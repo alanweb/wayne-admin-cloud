@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: wayne-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: dev
+        username: nacos
+        password: nacos
+    gateway:
+      discovery:
+        locator:
+          #服务ID转小写
+          lower-case-service-id: true
+          #开启自动发现服务
+          enabled: true
+      routes:
+        - id: product-service-limiter
+          uri: lb://nacos-discovery-product
+          predicates:
+            - Path=/product/**
+          filters:
+            # 令牌桶算法限流
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 5
+                keyResolver: '#{@myKeyResolver}'
+            # 熔断过滤器 访问错误跳转到网关的 /downgrade接口
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: forward:/downgrade
+            # 自定义网关过滤器
+            - name: RequestPath
+              args:
+                name: key
+                path: value
+  #redis缓存
+  redis:
+    timeout: 10000          #连接超时时间
+    host: 192.168.16.10     #Redis 服务地址
+    port: 6379              #Redis 端口
+    database: 0             #使用的库 默认0库
+    lettuce:
+      pool:
+        max-active: 1024    #最大连接数 默认8
+        max-wait: 1000      #最大连接阻塞等待时间，单位毫秒 默认-1
+        max-idle: 200       #最大空闲连接数 默认8
+        min-idle: 5         #最小空闲连接数 默认0
+server:
+  port: 8090
+nacos:
+  gateway:
+    route:
+      config:
+        data-id: gateway-router
+        group: DEFAULT_GROUP

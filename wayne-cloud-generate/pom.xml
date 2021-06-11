@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- 父 级 依 赖 -->
+    <parent>
+        <groupId>com.wayne.cloud</groupId>
+        <artifactId>wayne-admin-cloud</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <!-- Maven 地 址 -->
+    <groupId>com.wayne.cloud</groupId>
+    <artifactId>wayne-cloud-generate</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>wayne-cloud-generate</name>
+    <description>wayne generate</description>
+    <!-- 依 赖 管 理 -->
+    <dependencies>
+        <!-- 模 板 引 擎 -->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.wayne.cloud</groupId>
+            <artifactId>wayne-cloud-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- 分 页 依 赖 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!-- 模 板 引 擎 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

@@ -1,0 +1,158 @@
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.5.RELEASE</version>
+        <relativePath/>
+    </parent>
+    <groupId>com.wayne.cloud</groupId>
+    <artifactId>wayne-admin-cloud</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>wayne-admin-cloud</name>
+    <packaging>pom</packaging>
+    <modules>
+        <module>wayne-cloud-system</module>
+        <module>wayne-cloud-gateway</module>
+    </modules>
+    <properties>
+        <java.version>1.8</java.version>
+        <spring-boot-version>2.2.5.RELEASE</spring-boot-version>
+        <!--   spring cloud 版本      -->
+        <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
+        <!--   Nacos 版本    -->
+        <nacos-discovery.version>2.2.5.RELEASE</nacos-discovery.version>
+        <!-- MyBatis Plus 版 本 -->
+        <mybatis.plus.version>3.4.2</mybatis.plus.version>
+        <!-- swagger-starter 版 本 -->
+        <swagger-starter.version>1.9.1.RELEASE</swagger-starter.version>
+        <!-- swagger-ui 版 本 -->
+        <swagger-ui.version>1.9.6</swagger-ui.version>
+        <!--  模 板 引 擎   -->
+        <velocity.version>1.7</velocity.version>
+        <!-- Fast Json 序 列 化 版 本 -->
+        <fastjson.version>1.2.76</fastjson.version>
+        <!-- jackson -->
+        <jackson.version>2.9.9</jackson.version>
+        <jackson-databind.version>2.11.4</jackson-databind.version>
+        <!-- yaml 解 析 -->
+        <yaml.version>1.26</yaml.version>
+        <!-- HuTool 工 具 类 -->
+        <hutool.version>5.5.7</hutool.version>
+        <oshi.version>5.7.0</oshi.version>
+        <aspectjweaver.version>1.9.5</aspectjweaver.version>
+        <!-- Xss 工 具 类 -->
+        <jsoup.version>1.9.2</jsoup.version>
+        <wayne-cloud-common.version>1.0-SNAPSHOT</wayne-cloud-common.version>
+    </properties>
+    <!--  依赖版本定义  -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.wayne.cloud</groupId>
+                <artifactId>wayne-cloud-common</artifactId>
+                <version>${wayne-cloud-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${nacos-discovery.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${nacos-discovery.version}</version>
+            </dependency>
+            <!-- 常 用 工 具 类 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <!-- yaml 解析 -->
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${yaml.version}</version>
+            </dependency>
+            <!-- 数 据 库 连 接 工 具 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!-- 数 据 库 操 作 框 架 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+            <!-- 接 口 文 档 -->
+            <dependency>
+                <groupId>com.spring4all</groupId>
+                <artifactId>swagger-spring-boot-starter</artifactId>
+                <version>${swagger-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>swagger-bootstrap-ui</artifactId>
+                <version>${swagger-ui.version}</version>
+            </dependency>
+            <!-- 模 板 引 擎 -->
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+            <!-- JSON 解 析 工 具 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!-- Jackson 扩展包 -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <!-- Xss 爬虫 -->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.oshi</groupId>
+                <artifactId>oshi-core</artifactId>
+                <version>${oshi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectjweaver.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
