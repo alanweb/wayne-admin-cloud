@@ -20,7 +20,6 @@ import java.time.format.DateTimeFormatter;
 
 @Configuration
 public class CoreConfig {
-
     @Bean
     public RedisTemplate<String, Serializable> redisTemplate(LettuceConnectionFactory connectionFactory) {
         RedisTemplate<String, Serializable> redisTemplate = new RedisTemplate<>();

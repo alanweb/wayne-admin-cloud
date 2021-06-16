@@ -5,10 +5,10 @@ import com.wayne.common.exception.auth.CaptchaException;
 import com.wayne.common.plugin.logging.aop.enums.BusinessType;
 import com.wayne.common.plugin.logging.aop.enums.LoggingType;
 import com.wayne.common.plugin.system.domain.SysBaseLog;
-import com.wayne.common.plugin.system.service.SysContext;
 import com.wayne.common.tools.sequence.SequenceUtil;
 import com.wayne.common.tools.servlet.ServletUtil;
 import com.wayne.common.web.domain.response.Result;
+import com.wayne.web.service.SystemService;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.LockedException;
@@ -35,7 +35,7 @@ public class SecureAuthenticationFailureHandler implements AuthenticationFailure
      * 引 入 日 志 服 务
      * */
     @Resource
-    private SysContext sysContext;
+    private SystemService systemService;
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
@@ -64,7 +64,7 @@ public class SecureAuthenticationFailureHandler implements AuthenticationFailure
         sysLog.setBusinessType(BusinessType.OTHER);
         sysLog.setSuccess(false);
         sysLog.setLoggingType(LoggingType.LOGIN);
-        //sysLogService.save(sysLog);
+        systemService.saveLog(sysLog);
         ServletUtil.write(JSON.toJSONString(result));
     }
 }

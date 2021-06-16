@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.wayne.common.tools.servlet.ServletUtil;
 import com.wayne.common.tools.string.StringUtil;
 import com.wayne.common.web.domain.response.Result;
+import com.wf.captcha.utils.CaptchaUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -37,10 +38,10 @@ public class SecureCaptchaSupport extends OncePerRequestFilter implements Filter
                 response.getWriter().write(JSON.toJSONString(Result.failure("验证码不能为空!")));
                 return;
             }
-//            if (!CaptchaUtil.ver(ServletUtil.getRequest().getParameter("captcha"),ServletUtil.getRequest())){
-//                response.getWriter().write(JSON.toJSONString(Result.failure("验证码错误!")));
-//                return;
-//            }
+            if (!CaptchaUtil.ver(ServletUtil.getRequest().getParameter("captcha"),ServletUtil.getRequest())){
+                response.getWriter().write(JSON.toJSONString(Result.failure("验证码错误!")));
+                return;
+            }
         }
         chain.doFilter(request, response);
     }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wayne.system.mapper.SysPowerMapper">
+
+    <resultMap id="SysPowerMap" type="SysPower">
+        <id column="power_id" property="powerId"></id>
+        <result column="power_name" property="powerName"></result>
+        <result column="power_code" property="powerCode"></result>
+        <result column="power_url" property="powerUrl"></result>
+        <result column="parent_id" property="parentId"></result>
+        <result column="power_type" property="powerType"></result>
+        <result column="open_type" property="openType"></result>
+        <result column="icon" property="icon"></result>
+        <result column="sort" property="sort"></result>
+    </resultMap>
+
+    <resultMap id="ResuMenuMap" type="com.wayne.system.domain.SysMenu">
+        <id column="power_id" property="id"></id>
+        <result column="parent_id" property="parentId"></result>
+        <result column="power_name" property="title"></result>
+        <result column="username" property="username"></result>
+        <result column="power_type" property="type"></result>
+        <result column="icon" property="icon"></result>
+        <result column="open_type" property="openType"></result>
+        <result column="power_url" property="href"></result>
+   </resultMap>
+
+    <select id="selectMenuByUsername" parameterType="string" resultMap="ResuMenuMap">
+        	 select DISTINCT sp.power_id,sp.* from sys_power sp
+			 left join sys_role_power srp on srp.power_id = sp.power_id
+			 left join sys_role sr on sr.role_id = srp.role_id
+			 left join  sys_user_role sur on sur.role_id = sr.role_id
+			 left join sys_user su on su.user_id = sur.user_id
+			 <where>
+                 <if test="username != null and username != ''">
+                     su.username = #{username}
+                 </if>
+                 and sp.enable = 1 order by sp.sort
+             </where>
+    </select>
+    <select id="selectByUsername" parameterType="string" resultMap="SysPowerMap">
+        SELECT
+	    *
+        FROM
+	    sys_power sp
+	    LEFT JOIN sys_role_power srp ON sp.power_id = srp.power_id
+	    LEFT JOIN sys_role sr ON sr.role_id = srp.role_id
+	    LEFT JOIN sys_user_role sur ON sur.role_id = sr.role_id
+	    LEFT JOIN sys_user su ON su.user_id = sur.user_id
+        WHERE
+	    su.username = #{username}
+	    and sp.enable = 1
+        ORDER BY
+	    sp.sort ASC
+    </select>
+</mapper>

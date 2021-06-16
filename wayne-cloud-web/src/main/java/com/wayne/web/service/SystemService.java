@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 public interface SystemService {
     @PostMapping("/system/log/save")
     String saveLog(SysBaseLog log);
-
     @PostMapping("/system/user/update")
     String updateUser(SysBaseUser user);
     @GetMapping("/system/user/queryByName")

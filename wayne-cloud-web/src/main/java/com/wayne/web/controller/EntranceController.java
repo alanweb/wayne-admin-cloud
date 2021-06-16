@@ -38,9 +38,9 @@ public class EntranceController extends BaseController {
     public ModelAndView login(HttpServletRequest request){
         if (SecurityUtil.isAuthentication()) {
             SecureSessionService.expiredSession(request, sessionRegistry);
-            return jumpPage("index");
+            return jumpPage("/index");
         }else{
-            return jumpPage("login");
+            return jumpPage("/login");
         }
     }
 

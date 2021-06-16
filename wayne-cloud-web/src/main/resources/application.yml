@@ -1,7 +1,10 @@
 server:
-  port: 8802
+  port: 8808
   servlet:
-    context-path: /${spring.application.name}
+    # Session
+    session:
+      # 超 时 时 间
+      timeout: 120m
 spring:
   application:
     name: wayne-web
@@ -38,3 +41,21 @@ wayne:
       url: www.pearadmin.cn
       # 邮 箱
       email: Jmys1992@gmail.com
+  # 权 限 配 置
+  security:
+    # 开 启 超 级 管 理 员 账 号 -- 不需要验证权限
+    super-auth-open: true
+    # 超 级 管 理 员 账 号 -- 不需要验证权限
+    super-admin: admin
+    # 允 许 同 一 账 号 多 端 登 录 个 数
+    maximum: 1
+    # 记 住 密 码 KEY
+    remember-key: PEAR_REMEMBER
+    # 不 需 要 权 限 拦 截 的 接 口 配 置
+    open-api:
+      - /login/**  # 开放登录接口
+      - /captcha/** # 开放验证码接口
+      - /assets/** # 开放静态资源
+      - /admin/** # 开放静态资源
+      - /component/** # 开放静态资源
+      - /favicon.ico # 开放FAVICON

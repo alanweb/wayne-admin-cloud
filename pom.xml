@@ -42,6 +42,8 @@
         <hutool.version>5.5.7</hutool.version>
         <oshi.version>5.7.0</oshi.version>
         <aspectjweaver.version>1.9.5</aspectjweaver.version>
+        <!--   验证码     -->
+        <captcha.version>1.6.2</captcha.version>
         <!-- Xss 工 具 类 -->
         <jsoup.version>1.9.2</jsoup.version>
         <wayne-cloud-common.version>1.0-SNAPSHOT</wayne-cloud-common.version>
@@ -144,6 +146,12 @@
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>
                 <version>${aspectjweaver.version}</version>
+            </dependency>
+            <!-- 验 证 码 -->
+            <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>${captcha.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

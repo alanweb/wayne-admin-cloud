@@ -55,5 +55,5 @@ nacos:
   gateway:
     route:
       config:
-        data-id: gateway-router
+        data-id: wayne-gateway-router
         group: DEFAULT_GROUP

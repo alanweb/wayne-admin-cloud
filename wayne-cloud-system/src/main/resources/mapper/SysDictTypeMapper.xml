@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wayne.system.mapper.SysDictTypeMapper">
+
+    <!-- 映射转换集合 -->
+    <resultMap id="SysDictTypeMap" type="SysDictType">
+        <id column="id" property="id"></id>
+        <result column="type_name" property="typeName"></result>
+        <result column="type_code" property="typeCode"></result>
+        <result column="enable" property="enable"></result>
+        <result column="description" property="description"></result>
+        <result column="update_by" property="updateBy"></result>
+        <result column="update_time" property="updateTime"></result>
+        <result column="create_by" property="createBy"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="remark" property="remark"></result>
+    </resultMap>
+</mapper>

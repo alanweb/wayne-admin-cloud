@@ -1,0 +1,36 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: dev
+        username: nacos
+        password: nacos
+  redis:
+    # 主 机 地 址
+    host: 192.168.16.128
+    # 端 口
+    port: 6379
+    # 认 证
+    password:
+    # 选 择 数 据 库
+    database: 0
+    # 连 接 池 配 置
+    lettuce:
+      pool:
+        # 连接池中的最大空闲连接
+        max-active: 20
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1
+        # 连接池中的最大空闲连接
+        max-idle: 4
+        # 连接池中的最小空闲连接
+        min-idle: 0
+    # 超时时间
+    timeout: 1000
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/pear-admin?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
+    username: root
+    password: 123456
