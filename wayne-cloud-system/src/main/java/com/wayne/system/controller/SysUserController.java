@@ -1,10 +1,12 @@
 package com.wayne.system.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageInfo;
 import com.wayne.common.constant.ControllerConstant;
 import com.wayne.common.plugin.logging.aop.annotation.Logging;
 import com.wayne.common.plugin.logging.aop.enums.BusinessType;
 import com.wayne.common.plugin.submit.annotation.RepeatSubmit;
+import com.wayne.common.plugin.system.domain.SysBaseUser;
 import com.wayne.common.tools.secure.SecurityUtil;
 import com.wayne.common.tools.sequence.SequenceUtil;
 import com.wayne.common.tools.servlet.ServletUtil;
@@ -33,6 +35,7 @@ import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+
 /**
  * Describe: 用户控制器
  * Author: 就 眠 仪 式
@@ -204,7 +207,7 @@ public class SysUserController extends BaseController {
     @PreAuthorize("hasPermission('/system/user/edit','sys:user:edit')")
     @Logging(title = "修改头像", describe = "修改头像", type = BusinessType.EDIT)
     public Result updateAvatar(@RequestBody SysUser sysUser) {
-        sysUser.setUserId(((SysUser)SecurityUtil.currentUserObj()).getUserId());
+        sysUser.setUserId(((SysUser) SecurityUtil.currentUserObj()).getUserId());
         boolean result = sysUserService.updateById(sysUser);
         return decide(result);
     }
@@ -246,7 +249,7 @@ public class SysUserController extends BaseController {
     @GetMapping("menu")
     @ApiOperation(value = "获取用户菜单数据")
     public List<SysMenu> getUserMenu() {
-        SysUser sysUser = (SysUser)SecurityUtil.currentUserObj();
+        SysUser sysUser = (SysUser) SecurityUtil.currentUserObj();
         List<SysMenu> menus = sysUserService.getUserMenu(sysUser.getUsername());
         return sysUserService.toUserMenu(menus, "0");
     }
@@ -310,8 +313,13 @@ public class SysUserController extends BaseController {
      * Return: ModelAndView
      */
     @GetMapping("profile/{id}")
-    public ModelAndView profile(Model model,@PathVariable("id")String userId){
-        model.addAttribute("userId",userId);
+    public ModelAndView profile(Model model, @PathVariable("id") String userId) {
+        model.addAttribute("userId", userId);
         return jumpPage(MODULE_PATH + "profile");
+    }
+
+    @GetMapping("queryByName")
+    public SysUser queryByName(String username) {
+        return sysUserService.selectByUsername(username);
     }
 }

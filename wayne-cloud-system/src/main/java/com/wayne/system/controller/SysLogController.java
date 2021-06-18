@@ -6,12 +6,14 @@ import com.wayne.common.constant.ControllerConstant;
 import com.wayne.common.plugin.logging.aop.enums.LoggingType;
 import com.wayne.common.web.base.BaseController;
 import com.wayne.common.web.domain.request.PageDomain;
+import com.wayne.common.web.domain.response.Result;
 import com.wayne.common.web.domain.response.module.ResultTable;
 import com.wayne.system.domain.SysLog;
 import com.wayne.system.service.ISysLogService;
 import io.swagger.annotations.Api;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,6 +37,7 @@ public class SysLogController extends BaseController {
      * 系 统 日 志
      */
     private String MODULE_PATH = "system/log" ;
+
     /**
      * Describe: 行为日志视图
      * Param: null
@@ -43,7 +46,7 @@ public class SysLogController extends BaseController {
     @GetMapping("main")
     @PreAuthorize("hasPermission('/system/log/main','sys:log:main')")
     public ModelAndView main() {
-        return jumpPage(MODULE_PATH+"/main");
+        return jumpPage(MODULE_PATH + "/main");
     }
 
     /**
@@ -53,9 +56,9 @@ public class SysLogController extends BaseController {
      */
     @GetMapping("operateLog")
     @PreAuthorize("hasPermission('/system/log/operateLog','sys:log:operateLog')")
-    public ResultTable operateLog(PageDomain pageDomain, LocalDateTime startTime,LocalDateTime endTime) {
+    public ResultTable operateLog(PageDomain pageDomain, LocalDateTime startTime, LocalDateTime endTime) {
         PageHelper.startPage(pageDomain.getPage(), pageDomain.getLimit());
-        PageInfo<SysLog> pageInfo = new PageInfo<>(sysLogService.data(LoggingType.OPERATE,startTime,endTime));
+        PageInfo<SysLog> pageInfo = new PageInfo<>(sysLogService.data(LoggingType.OPERATE, startTime, endTime));
         return pageTable(pageInfo.getList(), pageInfo.getTotal());
     }
 
@@ -79,8 +82,19 @@ public class SysLogController extends BaseController {
      */
     @GetMapping("/info")
     @PreAuthorize("hasPermission('/system/log/info','sys:log:info')")
-    public ModelAndView details(){
-        return jumpPage(MODULE_PATH+"/info");
+    public ModelAndView details() {
+        return jumpPage(MODULE_PATH + "/info");
+    }
+
+    /**
+     * Describe: 记录日志
+     * Param: null
+     * Return: ModelAndView
+     */
+    @PostMapping("/save")
+    public Result save(SysLog log) {
+        boolean flag = sysLogService.save(log);
+        return flag ? Result.success() : Result.failure();
     }
 
 }

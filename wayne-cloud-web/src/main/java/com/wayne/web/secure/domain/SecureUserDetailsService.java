@@ -21,7 +21,7 @@ public class SecureUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        SysBaseUser sysUser = systemService.queryByUserName(username);
+        SysBaseUser sysUser = systemService.queryByName(username);
         if (sysUser == null) {
             throw new UsernameNotFoundException("Account Not Found");
         }

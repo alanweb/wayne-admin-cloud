@@ -16,6 +16,7 @@ import java.util.List;
  * */
 public interface ISysUserService extends IService<SysUser> {
 
+    SysUser selectByUsername(String username);
     /**
      * Describe: 根据条件查询用户列表数据
      * Param: username

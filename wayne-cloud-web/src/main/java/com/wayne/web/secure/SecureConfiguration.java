@@ -67,7 +67,7 @@ public class SecureConfiguration extends WebSecurityConfigurerAdapter {
     private SecurityProperty securityProperty;
 
     /**
-     * 实现userservice
+     * 实现userService
      */
     @Resource
     private SecureUserDetailsService securityUserDetailsService;

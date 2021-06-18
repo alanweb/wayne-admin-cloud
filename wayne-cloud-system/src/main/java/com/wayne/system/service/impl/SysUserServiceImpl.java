@@ -57,6 +57,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     //@Resource
     private SecurityProperty securityProperty;
 
+    @Override
+    public SysUser selectByUsername(String username) {
+        return baseMapper.selectByUsername(username);
+    }
+
     /**
      * Describe: 根据条件查询用户列表数据
      * Param: username
