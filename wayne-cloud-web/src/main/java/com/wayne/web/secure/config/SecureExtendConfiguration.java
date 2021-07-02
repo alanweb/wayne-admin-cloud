@@ -1,4 +1,4 @@
-package com.wayne.web.secure;
+package com.wayne.web.secure.config;
 
 import com.wayne.web.secure.process.SecureLogoutHandler;
 import com.wayne.web.secure.support.SecurePermissionSupport;

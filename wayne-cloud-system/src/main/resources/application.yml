@@ -19,6 +19,8 @@ spring:
     active: dev
   application:
     name: wayne-system
+  flyway:
+    enabled: false
 # Wayne 插 件 配 置 信 息
 wayne:
   # Document 配 置 信 息

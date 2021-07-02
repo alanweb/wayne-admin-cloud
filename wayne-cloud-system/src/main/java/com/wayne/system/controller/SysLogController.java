@@ -12,14 +12,13 @@ import com.wayne.system.domain.SysLog;
 import com.wayne.system.service.ISysLogService;
 import io.swagger.annotations.Api;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * Describe: 日志控制器
@@ -92,9 +91,18 @@ public class SysLogController extends BaseController {
      * Return: ModelAndView
      */
     @PostMapping("/save")
-    public Result save(SysLog log) {
+    public Result save(@RequestBody SysLog log) {
         boolean flag = sysLogService.save(log);
         return flag ? Result.success() : Result.failure();
     }
-
+    public static void main(String[] args) {
+        try {
+            String a = " 2021-06-30T09:31:13.755Z";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(" yyyy-MM-dd'T'HH:mm:ss");
+            Date parse = simpleDateFormat.parse(a);
+            System.out.println(parse.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

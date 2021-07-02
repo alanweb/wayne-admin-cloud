@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class GatewayConfig {
+public class GatewayConfiguration {
     public static final long DEFAULT_TIMEOUT = 30000;
 
     public static String NACOS_SERVER_ADDR;

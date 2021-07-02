@@ -1,3 +1,11 @@
+auth-host: http://sso.local.wayne.com:8801
+auth-path: wayne-web
+#auth-host: http://sso.dev.bj.iquantex.com
+#auth-path: portal-auth
+gateway-host: http://wayne-gateway.local.wayne.com:8080
+# portal 首页访问地址
+portal-url: http://wayne-gateway.local.wayne.com:8080
+
 spring:
   application:
     name: wayne-gateway
@@ -49,11 +57,38 @@ spring:
         max-wait: 1000      #最大连接阻塞等待时间，单位毫秒 默认-1
         max-idle: 200       #最大空闲连接数 默认8
         min-idle: 5         #最小空闲连接数 默认0
+  security:
+    oauth2:
+      client:
+        registration:
+          gateway:
+            provider: uaa
+            client-id: wayne_gateway
+            client-secret: changeit
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/${spring.application.name}/login/oauth2/code/{registrationId}"
+            scope: api-read,api-write
+        provider:
+          uaa:
+            authorization-uri: ${auth-host}/${auth-path}/oauth/authorize
+            token-uri: ${auth-host}/${auth-path}/oauth/token
+            user-info-uri: ${auth-host}/${auth-path}/api/userinfo
+            user-name-attribute: sub
+            jwk-set-uri: ${auth-host}/${auth-path}/.well-known/jwks.json
 server:
-  port: 8090
+  port: 8080
+  servlet:
+    context-path: /${spring.application.name}
 nacos:
   gateway:
     route:
       config:
         data-id: wayne-gateway-router
         group: DEFAULT_GROUP
+wayne:
+  sso:
+    cookie-domain: local.wayne.com
+    cookie-timeout-seconds: 8640000
+    enabled: true
+    login-success: /wayne-web
+    logout-success: ${auth-host}/${auth-path}/logout?service=${gateway-host:http://wayne-gateway.local.wayne.com:8080}/${spring.application.name}

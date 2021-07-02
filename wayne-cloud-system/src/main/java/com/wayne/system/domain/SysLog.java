@@ -1,5 +1,6 @@
 package com.wayne.system.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.wayne.common.plugin.logging.aop.enums.BusinessType;
@@ -9,6 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
+import org.apache.ibatis.type.JdbcType;
+import org.springframework.data.annotation.Transient;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -20,10 +23,9 @@ import java.util.Map;
  * CreateTime: 2019/10/23
  */
 @Data
-@Alias("SysLog")
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "sys_log")
+@TableName(value = "sys_logging")
 public class SysLog {
 
     /**
@@ -45,11 +47,13 @@ public class SysLog {
     /**
      * 业务类型
      */
+    @TableField(value = "business_Type")
     private BusinessType businessType;
 
     /**
      * 请求方式
      */
+    @TableField(value = "request_method")
     private RequestMethod requestMethod;
 
     /**
@@ -75,6 +79,7 @@ public class SysLog {
     /**
      * 获 取 请 求 体
      */
+    @TableField(value = "request_Body")
     private String requestBody;
 
     /**
@@ -120,5 +125,6 @@ public class SysLog {
     /**
      * 扩 展 信 息
      */
+    @TableField(exist = false)
     private Map<String, String> map = new HashMap<>();
 }

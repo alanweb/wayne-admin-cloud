@@ -2,7 +2,6 @@ package com.wayne.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -12,7 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @Date 2021/6/11
  * @Description
  */
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class, DataSourceAutoConfiguration.class},scanBasePackages = {"com.wayne"})
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class},scanBasePackages = {"com.wayne"})
 @EnableFeignClients
 @EnableDiscoveryClient
 public class WebApplication {

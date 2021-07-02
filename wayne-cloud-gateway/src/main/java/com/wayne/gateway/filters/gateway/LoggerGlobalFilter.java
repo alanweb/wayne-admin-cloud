@@ -1,4 +1,4 @@
-package com.wayne.gateway.filters;
+package com.wayne.gateway.filters.gateway;
 
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;

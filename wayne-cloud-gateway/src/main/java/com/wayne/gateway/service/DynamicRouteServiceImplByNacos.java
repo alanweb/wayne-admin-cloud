@@ -5,7 +5,7 @@ import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.config.listener.Listener;
 import com.alibaba.nacos.api.exception.NacosException;
-import com.wayne.gateway.config.GatewayConfig;
+import com.wayne.gateway.config.GatewayConfiguration;
 import com.wayne.gateway.service.impl.DynamicRouteServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ import java.util.concurrent.Executor;
  */
 @Component
 @Slf4j
-@DependsOn({"gatewayConfig"}) // 依赖于gatewayConfig bean
+@DependsOn({"gatewayConfiguration"}) // 依赖于gatewayConfig bean
 public class DynamicRouteServiceImplByNacos {
 
     @Autowired
@@ -43,7 +43,7 @@ public class DynamicRouteServiceImplByNacos {
                 log.warn("initConfigService fail");
                 return;
             }
-            String configInfo = configService.getConfig(GatewayConfig.NACOS_ROUTE_DATA_ID, GatewayConfig.NACOS_ROUTE_GROUP, GatewayConfig.DEFAULT_TIMEOUT);
+            String configInfo = configService.getConfig(GatewayConfiguration.NACOS_ROUTE_DATA_ID, GatewayConfiguration.NACOS_ROUTE_GROUP, GatewayConfiguration.DEFAULT_TIMEOUT);
             log.info("获取网关当前配置:\r\n{}",configInfo);
             List<RouteDefinition> definitionList = JSON.parseArray(configInfo, RouteDefinition.class);
             for(RouteDefinition definition : definitionList){
@@ -53,7 +53,7 @@ public class DynamicRouteServiceImplByNacos {
         } catch (Exception e) {
             log.error("初始化网关路由时发生错误",e);
         }
-        dynamicRouteByNacosListener(GatewayConfig.NACOS_ROUTE_DATA_ID,GatewayConfig.NACOS_ROUTE_GROUP);
+        dynamicRouteByNacosListener(GatewayConfiguration.NACOS_ROUTE_DATA_ID, GatewayConfiguration.NACOS_ROUTE_GROUP);
     }
 
     /**
@@ -89,8 +89,8 @@ public class DynamicRouteServiceImplByNacos {
     private ConfigService initConfigService(){
         try{
             Properties properties = new Properties();
-            properties.setProperty("serverAddr",GatewayConfig.NACOS_SERVER_ADDR);
-            properties.setProperty("namespace",GatewayConfig.NACOS_NAMESPACE);
+            properties.setProperty("serverAddr", GatewayConfiguration.NACOS_SERVER_ADDR);
+            properties.setProperty("namespace", GatewayConfiguration.NACOS_NAMESPACE);
             return configService= NacosFactory.createConfigService(properties);
         } catch (Exception e) {
             log.error("初始化网关路由时发生错误",e);

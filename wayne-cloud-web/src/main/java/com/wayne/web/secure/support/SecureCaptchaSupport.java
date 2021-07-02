@@ -32,13 +32,13 @@ public class SecureCaptchaSupport extends OncePerRequestFilter implements Filter
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         if (method.equalsIgnoreCase(request.getMethod()) && defaultFilterProcessUrl.equals(request.getServletPath())) {
-            String Captcha = ServletUtil.getRequest().getParameter("captcha");
+            String captcha = ServletUtil.getRequest().getParameter("captcha");
             response.setContentType("application/json;charset=UTF-8");
-            if (StringUtil.isEmpty(Captcha)){
+            if (StringUtil.isEmpty(captcha)){
                 response.getWriter().write(JSON.toJSONString(Result.failure("验证码不能为空!")));
                 return;
             }
-            if (!CaptchaUtil.ver(ServletUtil.getRequest().getParameter("captcha"),ServletUtil.getRequest())){
+            if (!CaptchaUtil.ver(captcha,ServletUtil.getRequest())){
                 response.getWriter().write(JSON.toJSONString(Result.failure("验证码错误!")));
                 return;
             }

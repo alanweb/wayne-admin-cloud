@@ -13,8 +13,10 @@
     <name>wayne-admin-cloud</name>
     <packaging>pom</packaging>
     <modules>
+        <module>wayne-cloud-common</module>
         <module>wayne-cloud-system</module>
         <module>wayne-cloud-gateway</module>
+        <module>wayne-cloud-web</module>
     </modules>
     <properties>
         <java.version>1.8</java.version>

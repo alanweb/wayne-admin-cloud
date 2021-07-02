@@ -25,6 +25,9 @@ import java.util.List;
 @Alias("SysUser")
 @TableName(value = "sys_user")
 public class SysUser extends BaseDomain implements UserDetails, CredentialsContainer {
+    public static final Integer C_DISABLE = 0;
+    public static final Integer C_NORMAL = 1;
+    public static final Integer C_DELETED = 2;
 
     private static final long serialVersionUID = 1L;
 
@@ -123,7 +126,7 @@ public class SysUser extends BaseDomain implements UserDetails, CredentialsConta
 
     @Override
     public boolean isAccountNonLocked() {
-        return "1".equals(this.getStatus()) ? true : false;
+        return C_NORMAL.equals(this.getStatus()) ? true : false;
     }
 
     @Override
@@ -133,7 +136,7 @@ public class SysUser extends BaseDomain implements UserDetails, CredentialsConta
 
     @Override
     public boolean isEnabled() {
-        return "1".equals(this.getEnable()) ? true : false;
+        return C_NORMAL.equals(this.getEnable()) ? true : false;
     }
 
     @Override
