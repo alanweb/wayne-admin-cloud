@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wayne.system.mapper.SysRoleMapper">
 
-    <resultMap id="SysRoleMap" type="SysRole">
+    <resultMap id="SysRoleMap" type="com.wayne.system.domain.SysRole">
         <id column="role_id" property="roleId"></id>
         <result column="role_name" property="roleName"></result>
         <result column="role_code" property="roleCode"></result>
@@ -16,16 +16,13 @@
     </resultMap>
     <!-- 根据 用户名-->
     <select id="selectByUsername" resultMap="SysRoleMap">
-        SELECT
-        *
-        FROM
-        sys_role sr ON sr.role_id = srp.role_id
+        SELECT sr.* FROM sys_role sr
         LEFT JOIN sys_user_role sur ON sur.role_id = sr.role_id
         LEFT JOIN sys_user su ON su.user_id = sur.user_id
         WHERE
-        su.username = #{username}
-        and sr.enable = 1
+            su.username = #{username}
+            and sr.enable = 1
         ORDER BY
-        sr.sort ASC
+            sr.sort ASC
     </select>
 </mapper>

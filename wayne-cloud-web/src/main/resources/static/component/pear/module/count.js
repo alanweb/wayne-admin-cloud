@@ -27,7 +27,7 @@ layui.define(['jquery', 'element'], function(exports) {
 				}
 				//t未发生改变的话就直接返回 
 				//避免调用text函数，提高DOM性能 
-				var t = count.toFixed(options.bit?options.bit:0);;
+				var t = count.toFixed(options.bit?options.bit:0);
 				
 				if (t == initial) return;
 				initial = t;

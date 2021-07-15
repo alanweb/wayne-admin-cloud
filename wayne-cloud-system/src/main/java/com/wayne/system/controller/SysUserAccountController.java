@@ -2,7 +2,7 @@ package com.wayne.system.controller;
 
 import com.wayne.common.constant.ControllerConstant;
 import com.wayne.common.web.domain.response.Result;
-import com.wayne.system.dto.UserAccount;
+import com.wayne.system.vo.UserAccount;
 import com.wayne.system.service.ISysUserAccountService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;

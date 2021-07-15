@@ -1,5 +1,5 @@
 server:
-  port: 8801
+  port: 8808
   servlet:
     # Session
     session:
@@ -9,21 +9,6 @@ server:
 spring:
   application:
     name: wayne-web
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/auth_server?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true
-    password: 123456
-    username: root
-    hikari:
-      minimum-idle: 5
-      idle-timeout: 600000
-      maximum-pool-size: 10
-      auto-commit: true
-      pool-name: MyHikariCP
-      max-lifetime: 1800000
-      connection-timeout: 30000
-      connection-test-query: SELECT 1
   cloud:
     nacos:
       discovery:
@@ -52,7 +37,7 @@ wayne:
     # 描 述 信 息
     describe: 企 业 快 速 开 发 平 台
     # 扫 包 路 径
-    scan-package: com.wayne.generate
+    scan-package: com.wayne.web
     # 协 议
     licence: MIT
     # 协 议 地 址
@@ -75,28 +60,6 @@ wayne:
     super-auth-open: true
     # 超 级 管 理 员 账 号 -- 不需要验证权限
     super-admin: admin
-    # 允 许 同 一 账 号 多 端 登 录 个 数
-    maximum: 1
-    # 记 住 密 码 KEY
-    remember-key: PEAR_REMEMBER
-    # 不 需 要 权 限 拦 截 的 接 口 配 置
-    open-api:
-      - /login/**  # 开放登录接口
-      - /captcha/** # 开放验证码接口
-      - /assets/** # 开放静态资源
-      - /admin/** # 开放静态资源
-      - /component/** # 开放静态资源
-      - /favicon.ico # 开放FAVICON
-## 安全配置
-uaa:
-  key-store:
-    name: tls/keystore.p12
-    password: password
-    alias: selfsigned
-  web-client-configuration:
-    # Access Token is valid for 5 mins
-    access-token-validity-in-seconds: 300
-    # Refresh Token is valid for 7 days
-    refresh-token-validity-in-seconds-for-remember-me: 604800
-    client-id: web_app
-    secret: changeit
+logging:
+  level:
+    root: info

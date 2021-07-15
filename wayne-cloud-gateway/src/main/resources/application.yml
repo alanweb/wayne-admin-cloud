@@ -1,5 +1,4 @@
 auth-host: http://sso.local.wayne.com:8801
-auth-path: wayne-web
 #auth-host: http://sso.dev.bj.iquantex.com
 #auth-path: portal-auth
 gateway-host: http://wayne-gateway.local.wayne.com:8080
@@ -22,7 +21,7 @@ spring:
           #服务ID转小写
           lower-case-service-id: true
           #开启自动发现服务
-          enabled: true
+          enabled: false
       routes:
         - id: product-service-limiter
           uri: lb://nacos-discovery-product
@@ -70,11 +69,11 @@ spring:
             scope: api-read,api-write
         provider:
           uaa:
-            authorization-uri: ${auth-host}/${auth-path}/oauth/authorize
-            token-uri: ${auth-host}/${auth-path}/oauth/token
-            user-info-uri: ${auth-host}/${auth-path}/api/userinfo
+            authorization-uri: ${auth-host}/oauth/authorize
+            token-uri: ${auth-host}/oauth/token
+            user-info-uri: ${auth-host}/api/userInfo
             user-name-attribute: sub
-            jwk-set-uri: ${auth-host}/${auth-path}/.well-known/jwks.json
+            jwk-set-uri: ${auth-host}/.well-known/jwks.json
 server:
   port: 8080
   servlet:
@@ -91,4 +90,4 @@ wayne:
     cookie-timeout-seconds: 8640000
     enabled: true
     login-success: /wayne-web
-    logout-success: ${auth-host}/${auth-path}/logout?service=${gateway-host:http://wayne-gateway.local.wayne.com:8080}/${spring.application.name}
+    logout-success: ${auth-host}/logout?service=${gateway-host:http://wayne-gateway.local.wayne.com:8080}/${spring.application.name}

@@ -121,7 +121,7 @@ public class SysUserController extends BaseController {
     public Result save(@RequestBody SysUser sysUser) {
         sysUser.setLogin("0");
         sysUser.setEnable("1");
-        sysUser.setStatus("1");
+        sysUser.setStatus(SysUser.C_NORMAL);
         sysUser.setUserId(SequenceUtil.makeStringId());
         sysUser.setCreateTime(LocalDateTime.now());
         sysUser.setPassword(new BCryptPasswordEncoder().encode(sysUser.getPassword()));

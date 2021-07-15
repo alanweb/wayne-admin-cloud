@@ -17,7 +17,8 @@ import java.util.List;
  * */
 @Data
 public class SysBaseUser extends BaseDomain implements UserDetails {
-
+    public static final String C_DISABLE = "0";
+    public static final String C_NORMAL = "1";
     /**
      * 编号
      * */
@@ -104,9 +105,15 @@ public class SysBaseUser extends BaseDomain implements UserDetails {
      */
     private List<SysBasePower> powerList;
 
+    private List<GrantedAuthority> authorities;
+
+    public void setAuthorities(List<GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
@@ -116,7 +123,7 @@ public class SysBaseUser extends BaseDomain implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return "1".equals(this.getStatus())?true:false;
+        return C_NORMAL.equals(this.getStatus())?true:false;
     }
 
     @Override
@@ -126,7 +133,7 @@ public class SysBaseUser extends BaseDomain implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return "1".equals(this.getEnable())?true:false;
+        return C_NORMAL.equals(this.getEnable())?true:false;
     }
 
 }

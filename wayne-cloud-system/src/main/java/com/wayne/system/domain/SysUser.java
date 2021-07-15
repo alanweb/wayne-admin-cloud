@@ -1,5 +1,6 @@
 package com.wayne.system.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.wayne.common.web.base.BaseDomain;
@@ -25,9 +26,9 @@ import java.util.List;
 @Alias("SysUser")
 @TableName(value = "sys_user")
 public class SysUser extends BaseDomain implements UserDetails, CredentialsContainer {
-    public static final Integer C_DISABLE = 0;
-    public static final Integer C_NORMAL = 1;
-    public static final Integer C_DELETED = 2;
+    public static final String C_DISABLE = "0";
+    public static final String C_NORMAL = "1";
+    public static final String C_DELETED = "2";
 
     private static final long serialVersionUID = 1L;
 
@@ -101,6 +102,7 @@ public class SysUser extends BaseDomain implements UserDetails, CredentialsConta
     /**
      * 计算列
      */
+    @TableField(exist = false)
     private String roleIds;
 
 
@@ -112,6 +114,7 @@ public class SysUser extends BaseDomain implements UserDetails, CredentialsConta
     /**
      * 权限 这里暂时不用 security 的 Authorities
      */
+    @TableField(exist = false)
     private List<SysPower> powerList;
 
     @Override

@@ -25,9 +25,9 @@
             <li class="layui-nav-item layui-hide-xs message"></li>
             <li class="layui-nav-item user">
                 <!-- 头 像 -->
-                <a href="javascript:;">
+                <a href="javascript:">
                     <img src="" id="avatar" class="layui-nav-img">
-                    <span th:text="${#authentication.principal}"></span>
+                    <span th:text="xxx"></span>
                 </a>
                 <!-- 功 能 菜 单 -->
                 <dl class="layui-nav-child">
@@ -81,7 +81,7 @@
 
         admin.render();
 
-        $('.layui-nav-img').attr("src","/system/file/download/"+[[${session.currentUser.avatar}]]);
+        $('.layui-nav-img').attr("src","/system/file/download/"+[[${avatar}]]);
 
         // 注销实现
         admin.logout(function(){

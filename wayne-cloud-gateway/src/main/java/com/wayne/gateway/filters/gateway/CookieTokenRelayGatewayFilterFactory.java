@@ -3,13 +3,14 @@ package com.wayne.gateway.filters.gateway;
 import static org.springframework.security.oauth2.core.web.reactive.function.OAuth2BodyExtractors.oauth2AccessTokenResponse;
 
 
-
 import java.net.URI;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import com.wayne.gateway.client.CookieOAuth2Helper;
@@ -45,7 +46,7 @@ import reactor.core.publisher.Mono;
  * based on {@link ServerOAuth2AuthorizedClientExchangeFilterFunction}
  */
 @Slf4j
-public class CookieTokenRelayGatewayFilterFactory extends AbstractGatewayFilterFactory<Object> {
+public class CookieTokenRelayGatewayFilterFactory extends AbstractGatewayFilterFactory<CookieTokenRelayGatewayFilterFactory.Config> {
 
     private final ServerOAuth2AuthorizedClientRepository authorizedClientRepository;
     private final OAuth2AuthorizedClientResolver authorizedClientResolver;
@@ -61,7 +62,7 @@ public class CookieTokenRelayGatewayFilterFactory extends AbstractGatewayFilterF
             ClientHttpConnector connector,
             String jwkUri,
             CookieTokenProcessor cookieTokenWrite) {
-        super(Object.class);
+        super(Config.class);
         this.authorizedClientRepository = authorizedClientRepository;
         this.authorizedClientResolver =
                 new OAuth2AuthorizedClientResolver(
@@ -73,11 +74,33 @@ public class CookieTokenRelayGatewayFilterFactory extends AbstractGatewayFilterF
     }
 
     public GatewayFilter apply() {
-        return apply((Object) null);
+        Config config = new Config();
+        config.setPath("/");
+        return apply(config);
     }
 
     @Override
-    public GatewayFilter apply(Object config) {
+    public List<String> shortcutFieldOrder() {
+        return Arrays.asList("path");
+    }
+
+    public static class Config {
+        private String path;
+
+        public Config() {
+        }
+
+        public String getPath() {
+            return path;
+        }
+
+        public void setPath(String path) {
+            this.path = path;
+        }
+    }
+
+    @Override
+    public GatewayFilter apply(Config config) {
         return (exchange, chain) ->
                 exchange
                         //获取凭证
@@ -109,8 +132,8 @@ public class CookieTokenRelayGatewayFilterFactory extends AbstractGatewayFilterF
     private OAuth2AuthenticationToken withUserName(
             ServerWebExchange exchange, OAuth2AuthenticationToken authentication) {
         String userName = authentication.getPrincipal().getAttribute("user_name");
-        Long userId = authentication.getPrincipal().getAttribute("user_id");
-        Long roleId = authentication.getPrincipal().getAttribute("role_id");
+        String userId = authentication.getPrincipal().getAttribute("user_id");
+        String roleId = authentication.getPrincipal().getAttribute("role_id");
         exchange
                 .mutate()
                 .request(
@@ -118,8 +141,8 @@ public class CookieTokenRelayGatewayFilterFactory extends AbstractGatewayFilterF
                                 r.headers(
                                         headers -> {
                                             headers.put("user_name", Collections.singletonList(userName));
-                                            headers.put("user_id", Collections.singletonList(userId.toString()));
-                                            headers.put("role_id", Collections.singletonList(roleId.toString()));
+                                            headers.put("user_id", Collections.singletonList(userId));
+                                            headers.put("role_id", Collections.singletonList(roleId));
                                         }))
                 .build();
         log.info(" ===> request path is <{}>", exchange.getRequest().getPath());
@@ -145,6 +168,7 @@ public class CookieTokenRelayGatewayFilterFactory extends AbstractGatewayFilterF
 
     /**
      * 根据refresh 刷 access token
+     *
      * @param exchange
      * @param clientRegistrationId
      * @param authorizedClient
@@ -214,6 +238,7 @@ public class CookieTokenRelayGatewayFilterFactory extends AbstractGatewayFilterF
 
     /**
      * 是否需要刷新token
+     *
      * @param authorizedClient
      * @return
      */

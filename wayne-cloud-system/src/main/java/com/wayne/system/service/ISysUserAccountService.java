@@ -1,6 +1,6 @@
 package com.wayne.system.service;
 
-import com.wayne.system.dto.UserAccount;
+import com.wayne.system.vo.UserAccount;
 
 /**
  * @Author bin.wei

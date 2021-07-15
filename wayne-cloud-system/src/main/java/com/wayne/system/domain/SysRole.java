@@ -51,4 +51,6 @@ public class SysRole extends BaseDomain {
      * 提供前端 显示
      * */
     private boolean checked = false;
+
+    private String remark;
 }

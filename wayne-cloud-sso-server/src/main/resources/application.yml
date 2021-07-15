@@ -1,0 +1,106 @@
+server:
+  port: 8801
+  servlet:
+    # Session
+    session:
+      # 超 时 时 间
+      timeout: 120m
+spring:
+  application:
+    name: wayne-auth
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/auth_server?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&allowPublicKeyRetrieval=true
+    password: 123456
+    username: root
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 600000
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: dev
+        username: nacos
+        password: nacos
+  #redis缓存
+  redis:
+    timeout: 10000          #连接超时时间
+    host: 192.168.16.128    #Redis 服务地址
+    port: 6379              #Redis 端口
+    database: 0             #使用的库 默认0库
+    lettuce:
+      pool:
+        max-active: 1024    #最大连接数 默认8
+        max-wait: 1000      #最大连接阻塞等待时间，单位毫秒 默认-1
+        max-idle: 200       #最大空闲连接数 默认8
+        min-idle: 5         #最小空闲连接数 默认0
+wayne:
+  account:
+    host: http://wayne-gateway.local.wayne.com:8080
+    default-client-redirect-uri: "http://wayne-gateway.local.wayne.com:8080/wayne-gateway/login/oauth2/code/gateway"
+#    default-client-redirect-uri: "http://portal-gateway.local.bj.iquantex.com:8080/portal-gateway/login/oauth2/code/gateway"
+  swagger:
+    # 文 档 标 题
+    title: Wayne Admin API
+    # 是 否 开 启
+    enable: true
+    # 描 述 信 息
+    describe: 企 业 快 速 开 发 平 台
+    # 扫 包 路 径
+    scan-package: com.wayne.generate
+    # 协 议
+    licence: MIT
+    # 协 议 地 址
+    licence-url: https://gitee.com/pear_community
+    # 组 织 信 息
+    terms-of-service-url: https://gitee.com/pear_community
+    # 版 本 信 息
+    version: Release 2.0.0
+    # 扩 展 信 息
+    contact:
+      # 作 者
+      name: 就 眠 仪 式
+      # 连 接
+      url: www.pearadmin.cn
+      # 邮 箱
+      email: Jmys1992@gmail.com
+  # 权 限 配 置
+  security:
+    # 允 许 同 一 账 号 多 端 登 录 个 数
+    maximum: 1
+    # 记 住 密 码 KEY
+    remember-key: WAYNE_REMEMBER
+    # 不 需 要 权 限 拦 截 的 接 口 配 置
+    whites:
+      - /login/**  # 开放登录接口
+      - /captcha/** # 开放验证码接口
+      - /assets/** # 开放静态资源
+      - /admin/** # 开放静态资源
+      - /component/** # 开放静态资源
+      - /favicon.ico # 开放FAVICON
+      - /.well-known/jwks.json #开放公钥
+    ## 安全配置
+    key-store:
+      name: tls/keystore.p12
+      password: password
+      alias: selfsigned
+    web-client-configuration:
+      # Access Token is valid for 5 mins
+      access-token-validity-in-seconds: 300
+      # Refresh Token is valid for 7 days
+      refresh-token-validity-in-seconds-for-remember-me: 604800
+      client-id: web_app
+      secret: changeit
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
