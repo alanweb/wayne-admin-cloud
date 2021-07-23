@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @Date 2021/6/11
  * @Description
  */
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class},scanBasePackages = {"com.wayne"})
+@SpringBootApplication(scanBasePackages = {"com.wayne"})
 @EnableFeignClients
 @EnableDiscoveryClient
 @EnableConfigurationProperties(SwaggerProperty.class)

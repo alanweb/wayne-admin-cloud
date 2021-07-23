@@ -2,6 +2,7 @@ package com.wayne.auth.controller;
 
 import com.wayne.common.tools.secure.SecurityUtil;
 import com.wayne.common.web.base.BaseController;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;

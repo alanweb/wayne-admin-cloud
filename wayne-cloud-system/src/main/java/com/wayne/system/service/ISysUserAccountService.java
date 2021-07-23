@@ -1,6 +1,6 @@
 package com.wayne.system.service;
 
-import com.wayne.system.vo.UserAccount;
+import com.wayne.common.plugin.system.domain.SysBaseUser;
 
 /**
  * @Author bin.wei
@@ -8,5 +8,5 @@ import com.wayne.system.vo.UserAccount;
  * @Description
  */
 public interface ISysUserAccountService {
-    UserAccount getUserAccount(String username);
+    SysBaseUser getUserAccount(String username);
 }

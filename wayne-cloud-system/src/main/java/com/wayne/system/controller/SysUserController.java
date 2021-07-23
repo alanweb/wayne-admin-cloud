@@ -189,7 +189,6 @@ public class SysUserController extends BaseController {
      */
     @PutMapping("update")
     @ApiOperation(value = "修改用户数据")
-    @PreAuthorize("hasPermission('/system/user/edit','sys:user:edit')")
     @Logging(title = "修改用户", describe = "修改用户", type = BusinessType.EDIT)
     public Result update(@RequestBody SysUser sysUser) {
         sysUserService.saveUserRole(sysUser.getUserId(), Arrays.asList(sysUser.getRoleIds().split(",")));

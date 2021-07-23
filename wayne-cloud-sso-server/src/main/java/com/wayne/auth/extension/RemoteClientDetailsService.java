@@ -5,7 +5,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Sets;
 import com.wayne.auth.domain.ClientDetailsDto;
-import com.wayne.auth.properties.AuthProperties;
+import com.wayne.auth.property.SecurityProperties;
 import com.wayne.auth.service.impl.WayneClientDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,15 +40,15 @@ public class RemoteClientDetailsService implements ClientDetailsService {
     private static final String PORTAL_CLIENT_ID = "wayne_gateway";
 
     private final String redirectUri;
-    private final AuthProperties authProperties;
+    private final SecurityProperties securityProperties;
     private final LoadingCache<String, ClientDetailsDto> clientDetailsDtoCache;
 
     public RemoteClientDetailsService(
             @Value("${wayne.account.default-client-redirect-uri}") String redirectUri,
-            AuthProperties authProperties,
+            SecurityProperties securityProperties,
             WayneClientDetailsService wayneClientDetailsService) {
         this.redirectUri = redirectUri;
-        this.authProperties = authProperties;
+        this.securityProperties = securityProperties;
         this.clientDetailsDtoCache =
                 CacheBuilder.newBuilder()
                         .expireAfterAccess(Duration.ofMinutes(1).getSeconds(), TimeUnit.SECONDS)
@@ -70,10 +70,10 @@ public class RemoteClientDetailsService implements ClientDetailsService {
         }
 
         int accessTokenValidity =
-                authProperties.getWebClientConfiguration().getAccessTokenValidityInSeconds();
+                securityProperties.getWebClientConfiguration().getAccessTokenValidityInSeconds();
         accessTokenValidity = Math.max(accessTokenValidity, MIN_ACCESS_TOKEN_VALIDITY_SECS);
         int refreshTokenValidity =
-                authProperties.getWebClientConfiguration().getRefreshTokenValidityInSecondsForRememberMe();
+                securityProperties.getWebClientConfiguration().getRefreshTokenValidityInSecondsForRememberMe();
         refreshTokenValidity = Math.max(refreshTokenValidity, accessTokenValidity);
 
         if (null != dto) {

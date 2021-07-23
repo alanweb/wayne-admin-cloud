@@ -89,5 +89,5 @@ wayne:
     cookie-domain: local.wayne.com
     cookie-timeout-seconds: 8640000
     enabled: true
-    login-success: /wayne-web
+    login-success: /wayne-web/
     logout-success: ${auth-host}/logout?service=${gateway-host:http://wayne-gateway.local.wayne.com:8080}/${spring.application.name}

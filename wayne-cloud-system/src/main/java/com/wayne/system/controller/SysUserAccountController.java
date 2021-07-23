@@ -1,11 +1,13 @@
 package com.wayne.system.controller;
 
 import com.wayne.common.constant.ControllerConstant;
+import com.wayne.common.plugin.system.domain.SysBaseUser;
 import com.wayne.common.web.domain.response.Result;
 import com.wayne.system.vo.UserAccount;
 import com.wayne.system.service.ISysUserAccountService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,10 +25,10 @@ public class SysUserAccountController {
     private ISysUserAccountService userAccountService;
 
     @GetMapping("info")
-    public Result<UserAccount> account(String username) {
-        UserAccount account = userAccountService.getUserAccount(username);
-        if (null != account) {
-            return Result.success(account);
+    public Result<SysBaseUser> account(String username) {
+        SysBaseUser sysBaseUser = userAccountService.getUserAccount(username);
+        if (null != sysBaseUser) {
+            return Result.success(sysBaseUser);
         }
         return Result.failure();
     }

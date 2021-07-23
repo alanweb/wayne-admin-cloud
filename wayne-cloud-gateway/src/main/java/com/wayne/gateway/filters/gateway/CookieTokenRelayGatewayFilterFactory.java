@@ -133,7 +133,6 @@ public class CookieTokenRelayGatewayFilterFactory extends AbstractGatewayFilterF
             ServerWebExchange exchange, OAuth2AuthenticationToken authentication) {
         String userName = authentication.getPrincipal().getAttribute("user_name");
         String userId = authentication.getPrincipal().getAttribute("user_id");
-        String roleId = authentication.getPrincipal().getAttribute("role_id");
         exchange
                 .mutate()
                 .request(
@@ -142,7 +141,6 @@ public class CookieTokenRelayGatewayFilterFactory extends AbstractGatewayFilterF
                                         headers -> {
                                             headers.put("user_name", Collections.singletonList(userName));
                                             headers.put("user_id", Collections.singletonList(userId));
-                                            headers.put("role_id", Collections.singletonList(roleId));
                                         }))
                 .build();
         log.info(" ===> request path is <{}>", exchange.getRequest().getPath());

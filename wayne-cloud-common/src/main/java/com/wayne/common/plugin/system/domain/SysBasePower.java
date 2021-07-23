@@ -1,5 +1,6 @@
 package com.wayne.common.plugin.system.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.wayne.common.web.base.BaseDomain;
 import lombok.Data;
 
@@ -9,6 +10,7 @@ import lombok.Data;
  * CreateTime: 2019/10/23
  * */
 @Data
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SysBasePower extends BaseDomain {
 
     /**

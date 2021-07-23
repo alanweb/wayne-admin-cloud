@@ -1,6 +1,6 @@
 package com.wayne.auth;
 
-import com.wayne.auth.properties.AuthProperties;
+import com.wayne.auth.property.SecurityProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -14,7 +14,7 @@ import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHtt
  * @Description
  */
 @EnableJdbcHttpSession
-@EnableConfigurationProperties({AuthProperties.class})
+@EnableConfigurationProperties({SecurityProperties.class})
 @SpringBootApplication(scanBasePackages = {"com.wayne"})
 @EnableFeignClients
 @EnableDiscoveryClient

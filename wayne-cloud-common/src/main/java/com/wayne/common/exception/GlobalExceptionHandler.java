@@ -24,8 +24,8 @@ public class GlobalExceptionHandler {
      * 不 支 持 的 请 求 类 型
      */
     @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
-    public Result handleException(HttpRequestMethodNotSupportedException e) {
-        log.error(e.getMessage(), e);
+    public Result handleException(HttpServletRequest request, HttpRequestMethodNotSupportedException e) {
+        log.error("{} {} ", request.getRequestURI(), e.getMessage(), e);
         return Result.failure("不支持' " + e.getMethod() + "'请求");
     }
 

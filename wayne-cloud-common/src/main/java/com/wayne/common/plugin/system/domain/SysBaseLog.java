@@ -1,5 +1,6 @@
 package com.wayne.common.plugin.system.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.wayne.common.plugin.logging.aop.enums.BusinessType;
 import com.wayne.common.plugin.logging.aop.enums.LoggingType;
 import com.wayne.common.plugin.logging.aop.enums.RequestMethod;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SysBaseLog {
 
     /**

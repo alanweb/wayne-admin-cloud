@@ -4,8 +4,10 @@ import com.wayne.common.plugin.logging.aop.annotation.Logging;
 import com.wayne.common.plugin.logging.aop.enums.BusinessType;
 import com.wayne.common.web.base.BaseController;
 import io.swagger.annotations.Api;
+import org.springframework.http.HttpHeaders;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping
 @Api(tags = {"项目入口"})
 public class IndexController extends BaseController {
-    @GetMapping({"/", "index"})
+    @GetMapping({ "/", "/index"})
     @Logging(title = "主页", describe = "返回 Index 主页视图", type = BusinessType.ADD)
     public ModelAndView index() {
         return jumpPage("index");
@@ -26,7 +28,7 @@ public class IndexController extends BaseController {
      * Return: 主页视图
      */
     @GetMapping("console")
-    public ModelAndView home(Model model) {
+    public ModelAndView home(@RequestHeader HttpHeaders headers, Model model) {
         return jumpPage("console/console");
     }
 

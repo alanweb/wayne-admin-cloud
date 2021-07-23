@@ -22,6 +22,7 @@ public class JwtTokenEnhancer implements TokenEnhancer {
         //把用户ID设置到JWT中
         info.put("user_id", securityUser.getUserId());
         info.put("user_name", securityUser.getUsername());
+        //info.put("power_code_list",securityUser.getPowerCodeList());
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(info);
         return accessToken;
     }

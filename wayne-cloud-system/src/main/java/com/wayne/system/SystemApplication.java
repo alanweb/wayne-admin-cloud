@@ -12,7 +12,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @Date 2021/6/9
  * @Description
  */
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class}, scanBasePackages = {"com.wayne"})
+@SpringBootApplication(scanBasePackages = {"com.wayne"})
 @MapperScan(value = "com.wayne.system.mapper")
 @EnableDiscoveryClient
 public class SystemApplication {

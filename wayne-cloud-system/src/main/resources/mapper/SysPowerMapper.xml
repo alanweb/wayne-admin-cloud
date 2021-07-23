@@ -14,7 +14,7 @@
         <result column="sort" property="sort"></result>
     </resultMap>
 
-    <resultMap id="ResuMenuMap" type="com.wayne.system.domain.SysMenu">
+    <resultMap id="ResultMenuMap" type="com.wayne.system.domain.SysMenu">
         <id column="power_id" property="id"></id>
         <result column="parent_id" property="parentId"></result>
         <result column="power_name" property="title"></result>
@@ -25,7 +25,7 @@
         <result column="power_url" property="href"></result>
    </resultMap>
 
-    <select id="selectMenuByUsername" parameterType="string" resultMap="ResuMenuMap">
+    <select id="selectMenuByUsername" parameterType="string" resultMap="ResultMenuMap">
         	 select DISTINCT sp.power_id,sp.* from sys_power sp
 			 left join sys_role_power srp on srp.power_id = sp.power_id
 			 left join sys_role sr on sr.role_id = srp.role_id

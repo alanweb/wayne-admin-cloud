@@ -2,7 +2,7 @@ package com.wayne.auth.config;
 
 import com.wayne.auth.extension.RemoteClientDetailsService;
 import com.wayne.auth.extension.UnauthorizedAuthenticationEntryPoint;
-import com.wayne.auth.properties.AuthProperties;
+import com.wayne.auth.property.SecurityProperties;
 import com.wayne.auth.service.impl.WayneUserDetailsService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.endpoint.DefaultRedirectResolver;
+import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.DefaultUserAuthenticationConverter;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -43,11 +45,10 @@ import java.util.Collection;
 public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter implements ApplicationContextAware {
     private ApplicationContext applicationContext;
     @Autowired
-    private AuthProperties authProperties;
+    private SecurityProperties securityProperties;
     @Autowired
     @Qualifier("dataSource")
     private DataSource dataSource;
-
     @Autowired
     private RemoteClientDetailsService remoteClientDetailsService;
     @Autowired
@@ -93,6 +94,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter imp
                 .authenticationEntryPoint(new UnauthorizedAuthenticationEntryPoint())
                 .allowFormAuthenticationForClients(); // 允许表单认证// 校验token
     }
+
     /**
      * 对remember me 的token进行持久化
      *
@@ -112,6 +114,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter imp
     public SessionRegistry sessionRegistry() {
         return new SessionRegistryImpl();
     }
+
     /**
      * Apply the token converter (and enhancer) for token store.
      *
@@ -124,19 +127,16 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter imp
 
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
-        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-        jwtAccessTokenConverter.setKeyPair(keyPair());
-        return jwtAccessTokenConverter;
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setKeyPair(keyPair());
+        return converter;
     }
 
     @Bean
     public KeyPair keyPair() {
-        AuthProperties.KeyStore keyStore = authProperties.getKeyStore();
-        String jwtFileName = keyStore.getName();
-        String jwtPassword = keyStore.getPassword();
-        String alias = keyStore.getAlias();
+        SecurityProperties.KeyStore keyStore = securityProperties.getKeyStore();
         //从classpath下的证书中获取秘钥对
-        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource(jwtFileName), jwtPassword.toCharArray());
-        return keyStoreKeyFactory.getKeyPair(alias);
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource(keyStore.getName()), keyStore.getPassword().toCharArray());
+        return keyStoreKeyFactory.getKeyPair(keyStore.getAlias(), keyStore.getSecret().toCharArray());
     }
 }

@@ -8,8 +8,7 @@ server:
     session:
       # 超 时 时 间
       timeout: 120m
-
-# Spring 配置
+  max-http-header-size: 102400
 spring:
   session:
     timeout: 120m
@@ -49,6 +48,18 @@ wayne:
       url: www.pearadmin.cn
       # 邮 箱
       email: Jmys1992@gmail.com
+  resource:
+    whites:
+      - /v2/api-docs
+      - /swagger-resources/configuration/ui
+      - /swagger-resources
+      - /swagger-resources/configuration/security
+      - /swagger-ui.html
+      - /webjars/**
+      - /system/client/**
+      - /system/account/info
+      - /system/user/update
+      - /system/log/save
   # 上传配置
   upload:
     # windows 上传路径

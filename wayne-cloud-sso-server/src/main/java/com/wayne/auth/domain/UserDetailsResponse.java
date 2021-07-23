@@ -1,5 +1,6 @@
 package com.wayne.auth.domain;
 
+import com.wayne.common.plugin.system.domain.SysBaseUser;
 import lombok.Data;
 
 /**
@@ -8,6 +9,6 @@ import lombok.Data;
  * @Description
  */
 @Data
-public class UserAccountResponse {
-    private UserAccount data;
+public class UserDetailsResponse {
+    private SysBaseUser data;
 }

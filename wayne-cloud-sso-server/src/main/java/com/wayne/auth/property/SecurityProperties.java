@@ -1,11 +1,7 @@
-package com.wayne.auth.properties;
+package com.wayne.auth.property;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * security 的配置信息
@@ -15,7 +11,7 @@ import java.util.List;
  */
 @Data
 @ConfigurationProperties(prefix = "wayne.security", ignoreUnknownFields = false)
-public class AuthProperties {
+public class SecurityProperties {
 
     private final KeyStore keyStore = new KeyStore();
     private final WebClientConfiguration webClientConfiguration = new WebClientConfiguration();
@@ -34,11 +30,13 @@ public class AuthProperties {
     @Data
     public static class KeyStore {
         // name of the keystore in the classpath
-        private String name = "tls/keystore.p12";
+        private String name = "tls/wayne.jks";
         // password used to access the key
-        private String password = "password";
+        private String password = "waynepwd";
+        // password used to access the key
+        private String secret = "wayneks";
         // name of the alias to fetch
-        private String alias = "selfsigned";
+        private String alias = "wayne";
     }
 
     @Data

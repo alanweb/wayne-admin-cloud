@@ -6,7 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wayne.common.tools.sequence.SequenceUtil;
 import com.wayne.common.web.domain.request.PageDomain;
-import com.wayne.system.config.SecurityProperty;
+import com.wayne.common.config.proprety.AuthProperty;
 import com.wayne.system.domain.SysMenu;
 import com.wayne.system.domain.SysRole;
 import com.wayne.system.domain.SysUser;
@@ -55,7 +55,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      * 超级管理员配置
      */
     //@Resource
-    private SecurityProperty securityProperty;
+    private AuthProperty securityProperty;
 
     @Override
     public SysUser selectByUsername(String username) {

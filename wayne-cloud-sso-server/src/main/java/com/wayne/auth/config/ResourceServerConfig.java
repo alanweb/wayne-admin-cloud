@@ -2,10 +2,11 @@ package com.wayne.auth.config;
 
 import com.wayne.auth.extension.UnauthorizedAuthenticationEntryPoint;
 import com.wayne.auth.process.*;
-import com.wayne.auth.properties.AuthProperties;
+import com.wayne.auth.property.SecurityProperties;
 import com.wayne.auth.support.SecureCaptchaSupport;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
@@ -23,6 +24,7 @@ import javax.annotation.Resource;
 
 @EnableResourceServer
 @Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Resource
     private TokenStore tokenStore;
@@ -38,7 +40,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
      * 配置不拦截url
      */
     @Resource
-    private AuthProperties authProperties;
+    private SecurityProperties securityProperties;
 
     /**
      * 用于统计用户在线
@@ -66,7 +68,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.setSharedObject(RequestCache.class, new HttpSessionRequestCache());
         http.addFilter(corsFilter)
                 .authorizeRequests()
-                .antMatchers(authProperties.getWhites()).permitAll()
+                .antMatchers(securityProperties.getWhites()).permitAll()
                 // 其他的需要登录后才能访问
                 .anyRequest().authenticated()
                 .and()
@@ -90,7 +92,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .deleteCookies("refresh_token", "access_token", "JSESSIONID_YY")
                 .and()
                 .rememberMe()
-                .key(authProperties.getRememberKey())
+                .key(securityProperties.getRememberKey())
                 .tokenRepository(persistentTokenRepository)
                 .tokenValiditySeconds(tokenValiditySeconds)
                 .authenticationSuccessHandler(rememberMeAuthenticationSuccessHandler)
@@ -100,7 +102,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .sessionFixation()
                 .migrateSession()
                 // 同时登陆多个只保留一个
-                .maximumSessions(authProperties.getMaximum())
+                .maximumSessions(securityProperties.getMaximum())
                 .maxSessionsPreventsLogin(false)
                 // 踢出用户操作
                 .expiredSessionStrategy(secureSessionExpiredHandler)

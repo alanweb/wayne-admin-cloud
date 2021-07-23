@@ -46,7 +46,6 @@ wayne:
   account:
     host: http://wayne-gateway.local.wayne.com:8080
     default-client-redirect-uri: "http://wayne-gateway.local.wayne.com:8080/wayne-gateway/login/oauth2/code/gateway"
-#    default-client-redirect-uri: "http://portal-gateway.local.bj.iquantex.com:8080/portal-gateway/login/oauth2/code/gateway"
   swagger:
     # 文 档 标 题
     title: Wayne Admin API
@@ -89,9 +88,10 @@ wayne:
       - /.well-known/jwks.json #开放公钥
     ## 安全配置
     key-store:
-      name: tls/keystore.p12
-      password: password
-      alias: selfsigned
+      name: tls/wayne.jks
+      secret: wayneks
+      alias: wayne
+      password: waynepwd
     web-client-configuration:
       # Access Token is valid for 5 mins
       access-token-validity-in-seconds: 300
@@ -101,6 +101,6 @@ wayne:
       secret: changeit
 logging:
   level:
-    org:
-      springframework:
-        security: DEBUG
+    com:
+      wayne:
+        auth: DEBUG
