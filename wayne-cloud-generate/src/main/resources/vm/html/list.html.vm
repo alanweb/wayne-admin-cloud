@@ -48,20 +48,20 @@
                  <table id="${businessName}-table" lay-filter="${businessName}-table"></table>
 
                  <script type="text/html" id="${businessName}-toolbar">
-                     <button  sec:authorize="hasPermission('/${moduleName}/${businessName}/add','${permissionPrefix}:add')"  class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
+                     <button  sec:authorize="hasAnyAuthority('${permissionPrefix}:add')"  class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
                          <i class="layui-icon layui-icon-add-1"></i>
                          新增
                      </button>
-                     <button  sec:authorize="hasPermission('/${moduleName}/${businessName}/remove','${permissionPrefix}:remove')"   class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove">
+                     <button  sec:authorize="hasAnyAuthority('${permissionPrefix}:remove')"   class="pear-btn pear-btn-danger pear-btn-md" lay-event="batchRemove">
                          <i class="layui-icon layui-icon-delete"></i>
                          删除
                      </button>
                  </script>
 
                  <script type="text/html" id="${businessName}-bar">
-                     <button  sec:authorize="hasPermission('/${moduleName}/${businessName}/edit','${permissionPrefix}:edit')"   class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>
+                     <button  sec:authorize="hasAnyAuthority('${permissionPrefix}:edit')"   class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>
                      </button>
-                     <button  sec:authorize="hasPermission('/${moduleName}/${businessName}/remove','${permissionPrefix}:remove')"   class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove"><i class="layui-icon layui-icon-delete"></i>
+                     <button  sec:authorize="hasAnyAuthority('${permissionPrefix}:remove')"   class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove"><i class="layui-icon layui-icon-delete"></i>
                      </button>
                  </script>
              </div>

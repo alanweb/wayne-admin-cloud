@@ -72,7 +72,7 @@ spring:
             authorization-uri: ${auth-host}/oauth/authorize
             token-uri: ${auth-host}/oauth/token
             user-info-uri: ${auth-host}/api/userInfo
-            user-name-attribute: sub
+            user-name-attribute: username
             jwk-set-uri: ${auth-host}/.well-known/jwks.json
 server:
   port: 8080
@@ -87,7 +87,7 @@ nacos:
 wayne:
   sso:
     cookie-domain: local.wayne.com
-    cookie-timeout-seconds: 8640000
+    cookie-timeout-seconds: 86400
     enabled: true
     login-success: /wayne-web/
     logout-success: ${auth-host}/logout?service=${gateway-host:http://wayne-gateway.local.wayne.com:8080}/${spring.application.name}

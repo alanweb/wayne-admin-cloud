@@ -85,6 +85,7 @@ wayne:
       - /admin/** # 开放静态资源
       - /component/** # 开放静态资源
       - /favicon.ico # 开放FAVICON
+      - /api/userInfo
       - /.well-known/jwks.json #开放公钥
     ## 安全配置
     key-store:
@@ -104,3 +105,6 @@ logging:
     com:
       wayne:
         auth: DEBUG
+    org:
+      springframework:
+        security: DEBUG
