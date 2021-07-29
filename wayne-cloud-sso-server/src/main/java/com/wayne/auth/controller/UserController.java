@@ -1,8 +1,9 @@
 package com.wayne.auth.controller;
 
 import com.wayne.auth.service.impl.WayneUserDetailsService;
-import com.wayne.common.web.base.BaseController;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/api")
-public class UserController extends BaseController {
+public class UserController {
     private final WayneUserDetailsService wayneUserDetailsService;
 
     public UserController(WayneUserDetailsService wayneUserDetailsService) {
@@ -29,7 +30,18 @@ public class UserController extends BaseController {
      */
     @GetMapping("/userInfo")
     public ResponseEntity<UserDetails> getUserInfo() {
-        String loginName = getCurrentUserName();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object currentUser = null;
+        if (null != authentication && authentication.isAuthenticated()) {
+            currentUser = authentication.getPrincipal();
+        }
+        String loginName = null;
+        if (currentUser instanceof UserDetails) {
+            UserDetails springSecurityUser = (UserDetails) currentUser;
+            loginName = springSecurityUser.getUsername();
+        } else if (currentUser instanceof String) {
+            loginName = (String) currentUser;
+        }
         UserDetails userDetails = wayneUserDetailsService.getUserDetails(loginName);
         if (null != userDetails) {
             return ResponseEntity.ok(userDetails);

@@ -11,7 +11,10 @@ public class ControllerConstant {
      * 系统业务基础路径
      * */
     public final static String API_SYSTEM_PREFIX = "/system/";
-
+    /**
+     * 系统业务基础路径
+     * */
+    public final static String API_WEB_PREFIX = "/web/";
     /**
      * 代码生成基础路径
      * */

@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 
 @FeignClient("wayne-system")
 public interface SystemService {
-    @PostMapping("/system/log/save")
+    @PostMapping("/api/system/log/save")
     String saveLog(@RequestBody SysBaseLog log);
-    @PutMapping("/system/user/update")
+    @PutMapping("/api/system/user/update")
     String updateUser(@RequestBody SysBaseUser user);
-    @GetMapping("/system/user/queryByName")
+    @GetMapping("/api/system/user/queryByName")
     SysBaseUser queryByName(@RequestParam("username") String username);
-    @GetMapping("/system/account/info")
+    @GetMapping("/api/system/account/info")
     UserDetailsResponse getUserAccount(@RequestParam("username") String username);
-    @GetMapping("/system/client/detail")
+    @GetMapping("/api/system/client/detail")
     ClientDetailsResponse getClientDetail(@RequestParam("clientId") String clientId);
 }

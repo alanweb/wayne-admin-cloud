@@ -76,7 +76,7 @@
 
         form.on('submit(role-update)', function (data) {
             $.ajax({
-                url: '/system/role/update',
+                url: '/api/system/role/update',
                 data: JSON.stringify(data.field),
                 dataType: 'json',
                 contentType: 'application/json',

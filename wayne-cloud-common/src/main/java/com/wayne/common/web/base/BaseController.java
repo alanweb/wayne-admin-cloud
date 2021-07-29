@@ -1,10 +1,18 @@
 package com.wayne.common.web.base;
 
+import com.wayne.common.plugin.system.domain.SysBaseUser;
+import com.wayne.common.plugin.system.service.SysContext;
 import com.wayne.common.web.domain.response.ResultController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 
 /**
  * Describe: 基 础 控 制 器 类
@@ -13,25 +21,29 @@ import org.springframework.util.Assert;
  */
 public class BaseController extends ResultController {
 
-    public Object getCurrentUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (null != authentication && authentication.isAuthenticated()) {
-            return authentication.getPrincipal();
-        }
-        Assert.notNull(null, "无法获取当前用户信息");
-        return null;
+    @Autowired
+    private SysContext sysContext;
+
+    public SysBaseUser getCurrentUser() {
+        String userName = getCurrentUserName();
+        SysBaseUser user = sysContext.getUserByName(userName);
+        Assert.notNull(user, "无法获取当前用户信息");
+        return user;
     }
 
     public String getCurrentUserName() {
-        Object currentUser = getCurrentUser();
-        String userName = null;
-        if (currentUser instanceof UserDetails) {
-            UserDetails springSecurityUser = (UserDetails) currentUser;
-            userName = springSecurityUser.getUsername();
-        } else if (currentUser instanceof String) {
-            userName = (String) currentUser;
-        }
-        Assert.notNull(userName, "无法获取当前用户信息");
-        return userName;
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        Enumeration<String> userName = request.getHeaders("user_name");
+        Assert.isTrue(userName.hasMoreElements(), "无法获取当前用户信息");
+        return userName.nextElement();
+    }
+
+    public String getCurrentUserId() {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        Enumeration<String> userId = request.getHeaders("user_id");
+        Assert.isTrue(userId.hasMoreElements(), "无法获取当前用户信息");
+        return userId.nextElement();
     }
 }

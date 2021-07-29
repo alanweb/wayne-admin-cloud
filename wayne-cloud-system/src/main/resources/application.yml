@@ -8,6 +8,7 @@ server:
     session:
       # 超 时 时 间
       timeout: 120m
+    context-path: /api
   max-http-header-size: 102400
 spring:
   session:

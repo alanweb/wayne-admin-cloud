@@ -129,7 +129,7 @@
             }
             let loading = layer.load()
             $.ajax({
-                url: '/system/role/' + operate,
+                url: '/api/system/role/' + operate,
                 data: JSON.stringify({roleId: this.value}),
                 dataType: 'json',
                 contentType: 'application/json',

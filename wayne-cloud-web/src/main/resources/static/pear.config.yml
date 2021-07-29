@@ -7,7 +7,7 @@ logo:
 ## 菜单配置
 menu: 
   ## 菜单数据来源
-  data: /system/user/menu
+  data: /api/system/user/menu
   ## 是否同时只打开一个菜单目录
   accordion: true
   ## 是否开启多系统菜单模式
@@ -29,7 +29,7 @@ tab:
   ## 默认选项卡数据
   index: 
     id: "10" ## 标识 ID , 建议与菜单项中的 ID 一致
-    href: "/console" ## 页面地址
+    href: "/web/console" ## 页面地址
     title: "首页" ## 标题
 ## 主题配置
 theme: 
@@ -73,4 +73,4 @@ other:
   autoHead: false
 header:
   ## 站内消息，数据来源，通过 false 设置关闭
-  message: "system/notice/notice"
+  message: "/api/system/notice/notice"

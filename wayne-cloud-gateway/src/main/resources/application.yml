@@ -16,6 +16,11 @@ spring:
         username: nacos
         password: nacos
     gateway:
+      default-filters:
+        #- WayneSetResponseHeader=X-Frame-Options,SAMEORIGIN
+        - WayneRemoveResponseHeader=X-Frame-Options
+        # 去重网关
+        - DedupeResponseHeader=Access-Control-Allow-Origin, RETAIN_UNIQUE
       discovery:
         locator:
           #服务ID转小写
@@ -89,5 +94,5 @@ wayne:
     cookie-domain: local.wayne.com
     cookie-timeout-seconds: 86400
     enabled: true
-    login-success: /wayne-web/
+    login-success: /web/
     logout-success: ${auth-host}/logout?service=${gateway-host:http://wayne-gateway.local.wayne.com:8080}/${spring.application.name}

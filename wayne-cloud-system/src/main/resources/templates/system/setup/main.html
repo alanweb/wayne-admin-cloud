@@ -83,7 +83,7 @@ layui.use(['element','form','popup','jquery'],function(){
 
     form.on('submit(setup-save)', function (data) {
         $.ajax({
-            url: '/system/setup/save',
+            url: '/api/system/setup/save',
             data: JSON.stringify(data.field),
             dataType: 'json',
             contentType: 'application/json',

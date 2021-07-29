@@ -5,7 +5,7 @@ server:
     session:
       # 超 时 时 间
       timeout: 120m
-    context-path: /${spring.application.name}
+    context-path: /web
 spring:
   application:
     name: wayne-web

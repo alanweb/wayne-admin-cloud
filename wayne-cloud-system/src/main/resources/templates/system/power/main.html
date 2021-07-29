@@ -89,7 +89,7 @@
                 treeDefaultClose: true,
                 toolbar: '#power-toolbar',
                 elem: '#power-table',
-                url: '/system/power/data',
+                url: '/api/system/power/data',
                 page: false,
                 cols: [
                     [
@@ -162,7 +162,7 @@
             }
             let loading = layer.load();
             $.ajax({
-                url: '/system/power/' + operate,
+                url: '/api/system/power/' + operate,
                 data: JSON.stringify({powerId: this.value}),
                 dataType: 'json',
                 contentType: 'application/json',

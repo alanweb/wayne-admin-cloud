@@ -13,6 +13,7 @@ import com.wayne.system.domain.SysUser;
 import com.wayne.system.service.ISysNoticeService;
 import com.wayne.system.service.ISysUserService;
 import io.swagger.annotations.Api;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -63,17 +64,14 @@ public class SysNoticeController extends BaseController
      * */
     @ResponseBody
     @GetMapping("notice")
-    public List<Map> notice(){
-
+    public List<Map> notice(@RequestHeader HttpHeaders headers){
+        String userId = headers.get("user_id").get(0);
         List<Map> result = new ArrayList<>();
-
         SysNotice publicParam = new SysNotice();
         publicParam.setType("public");
-
         SysNotice privateParam = new SysNotice();
         privateParam.setType("private");
-        privateParam.setAccept(((SysUser)SecurityUtil.currentUserObj()).getUserId());
-
+        privateParam.setAccept(userId);
         SysNotice noticeParam = new SysNotice();
         noticeParam.setType("notice");
 

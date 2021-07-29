@@ -90,7 +90,7 @@
 
         form.on('submit(dept-update)', function (data) {
             $.ajax({
-                url: '/system/dept/update',
+                url: '/api/system/dept/update',
                 data: JSON.stringify(data.field),
                 dataType: 'json',
                 contentType: 'application/json',

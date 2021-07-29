@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wayne.common.constant.ControllerConstant;
 import com.wayne.common.plugin.logging.aop.enums.LoggingType;
+import com.wayne.common.plugin.system.domain.SysBaseLog;
 import com.wayne.common.web.base.BaseController;
 import com.wayne.common.web.domain.request.PageDomain;
 import com.wayne.common.web.domain.response.Result;
@@ -16,9 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Describe: 日志控制器
@@ -35,7 +36,7 @@ public class SysLogController extends BaseController {
     /**
      * 系 统 日 志
      */
-    private String MODULE_PATH = "system/log" ;
+    private String MODULE_PATH = "system/log";
 
     /**
      * Describe: 行为日志视图
@@ -95,14 +96,9 @@ public class SysLogController extends BaseController {
         boolean flag = sysLogService.save(log);
         return flag ? Result.success() : Result.failure();
     }
-    public static void main(String[] args) {
-        try {
-            String a = " 2021-06-30T09:31:13.755Z";
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(" yyyy-MM-dd'T'HH:mm:ss");
-            Date parse = simpleDateFormat.parse(a);
-            System.out.println(parse.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+    @GetMapping("/selectTopLoginLog")
+    public List<SysBaseLog> selectTopLoginLog(@RequestParam String userName) {
+        return sysLogService.selectTopLoginLog(userName).stream().collect(Collectors.toList());
     }
 }

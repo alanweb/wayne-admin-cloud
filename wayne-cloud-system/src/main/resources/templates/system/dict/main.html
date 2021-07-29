@@ -126,7 +126,7 @@
 
         table.render({
             elem: '#dict-type-table',
-            url: '/system/dictType/data',
+            url: '/api/system/dictType/data',
             page: true,
             cols: cols,
             skin: 'line',
@@ -143,7 +143,7 @@
             $(".empty").hide();
             table.render({
                 elem: '#dict-data-table',
-                url: '/system/dictData/data?typeCode=' + typeCode,
+                url: '/api/system/dictData/data?typeCode=' + typeCode,
                 page: true,
                 height: 'full-148',
                 cols: dataCols,
@@ -184,7 +184,7 @@
             }
             let loading = layer.load()
             $.ajax({
-                url: '/system/dictType/' + operate,
+                url: '/api/system/dictType/' + operate,
                 data: JSON.stringify({id: this.value,typeCode: typeCode}),
                 dataType: 'json',
                 contentType: 'application/json',
@@ -225,7 +225,7 @@
                 layer.close(index);
                 let loading = layer.load();
                 $.ajax({
-                    url: "/system/dictType/remove/" + obj.data['id'],
+                    url: "/api/system/dictType/remove/" + obj.data['id'],
                     dataType: 'json',
                     type: 'delete',
                     success: function (result) {
@@ -275,7 +275,7 @@
                 layer.close(index);
                 let loading = layer.load();
                 $.ajax({
-                    url: "/system/dictData/remove/" + obj.data['dataId'],
+                    url: "/api/system/dictData/remove/" + obj.data['dataId'],
                     dataType: 'json',
                     type: 'delete',
                     success: function (result) {
@@ -325,7 +325,7 @@
             }
             let loading = layer.load()
             $.ajax({
-                url: '/system/dictData/' + operate,
+                url: '/api/system/dictData/' + operate,
                 data: JSON.stringify({dataId: this.value,typeCode: typeCode}),
                 dataType: 'json',
                 contentType: 'application/json',

@@ -87,7 +87,7 @@
 
         dtree.renderSelect({
             elem: "#selectParent",
-            url: "/system/dept/tree",
+            url: "/api/system/dept/tree",
             method: 'get',
             selectInputName: {nodeId: "parentId", context: "parentName"},
             skin: "layui",
@@ -98,7 +98,7 @@
 
         form.on('submit(dept-save)', function (data) {
             $.ajax({
-                url: '/system/dept/save',
+                url: '/api/system/dept/save',
                 data: JSON.stringify(data.field),
                 dataType: 'json',
                 contentType: 'application/json',

@@ -1,22 +1,28 @@
 package com.wayne.web.service;
 
 import com.wayne.common.plugin.system.domain.SysBaseLog;
+import com.wayne.common.plugin.system.domain.SysBaseRole;
 import com.wayne.common.plugin.system.domain.SysBaseUser;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @FeignClient("wayne-system")
 public interface SystemService {
-    @PostMapping("/system/log/save")
+    @PostMapping("/api/system/log/save")
     String saveLog(@RequestBody SysBaseLog log);
 
-    @PostMapping("/system/user/update")
+    @PutMapping("/api/system/user/update")
     String updateUser(@RequestBody SysBaseUser user);
 
-    @GetMapping("/system/user/queryByName")
+    @GetMapping("/api/system/user/queryByName")
     SysBaseUser queryByName(@RequestParam("username") String username);
+
+    @GetMapping("/api/system/log/selectTopLoginLog")
+    List<SysBaseLog> selectTopLoginLog(@RequestParam("username") String username);
+
+    @GetMapping("/api/system/role/all")
+    List<SysBaseRole> roleAll();
 
 }

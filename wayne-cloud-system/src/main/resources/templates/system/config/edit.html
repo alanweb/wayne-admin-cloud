@@ -67,7 +67,7 @@
 
         form.on('submit(dict-type-update)', function (data) {
             $.ajax({
-                url: '/system/config/update',
+                url: '/api/system/config/update',
                 data: JSON.stringify(data.field),
                 dataType: 'json',
                 contentType: 'application/json',

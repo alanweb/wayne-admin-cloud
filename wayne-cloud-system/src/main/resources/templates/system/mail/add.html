@@ -60,7 +60,7 @@
 
         form.on('submit(mail-save)', function (data) {
             $.ajax({
-                url: '/system/mail/save',
+                url: '/api/system/mail/save',
                 data: JSON.stringify(data.field),
                 dataType: 'json',
                 contentType: 'application/json',

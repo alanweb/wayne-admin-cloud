@@ -2,7 +2,7 @@ package com.wayne.system.domain;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.wayne.common.web.base.BaseDomain;
+import com.wayne.common.plugin.system.domain.SysBaseDict;
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
@@ -14,37 +14,11 @@ import org.apache.ibatis.type.Alias;
 @Data
 @Alias("SysDictData")
 @TableName(value = "Sys_Dict_Data")
-public class SysDictData extends BaseDomain {
+public class SysDictData extends SysBaseDict {
 
     /**
      *  id 编号
      * */
     @TableId
     private String dataId;
-
-    /**
-     *  字典显示
-     * */
-    private String dataLabel;
-
-    /**
-     * 字典值
-     * */
-    private String dataValue;
-
-    /**
-     * 字典类型
-     * */
-    private String typeCode;
-
-    /**
-     * 是否为默认
-     * */
-    private String isDefault;
-
-    /**
-     * 是否启用
-     * */
-    private String enable;
-
 }

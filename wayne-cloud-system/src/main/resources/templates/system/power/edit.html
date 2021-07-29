@@ -103,7 +103,7 @@
 
         dtree.renderSelect({
             elem: "#selectParent",
-            url: "/system/power/selectParent",
+            url: "/api/system/power/selectParent",
             method: 'get',
             selectInputName: {nodeId: "parentId", context: "powerName"},
             skin: "layui",
@@ -136,7 +136,7 @@
         form.on('submit(power-save)', function (data) {
             data.field.icon = "layui-icon " + data.field.icon;
             $.ajax({
-                url: '/system/power/update',
+                url: '/api/system/power/update',
                 data: JSON.stringify(data.field),
                 dataType: 'json',
                 contentType: 'application/json',

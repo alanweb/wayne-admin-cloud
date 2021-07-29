@@ -209,7 +209,7 @@
 
         form.on('submit(user-update)', function (data) {
             $.ajax({
-                url: '/system/user/updateInfo',
+                url: '/api/system/user/updateInfo',
                 data: JSON.stringify(data.field),
                 dataType: 'json',
                 contentType: 'application/json',

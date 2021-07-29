@@ -166,7 +166,7 @@ layui.define(["layer", "jquery","table"], function (exports) {
                 }
                 $.ajax({
                     type: "POST",
-                    url: "/system/role/checkRoleKeyUnique",
+                    url: "/api/system/role/checkRoleKeyUnique",
                     async: false,
                     cache: false,
                     dataType: "json",
@@ -191,7 +191,7 @@ layui.define(["layer", "jquery","table"], function (exports) {
                 }
                 $.ajax({
                     type: "POST",
-                    url: "/system/role/checkRoleNameUnique",
+                    url: "/api/system/role/checkRoleNameUnique",
                     async: false,
                     cache: false,
                     dataType: "json",

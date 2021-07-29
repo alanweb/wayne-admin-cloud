@@ -67,7 +67,7 @@
 
         form.on('submit(dict-data-save)', function (data) {
             $.ajax({
-                url: '/system/dictData/save',
+                url: '/api/system/dictData/save',
                 data: JSON.stringify(data.field),
                 dataType: 'json',
                 contentType: 'application/json',

@@ -1,6 +1,5 @@
 package com.wayne.system.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageInfo;
 import com.wayne.common.constant.ControllerConstant;
 import com.wayne.common.plugin.logging.aop.annotation.Logging;
@@ -18,12 +17,14 @@ import com.wayne.common.web.domain.response.module.ResultTable;
 import com.wayne.system.domain.SysMenu;
 import com.wayne.system.domain.SysUser;
 import com.wayne.system.param.EditPassword;
+import com.wayne.system.param.QueryUserParam;
 import com.wayne.system.service.ISysLogService;
 import com.wayne.system.service.ISysRoleService;
 import com.wayne.system.service.ISysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.util.Strings;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,11 +48,6 @@ import java.util.List;
 public class SysUserController extends BaseController {
 
     /**
-     * Describe: 基础路径
-     */
-    private static String MODULE_PATH = "system/user/" ;
-
-    /**
      * Describe: 用户模块服务
      */
     @Resource
@@ -69,17 +65,7 @@ public class SysUserController extends BaseController {
     @Resource
     private ISysLogService sysLogService;
 
-    /**
-     * Describe: 获取用户列表视图
-     * Param ModelAndView
-     * Return 用户列表视图
-     */
-    @GetMapping("main")
-    @ApiOperation(value = "获取用户列表视图")
-    @PreAuthorize("hasPermission('/system/user/main','sys:user:main')")
-    public ModelAndView main() {
-        return jumpPage(MODULE_PATH + "main");
-    }
+
 
     /**
      * Describe: 获取用户列表数据
@@ -88,25 +74,18 @@ public class SysUserController extends BaseController {
      */
     @GetMapping("data")
     @ApiOperation(value = "获取用户列表数据")
-    @PreAuthorize("hasPermission('/system/user/data','sys:user:data')")
+    @PreAuthorize("hasAnyAuthority('sys:user:data')")
     @Logging(title = "查询用户", describe = "查询用户", type = BusinessType.QUERY)
-    public ResultTable data(PageDomain pageDomain, SysUser param) {
-        PageInfo<SysUser> pageInfo = sysUserService.page(param, pageDomain);
+    public ResultTable data(PageDomain pageDomain, QueryUserParam param) {
+        SysUser user = new SysUser();
+        user.setDeptId(param.getDeptId());
+        user.setUsername(param.getUsername());
+        user.setRealName(param.getRealName());
+        PageInfo<SysUser> pageInfo = sysUserService.page(user, pageDomain);
         return pageTable(pageInfo.getList(), pageInfo.getTotal());
     }
 
-    /**
-     * Describe: 用户新增视图
-     * Param ModelAndView
-     * Return 返回用户新增视图
-     */
-    @GetMapping("add")
-    @ApiOperation(value = "获取用户新增视图")
-    @PreAuthorize("hasPermission('/system/user/add','sys:user:add')")
-    public ModelAndView add(Model model) {
-        model.addAttribute("sysRoles", sysRoleService.list());
-        return jumpPage(MODULE_PATH + "add");
-    }
+
 
     /**
      * Describe: 用户新增接口
@@ -116,7 +95,7 @@ public class SysUserController extends BaseController {
     @RepeatSubmit
     @PostMapping("save")
     @ApiOperation(value = "保存用户数据")
-    @PreAuthorize("hasPermission('/system/user/add','sys:user:add')")
+    @PreAuthorize("hasAnyAuthority('sys:user:add')")
     @Logging(title = "新增用户", describe = "新增用户", type = BusinessType.ADD)
     public Result save(@RequestBody SysUser sysUser) {
         sysUser.setLogin("0");
@@ -130,29 +109,6 @@ public class SysUserController extends BaseController {
         return decide(result);
     }
 
-    /**
-     * Describe: 用户修改视图
-     * Param ModelAndView
-     * Return 返回用户修改视图
-     */
-    @GetMapping("edit")
-    @ApiOperation(value = "获取用户修改视图")
-    @PreAuthorize("hasPermission('/system/user/edit','sys:user:edit')")
-    public ModelAndView edit(Model model, String userId) {
-        model.addAttribute("sysRoles", sysUserService.getUserRole(userId));
-        model.addAttribute("sysUser", sysUserService.getById(userId));
-        return jumpPage(MODULE_PATH + "edit");
-    }
-
-    /**
-     * Describe: 用户密码修改视图
-     * Param ModelAndView
-     * Return 返回用户密码修改视图
-     */
-    @GetMapping("editPassword")
-    public ModelAndView editPasswordView() {
-        return jumpPage(MODULE_PATH + "password");
-    }
 
     /**
      * Describe: 用户密码修改接口
@@ -164,8 +120,7 @@ public class SysUserController extends BaseController {
         String oldPassword = editPassword.getOldPassword();
         String newPassword = editPassword.getNewPassword();
         String confirmPassword = editPassword.getConfirmPassword();
-        SysUser sysUser = (SysUser) ServletUtil.getSession().getAttribute("currentUser");
-        SysUser editUser = sysUserService.getById(sysUser.getUserId());
+        SysUser editUser = sysUserService.getById(getCurrentUserId());
         if (Strings.isBlank(confirmPassword)
                 || Strings.isBlank(newPassword)
                 || Strings.isBlank(oldPassword)) {
@@ -203,10 +158,10 @@ public class SysUserController extends BaseController {
      */
     @PutMapping("updateAvatar")
     @ApiOperation(value = "修改用户头像")
-    @PreAuthorize("hasPermission('/system/user/edit','sys:user:edit')")
+    @PreAuthorize("hasAnyAuthority('sys:user:edit')")
     @Logging(title = "修改头像", describe = "修改头像", type = BusinessType.EDIT)
     public Result updateAvatar(@RequestBody SysUser sysUser) {
-        sysUser.setUserId(((SysUser) SecurityUtil.currentUserObj()).getUserId());
+        sysUser.setUserId(getCurrentUserId());
         boolean result = sysUserService.updateById(sysUser);
         return decide(result);
     }
@@ -218,7 +173,7 @@ public class SysUserController extends BaseController {
      */
     @DeleteMapping("batchRemove/{ids}")
     @ApiOperation(value = "批量删除用户")
-    @PreAuthorize("hasPermission('/system/user/remove','sys:user:remove')")
+    @PreAuthorize("hasAnyAuthority('sys:user:remove')")
     @Logging(title = "删除用户", describe = "删除用户", type = BusinessType.REMOVE)
     public Result batchRemove(@PathVariable String ids) {
         boolean result = sysUserService.removeByIds(Arrays.asList(Convert.toStrArray(ids)));
@@ -233,7 +188,7 @@ public class SysUserController extends BaseController {
     @Transactional
     @DeleteMapping("remove/{id}")
     @ApiOperation(value = "删除用户数据")
-    @PreAuthorize("hasPermission('/system/user/remove','sys:user:remove')")
+    @PreAuthorize("hasAnyAuthority('sys:user:remove')")
     @Logging(title = "删除用户", describe = "删除用户", type = BusinessType.REMOVE)
     public Result remove(@PathVariable String id) {
         boolean result = sysUserService.removeById(id);
@@ -248,8 +203,8 @@ public class SysUserController extends BaseController {
     @GetMapping("menu")
     @ApiOperation(value = "获取用户菜单数据")
     public List<SysMenu> getUserMenu() {
-        SysUser sysUser = (SysUser) SecurityUtil.currentUserObj();
-        List<SysMenu> menus = sysUserService.getUserMenu(sysUser.getUsername());
+        String userName = getCurrentUserName();
+        List<SysMenu> menus = sysUserService.getUserMenu(userName);
         return sysUserService.toUserMenu(menus, "0");
     }
 
@@ -279,19 +234,6 @@ public class SysUserController extends BaseController {
         return decide(result);
     }
 
-    /**
-     * Describe: 个人资料
-     * Param: null
-     * Return: ModelAndView
-     */
-    @GetMapping("center")
-    @ApiOperation(value = "个人资料")
-    public ModelAndView center(Model model) {
-        SysUser sysUser = (SysUser) SecurityUtil.currentUserObj();
-        model.addAttribute("userInfo", sysUserService.getById(sysUser.getUserId()));
-        model.addAttribute("logs", sysLogService.selectTopLoginLog(sysUser.getUsername()));
-        return jumpPage(MODULE_PATH + "center");
-    }
 
     /**
      * Describe: 用户修改接口
@@ -304,21 +246,8 @@ public class SysUserController extends BaseController {
         boolean result = sysUserService.updateById(sysUser);
         return decide(result);
     }
-
-
-    /**
-     * Describe: 更换头像
-     * Param: null
-     * Return: ModelAndView
-     */
-    @GetMapping("profile/{id}")
-    public ModelAndView profile(Model model, @PathVariable("id") String userId) {
-        model.addAttribute("userId", userId);
-        return jumpPage(MODULE_PATH + "profile");
-    }
-
     @GetMapping("queryByName")
-    public SysUser queryByName(String username) {
+    public SysBaseUser queryByName(String username) {
         return sysUserService.selectByUsername(username);
     }
 }

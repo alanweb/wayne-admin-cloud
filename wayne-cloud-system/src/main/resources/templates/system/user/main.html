@@ -131,7 +131,7 @@
         dtree.render({
             elem: "#dept-tree",
             method: "get",
-            url: "/system/dept/tree",
+            url: "/api/system/dept/tree",
             dataFormat: "list",
             line: true,
             skin: "laySimple",
@@ -200,7 +200,7 @@
             }
             let loading = layer.load();
             $.ajax({
-                url: '/system/user/' + operate,
+                url: '/api/system/user/' + operate,
                 data: JSON.stringify({userId: this.value}),
                 dataType: 'json',
                 contentType: 'application/json',

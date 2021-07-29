@@ -78,7 +78,7 @@
                 treeDefaultClose: false,
                 toolbar: '#dept-toolbar',
                 elem: '#dept-table',
-                url: '/system/dept/data',
+                url: '/api/system/dept/data',
                 page: false,
                 cols: [
                     [
@@ -153,7 +153,7 @@
             }
             let loading = layer.load();
             $.ajax({
-                url: '/system/dept/' + operate,
+                url: '/api/system/dept/' + operate,
                 data: JSON.stringify({deptId: this.value}),
                 dataType: 'json',
                 contentType: 'application/json',

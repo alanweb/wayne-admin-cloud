@@ -52,13 +52,7 @@ public class SysContextService implements SysContext {
 
     @Override
     public SysBaseUser getUserById(String id) {
-        SysUser sysUser = sysUserMapper.selectById(id);
-        SysBaseUser sysUserModel = null;
-        if (sysUser != null) {
-            sysUserModel = new SysBaseUser();
-            BeanUtils.copyProperties(sysUser, sysUserModel);
-        }
-        return sysUserModel;
+        return sysUserMapper.selectById(id);
     }
 
     @Override
@@ -103,15 +97,7 @@ public class SysContextService implements SysContext {
     private List<SysBaseDict> buildSysDictDataModel(List<SysDictData> sysDictDataList) {
         List<SysBaseDict> sysDictDataModelList = new ArrayList<>();
         if (sysDictDataList != null && sysDictDataList.size() > 0) {
-            for (SysDictData sysDictData : sysDictDataList) {
-                try {
-                    SysBaseDict sysDictDataModel = new SysBaseDict();
-                    BeanUtils.copyProperties(sysDictData, sysDictDataModel);
-                    sysDictDataModelList.add(sysDictDataModel);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+            sysDictDataModelList = sysDictDataList.stream().collect(Collectors.toList());
         }
         return sysDictDataModelList;
     }
