@@ -44,7 +44,7 @@ public class SysLogController extends BaseController {
      * Return: ModelAndView
      */
     @GetMapping("main")
-    @PreAuthorize("hasPermission('/system/log/main','sys:log:main')")
+    @PreAuthorize("hasAnyAuthority('sys:log:main')")
     public ModelAndView main() {
         return jumpPage(MODULE_PATH + "/main");
     }
@@ -55,7 +55,7 @@ public class SysLogController extends BaseController {
      * Return: ResultTable
      */
     @GetMapping("operateLog")
-    @PreAuthorize("hasPermission('/system/log/operateLog','sys:log:operateLog')")
+    @PreAuthorize("hasAnyAuthority('sys:log:operateLog')")
     public ResultTable operateLog(PageDomain pageDomain, LocalDateTime startTime, LocalDateTime endTime) {
         PageHelper.startPage(pageDomain.getPage(), pageDomain.getLimit());
         PageInfo<SysLog> pageInfo = new PageInfo<>(sysLogService.data(LoggingType.OPERATE, startTime, endTime));
@@ -68,7 +68,7 @@ public class SysLogController extends BaseController {
      * Return: ModelAndView
      */
     @GetMapping("loginLog")
-    @PreAuthorize("hasPermission('/system/log/loginLog','sys:log:loginLog')")
+    @PreAuthorize("hasAnyAuthority('sys:log:loginLog')")
     public ResultTable loginLog(PageDomain pageDomain, LocalDateTime startTime, LocalDateTime endTime) {
         PageHelper.startPage(pageDomain.getPage(), pageDomain.getLimit());
         PageInfo<SysLog> pageInfo = new PageInfo<>(sysLogService.data(LoggingType.LOGIN, startTime, endTime));
@@ -81,7 +81,7 @@ public class SysLogController extends BaseController {
      * Return: ModelAndView
      */
     @GetMapping("/info")
-    @PreAuthorize("hasPermission('/system/log/info','sys:log:info')")
+    @PreAuthorize("hasAnyAuthority('sys:log:info')")
     public ModelAndView details() {
         return jumpPage(MODULE_PATH + "/info");
     }
@@ -98,7 +98,7 @@ public class SysLogController extends BaseController {
     }
 
     @GetMapping("/selectTopLoginLog")
-    public List<SysBaseLog> selectTopLoginLog(@RequestParam String userName) {
-        return sysLogService.selectTopLoginLog(userName).stream().collect(Collectors.toList());
+    public List<SysBaseLog> selectTopLoginLog(String username) {
+        return sysLogService.selectTopLoginLog(username).stream().collect(Collectors.toList());
     }
 }

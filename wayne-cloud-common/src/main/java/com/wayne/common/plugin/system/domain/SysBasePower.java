@@ -61,7 +61,7 @@ public class SysBasePower extends BaseDomain {
     /**
      * 开启
      * */
-    private Boolean enable;
+    private String enable;
 
     /**
      * 计算列 提供给前端组件

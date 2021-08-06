@@ -6,6 +6,7 @@ import com.wayne.common.plugin.system.domain.SysBaseRole;
 import com.wayne.common.tools.sequence.SequenceUtil;
 import com.wayne.common.tools.string.Convert;
 import com.wayne.common.web.base.BaseController;
+import com.wayne.common.web.constants.Enable;
 import com.wayne.common.web.domain.request.PageDomain;
 import com.wayne.common.web.domain.response.Result;
 import com.wayne.common.web.domain.response.module.ResultTable;
@@ -35,27 +36,10 @@ import java.util.stream.Collectors;
 public class SysRoleController extends BaseController {
 
     /**
-     * Describe: 基础路径
-     */
-    private static String MODULE_PATH = "system/role/";
-
-    /**
      * Describe: 角色模块服务
      */
     @Resource
     private ISysRoleService sysRoleService;
-
-    /**
-     * Describe: 获取角色列表视图
-     * Param ModelAndView
-     * Return 用户列表视图
-     */
-    @GetMapping("main")
-    @ApiOperation(value = "获取角色列表视图")
-    @PreAuthorize("hasPermission('/system/role/main','sys:role:main')")
-    public ModelAndView main() {
-        return jumpPage(MODULE_PATH + "main");
-    }
 
     /**
      * Describe: 获取角色列表数据
@@ -64,22 +48,10 @@ public class SysRoleController extends BaseController {
      */
     @GetMapping("data")
     @ApiOperation(value = "获取角色列表数据")
-    @PreAuthorize("hasPermission('/system/role/data','sys:role:data')")
+    @PreAuthorize("hasAnyAuthority('sys:role:data')")
     public ResultTable data(PageDomain pageDomain, SysRole param) {
         PageInfo<SysRole> pageInfo = sysRoleService.page(param, pageDomain);
         return pageTable(pageInfo.getList(), pageInfo.getTotal());
-    }
-
-    /**
-     * Describe: 获取角色新增视图
-     * Param ModelAndView
-     * Return 角色新增视图
-     */
-    @GetMapping("add")
-    @ApiOperation(value = "获取角色新增视图")
-    @PreAuthorize("hasPermission('/system/role/add','sys:role:add')")
-    public ModelAndView add() {
-        return jumpPage(MODULE_PATH + "add");
     }
 
     /**
@@ -89,25 +61,11 @@ public class SysRoleController extends BaseController {
      */
     @PostMapping("save")
     @ApiOperation(value = "保存角色数据")
-    @PreAuthorize("hasPermission('/system/role/add','sys:role:add')")
+    @PreAuthorize("hasAnyAuthority('sys:role:add')")
     public Result save(@RequestBody SysRole sysRole) {
         sysRole.setRoleId(SequenceUtil.makeStringId());
         boolean result = sysRoleService.save(sysRole);
         return decide(result);
-    }
-
-    /**
-     * Describe: 获取角色修改视图
-     * Param ModelAndView
-     * Return 角色修改视图
-     */
-    @GetMapping("edit")
-    @ApiOperation(value = "获取角色修改视图")
-    @PreAuthorize("hasPermission('/system/role/edit','sys:role:edit')")
-    public ModelAndView edit(ModelAndView modelAndView, String roleId) {
-        modelAndView.addObject("sysRole", sysRoleService.getById(roleId));
-        modelAndView.setViewName(MODULE_PATH + "edit");
-        return modelAndView;
     }
 
     /**
@@ -117,23 +75,10 @@ public class SysRoleController extends BaseController {
      */
     @PutMapping("update")
     @ApiOperation(value = "修改角色数据")
-    @PreAuthorize("hasPermission('/system/role/edit','sys:role:edit')")
+    @PreAuthorize("hasAnyAuthority('sys:role:edit')")
     public Result update(@RequestBody SysRole sysRole) {
         boolean result = sysRoleService.updateById(sysRole);
         return decide(result);
-    }
-
-    /**
-     * Describe: 获取角色授权视图
-     * Param ModelAndView
-     * Return ModelAndView
-     */
-    @GetMapping("power")
-    @ApiOperation(value = "获取分配角色权限视图")
-    @PreAuthorize("hasPermission('/system/role/power','sys:role:power')")
-    public ModelAndView power(Model model, String roleId) {
-        model.addAttribute("roleId", roleId);
-        return jumpPage(MODULE_PATH + "power");
     }
 
     /**
@@ -143,7 +88,7 @@ public class SysRoleController extends BaseController {
      */
     @PutMapping("saveRolePower")
     @ApiOperation(value = "保存角色权限数据")
-    @PreAuthorize("hasPermission('/system/role/power','sys:role:power')")
+    @PreAuthorize("hasAnyAuthority('sys:role:power')")
     public Result saveRolePower(String roleId, String powerIds) {
         boolean result = sysRoleService.saveRolePower(roleId, Arrays.asList(powerIds.split(",")));
         return decide(result);
@@ -156,7 +101,7 @@ public class SysRoleController extends BaseController {
      */
     @GetMapping("getRolePower")
     @ApiOperation(value = "获取角色权限数据")
-    @PreAuthorize("hasPermission('/system/role/power','sys:role:power')")
+    @PreAuthorize("hasAnyAuthority('sys:role:power')")
     public ResultTree getRolePower(String roleId) {
         return dataTree(sysRoleService.getRolePower(roleId));
     }
@@ -168,7 +113,7 @@ public class SysRoleController extends BaseController {
      */
     @DeleteMapping("remove/{id}")
     @ApiOperation(value = "删除角色数据")
-    @PreAuthorize("hasPermission('/system/role/remove','sys:role:remove')")
+    @PreAuthorize("hasAnyAuthority('sys:role:remove')")
     public Result remove(@PathVariable String id) {
         boolean result = sysRoleService.removeById(id);
         return decide(result);
@@ -181,7 +126,7 @@ public class SysRoleController extends BaseController {
      */
     @DeleteMapping("batchRemove/{ids}")
     @ApiOperation(value = "批量删除角色数据")
-    @PreAuthorize("hasPermission('/system/role/remove','sys:role:remove')")
+    @PreAuthorize("hasAnyAuthority('sys:role:remove')")
     public Result batchRemove(@PathVariable String ids) {
         boolean result = sysRoleService.removeByIds(Arrays.asList(Convert.toStrArray(ids)));
         return decide(result);
@@ -195,7 +140,7 @@ public class SysRoleController extends BaseController {
     @PutMapping("enable")
     @ApiOperation(value = "启用角色")
     public Result enable(@RequestBody SysRole sysRole) {
-        sysRole.setEnable("0");
+        sysRole.setEnable(Enable.ENABLE);
         boolean result = sysRoleService.updateById(sysRole);
         return decide(result);
     }
@@ -208,7 +153,7 @@ public class SysRoleController extends BaseController {
     @PutMapping("disable")
     @ApiOperation(value = "禁用角色")
     public Result disable(@RequestBody SysRole sysRole) {
-        sysRole.setEnable("1");
+        sysRole.setEnable(Enable.DISABLE);
         boolean result = sysRoleService.updateById(sysRole);
         return decide(result);
     }
@@ -218,7 +163,19 @@ public class SysRoleController extends BaseController {
      * Param: roleId
      * Return: List<SysBaseRole>
      */
-    @PutMapping("all")
+    @GetMapping("/{roleId}")
+    @ApiOperation(value = "获取角色信息", hidden = true)
+    public SysBaseRole queryByRoleId(@PathVariable String roleId) {
+        return sysRoleService.getById(roleId);
+    }
+
+    /**
+     * Describe: 查询全部角色
+     * Param: roleId
+     * Return: List<SysBaseRole>
+     */
+    @GetMapping("all")
+    @ApiOperation(value = "全部角色", hidden = true)
     public List<SysBaseRole> all() {
         return sysRoleService.list().stream().collect(Collectors.toList());
     }

@@ -23,7 +23,7 @@ public class SysContextImpl implements SysContext {
 
     @Override
     public SysBaseUser getUserByName(String username) {
-        return systemService.queryByName(username);
+        return systemService.queryByUserName(username);
     }
 
     @Override

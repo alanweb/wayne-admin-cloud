@@ -96,7 +96,7 @@ public class SysBaseUser extends BaseDomain implements UserDetails {
      */
     private String roleIds;
 
-
+    private String remark;
     /**
      * 最后一次登录时间
      */

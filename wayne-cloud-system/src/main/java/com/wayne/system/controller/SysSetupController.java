@@ -39,7 +39,7 @@ public class SysSetupController extends BaseController implements ApplicationEve
     private ISysConfigService sysConfigService;
 
     @GetMapping("main")
-    @PreAuthorize("hasPermission('/system/setup/main','sys:setup:main')")
+    @PreAuthorize("hasAnyAuthority('sys:setup:main')")
     public ModelAndView main(Model model) {
 
         SysSetup sysSetup = new SysSetup();
@@ -66,7 +66,7 @@ public class SysSetupController extends BaseController implements ApplicationEve
 
     @Transactional
     @PutMapping("save")
-    @PreAuthorize("hasPermission('/system/setup/add','sys:setup:add')")
+    @PreAuthorize("hasAnyAuthority('sys:setup:add')")
     public Result save(@RequestBody SysSetup sysSetup) {
 
         String from = sysSetup.getMailFrom();

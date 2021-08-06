@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="include :: header('Pear Admin 开发平台')"/>
+    <th:block th:include="include :: header('Wayne Admin 开发平台')"/>
     <link rel="stylesheet" href="admin/css/load.css"/>
     <link rel="stylesheet" href="admin/css/admin.css"/>
     <!-- 主 题 更 换 -->
-    <style id="pearadmin-bg-color"></style>
+    <style id="wayneadmin-bg-color"></style>
 </head>
 <!-- 结 构 代 码 -->
-<body class="layui-layout-body pear-admin">
+<body class="layui-layout-body wayne-admin">
 <!-- 布 局 框 架 -->
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
@@ -21,7 +21,7 @@
         <div id="control" class="layui-layout-control"></div>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item layui-hide-xs"><a href="#" class="fullScreen layui-icon layui-icon-screen-full"></a></li>
-            <li class="layui-nav-item layui-hide-xs"><a href="http://www.pearadmin.com" class="layui-icon layui-icon-website"></a></li>
+            <li class="layui-nav-item layui-hide-xs"><a href="http://www.wayneadmin.com" class="layui-icon layui-icon-website"></a></li>
             <li class="layui-nav-item layui-hide-xs message"></li>
             <li class="layui-nav-item user">
                 <!-- 头 像 -->
@@ -54,14 +54,14 @@
         <div id="content"></div>
     </div>
     <!-- 遮 盖 层 -->
-    <div class="pear-cover"></div>
+    <div class="wayne-cover"></div>
     <!-- 加 载 动 画-->
     <div class="loader-main">
         <div class="loader"></div>
     </div>
 </div>
 <!-- 移 动 端 便 捷 操 作 -->
-<div class="pear-collasped-pe collaspe">
+<div class="wayne-collasped-pe collaspe">
     <a href="#" class="layui-icon layui-icon-shrink-right"></a>
 </div>
 <!-- 依 赖 脚 本 -->
@@ -73,11 +73,11 @@
         let layer = layui.layer;
         let popup = layui.popup;
 
-        // 框架初始化时会读取 根目录下 pear.config.yml 文件作为初始化配置
+        // 框架初始化时会读取 根目录下 wayne.config.yml 文件作为初始化配置
         // 你可以通过 admin.setConfigPath 方法修改配置文件位置
         // 你可以通过 admin.setConfigType 方法修改配置文件类型
         admin.setConfigType("yml");
-        admin.setConfigPath("pear.config.yml");
+        admin.setConfigPath("wayne.config.yml");
 
         admin.render();
 

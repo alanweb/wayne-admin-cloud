@@ -43,7 +43,7 @@ public class SysMailController extends BaseController {
      */
     @GetMapping("/main")
     @ApiOperation(value = "邮件管理页面")
-    @PreAuthorize("hasPermission('/system/mail/main','sys:mail:main')")
+    @PreAuthorize("hasAnyAuthority('sys:mail:main')")
     public ModelAndView main() {
         return jumpPage(MODULE_PATH + "main");
     }
@@ -55,7 +55,7 @@ public class SysMailController extends BaseController {
      */
     @GetMapping("/data")
     @ApiOperation(value = "邮件列表数据")
-    @PreAuthorize("hasPermission('/system/mail/data','sys:mail:data')")
+    @PreAuthorize("hasAnyAuthority('sys:mail:data')")
     public ResultTable data(SysMail sysMail, PageDomain pageDomain) {
         PageInfo<SysMail> page = sysMailService.page(sysMail, pageDomain);
         return pageTable(page.getList(), page.getTotal());
@@ -67,7 +67,7 @@ public class SysMailController extends BaseController {
      */
     @GetMapping("/add")
     @ApiOperation(value = "邮件发送页面")
-    @PreAuthorize("hasPermission('/system/mail/add','sys:mail:add')")
+    @PreAuthorize("hasAnyAuthority('sys:mail:add')")
     public ModelAndView add() {
         return jumpPage(MODULE_PATH + "add");
     }
@@ -79,7 +79,7 @@ public class SysMailController extends BaseController {
      */
     @PostMapping("/save")
     @ApiOperation(value = "邮件保存和发送")
-    @PreAuthorize("hasPermission('/system/mail/save','sys:mail:save')")
+    @PreAuthorize("hasAnyAuthority('sys:mail:save')")
     public Result save(@RequestBody SysMail sysMail) {
         try {
             return decide(sysMailService.save(sysMail));
@@ -96,7 +96,7 @@ public class SysMailController extends BaseController {
      */
     @DeleteMapping("/remove/{mailId}")
     @ApiOperation(value = "删除邮件")
-    @PreAuthorize("hasPermission('/system/mail/remove','sys:mail:remove')")
+    @PreAuthorize("hasAnyAuthority('sys:mail:remove')")
     public Result remove(@PathVariable String mailId) {
         return decide(sysMailService.removeById(mailId));
     }
@@ -108,7 +108,7 @@ public class SysMailController extends BaseController {
      */
     @DeleteMapping("/batchRemove/{ids}")
     @ApiOperation(value = "批量删除邮件")
-    @PreAuthorize("hasPermission('/system/mail/remove','sys:mail:remove')")
+    @PreAuthorize("hasAnyAuthority('sys:mail:remove')")
     public Result batchRemove(@PathVariable String ids) {
         ArrayList<String> idList = CollectionUtil.newArrayList(StringUtil.split(ids, ","));
         return decide(sysMailService.removeByIds(idList));

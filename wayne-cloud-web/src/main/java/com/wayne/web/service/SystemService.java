@@ -16,8 +16,14 @@ public interface SystemService {
     @PutMapping("/api/system/user/update")
     String updateUser(@RequestBody SysBaseUser user);
 
-    @GetMapping("/api/system/user/queryByName")
-    SysBaseUser queryByName(@RequestParam("username") String username);
+    @GetMapping("/api/system/user/queryByUserName")
+    SysBaseUser queryByUserName(@RequestParam("username") String username);
+
+    @GetMapping("/api/system/user/queryByUserId")
+    SysBaseUser queryByUserId(@RequestParam("userId") String userId);
+
+    @GetMapping("/api/system/user/queryUserRole")
+    List<SysBaseRole> getUserRole(@RequestParam("userId") String userId);
 
     @GetMapping("/api/system/log/selectTopLoginLog")
     List<SysBaseLog> selectTopLoginLog(@RequestParam("username") String username);
@@ -25,4 +31,6 @@ public interface SystemService {
     @GetMapping("/api/system/role/all")
     List<SysBaseRole> roleAll();
 
+    @GetMapping("/api/system/role/{roleId}")
+    SysBaseRole getRoleById(@PathVariable String roleId);
 }

@@ -42,7 +42,7 @@ public class SysDictTypeController extends BaseController {
      * Return: ModelAndView
      * */
     @GetMapping("main")
-    @PreAuthorize("hasPermission('/system/dictType/main','sys:dictType:main')")
+    @PreAuthorize("hasAnyAuthority('sys:dictType:main')")
     public ModelAndView main(){
         return jumpPage(MODULE_PATH + "main");
     }
@@ -53,14 +53,14 @@ public class SysDictTypeController extends BaseController {
      * Return: ResuTable
      * */
     @GetMapping("data")
-    @PreAuthorize("hasPermission('/system/dictType/data','sys:dictType:data')")
+    @PreAuthorize("hasAnyAuthority('sys:dictType:data')")
     public ResultTable data(SysDictType sysDictType, PageDomain pageDomain){
         PageInfo<SysDictType> pageInfo = sysDictTypeService.page(sysDictType,pageDomain);
         return pageTable(pageInfo.getList(),pageInfo.getTotal());
     }
 
     @GetMapping("list")
-    @PreAuthorize("hasPermission('/system/dictType/data','sys:dictType:data')")
+    @PreAuthorize("hasAnyAuthority('sys:dictType:data')")
     public ResultTable list(SysDictType sysDictType, PageDomain pageDomain){
         List<SysDictType> list = sysDictTypeService.list(sysDictType);
         return dataTable(list);
@@ -72,7 +72,7 @@ public class SysDictTypeController extends BaseController {
      * Return: ModelAndView
      * */
     @GetMapping("add")
-    @PreAuthorize("hasPermission('/system/dictType/add','sys:dictType:add')")
+    @PreAuthorize("hasAnyAuthority('sys:dictType:add')")
     public ModelAndView add(){
         return jumpPage(MODULE_PATH + "add");
     }
@@ -83,7 +83,7 @@ public class SysDictTypeController extends BaseController {
      * Return: ResuBean
      * */
     @PostMapping("save")
-    @PreAuthorize("hasPermission('/system/dictType/add','sys:dictType:add')")
+    @PreAuthorize("hasAnyAuthority('sys:dictType:add')")
     public Result save(@RequestBody SysDictType sysDictType){
         sysDictType.setId(SequenceUtil.makeStringId());
         boolean result = sysDictTypeService.save(sysDictType);
@@ -96,7 +96,7 @@ public class SysDictTypeController extends BaseController {
      * Return: ModelAndView
      * */
     @GetMapping("edit")
-    @PreAuthorize("hasPermission('/system/dictType/edit','sys:dictType:edit')")
+    @PreAuthorize("hasAnyAuthority('sys:dictType:edit')")
     public ModelAndView edit(Model model, String dictTypeId){
         model.addAttribute("sysDictType",sysDictTypeService.getById(dictTypeId));
         return jumpPage(MODULE_PATH + "edit");
@@ -108,7 +108,7 @@ public class SysDictTypeController extends BaseController {
      * Return: ModelAndView
      * */
     @PutMapping("update")
-    @PreAuthorize("hasPermission('/system/dictType/edit','sys:dictType:edit')")
+    @PreAuthorize("hasAnyAuthority('sys:dictType:edit')")
     public Result update(@RequestBody SysDictType sysDictType){
         boolean result =  sysDictTypeService.updateById(sysDictType);
         return decide(result);
@@ -120,7 +120,7 @@ public class SysDictTypeController extends BaseController {
      * Return: ModelAndView
      * */
     @DeleteMapping("remove/{id}")
-    @PreAuthorize("hasPermission('/system/dictType/remove','sys:dictType:remove')")
+    @PreAuthorize("hasAnyAuthority('sys:dictType:remove')")
     public Result remove(@PathVariable("id")String id){
         Boolean result = sysDictTypeService.remove(id);
         return decide(result);

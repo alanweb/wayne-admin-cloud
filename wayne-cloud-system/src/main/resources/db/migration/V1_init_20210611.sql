@@ -28,7 +28,7 @@ INSERT INTO sys_config (config_id,config_name,config_code,config_value,create_ti
 ('1370975131630829568','上传路径','upload_path',NULL,NULL,NULL,NULL,NULL,NULL,'system'),
 ('2','2','oss_key','LTAI4G8ZDXDU6DiibSVd8G2b',NULL,NULL,NULL,NULL,NULL,NULL),
 ('3','3','oss_secret','9apyAWE7Xfu7NP5jgFHFdXeyPa28jL',NULL,NULL,NULL,NULL,NULL,NULL),
-('4','4','oss_bucket','pearadmin-bbs',NULL,NULL,NULL,NULL,NULL,NULL);
+('4','4','oss_bucket','wayneadmin-bbs',NULL,NULL,NULL,NULL,NULL,NULL);
 
 DROP TABLE IF EXISTS `sys_dept`;
 CREATE TABLE `sys_dept` (
@@ -49,20 +49,20 @@ CREATE TABLE `sys_dept` (
     PRIMARY KEY (`dept_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 INSERT INTO sys_dept (dept_id,parent_id,dept_name,sort,leader,phone,email,status,create_by,create_time,update_by,update_time,remark,address) VALUES
-('1','0','济南总公司',1,'就眠仪式','15553726531','pearadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
-('10','8','设计部',3,'就眠仪式','15553726531','pearadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
-('1316361008259792896','1316360459930042368','软件部',1,'就眠仪式','15553726531','pearadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
-('1316361192645591040','1316360459930042368','市场部',1,'就眠仪式','15553726531','pearadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
+('1','0','济南总公司',1,'就眠仪式','15553726531','wayneadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
+('10','8','设计部',3,'就眠仪式','15553726531','wayneadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
+('1316361008259792896','1316360459930042368','软件部',1,'就眠仪式','15553726531','wayneadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
+('1316361192645591040','1316360459930042368','市场部',1,'就眠仪式','15553726531','wayneadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
 ('1377824449830584320','3','财务部',1,'就眠仪式','15553726531','854085467@qq.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
 ('1377825171905183744','8','财务部',1,'就眠仪式','15553726531','854085467@qq.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
-('3','1','杭州分公司',1,'就眠仪式','15553726531','pearadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'浙江杭州'),
-('4','2','软件部',2,'就眠仪式','15553726531','pearadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
-('5','2','市场部',2,'就眠仪式','15553726531','pearadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
-('6','3','软件部',3,'就眠仪式','15553726531','pearadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'浙江杭州');
+('3','1','杭州分公司',1,'就眠仪式','15553726531','wayneadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'浙江杭州'),
+('4','2','软件部',2,'就眠仪式','15553726531','wayneadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
+('5','2','市场部',2,'就眠仪式','15553726531','wayneadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
+('6','3','软件部',3,'就眠仪式','15553726531','wayneadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'浙江杭州');
 INSERT INTO sys_dept (dept_id,parent_id,dept_name,sort,leader,phone,email,status,create_by,create_time,update_by,update_time,remark,address) VALUES
-('7','3','设计部',4,'就眠仪式','15553726531','pearadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
-('8','1','深圳分公司',3,'就眠仪式','15553726531','pearadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
-('9','8','软件部',3,'就眠仪式','15553726531','pearadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南');
+('7','3','设计部',4,'就眠仪式','15553726531','wayneadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
+('8','1','深圳分公司',3,'就眠仪式','15553726531','wayneadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南'),
+('9','8','软件部',3,'就眠仪式','15553726531','wayneadmin@gmail.com','0',NULL,NULL,NULL,NULL,NULL,'山东济南');
 
 DROP TABLE IF EXISTS `sys_dict_data`;
 CREATE TABLE `sys_dict_data` (

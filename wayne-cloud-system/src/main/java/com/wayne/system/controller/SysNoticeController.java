@@ -41,7 +41,7 @@ public class SysNoticeController extends BaseController
     private ISysUserService sysUserService;
 
     @GetMapping("/main")
-    @PreAuthorize("hasPermission('/system/notice/main','system:notice:main')")
+    @PreAuthorize("hasAnyAuthority('system:notice:main')")
     public ModelAndView main()
     {
         return jumpPage(prefix + "/main");
@@ -52,7 +52,7 @@ public class SysNoticeController extends BaseController
      */
     @ResponseBody
     @GetMapping("/data")
-    @PreAuthorize("hasPermission('/system/notice/data','system:notice:data')")
+    @PreAuthorize("hasAnyAuthority('system:notice:data')")
     public ResultTable list(@ModelAttribute SysNotice sysNotice, PageDomain pageDomain)
     {
         PageInfo<SysNotice> pageInfo = sysNoticeService.selectSysNoticePage(sysNotice,pageDomain);
@@ -101,7 +101,7 @@ public class SysNoticeController extends BaseController
      * 新增notice
      */
     @GetMapping("/add")
-    @PreAuthorize("hasPermission('/system/notice/add','system:notice:add')")
+    @PreAuthorize("hasAnyAuthority('system:notice:add')")
     public ModelAndView add(Model model)
     {
         model.addAttribute("users",sysUserService.list());
@@ -113,7 +113,7 @@ public class SysNoticeController extends BaseController
      */
     @ResponseBody
     @PostMapping("/save")
-    @PreAuthorize("hasPermission('/system/notice/add','system:notice:add')")
+    @PreAuthorize("hasAnyAuthority('system:notice:add')")
     public Result save(@RequestBody SysNotice sysNotice)
     {
         sysNotice.setId(SequenceUtil.makeStringId());
@@ -124,7 +124,7 @@ public class SysNoticeController extends BaseController
      * 修改notice
      */
     @GetMapping("/edit")
-    @PreAuthorize("hasPermission('/system/notice/edit','system:notice:edit')")
+    @PreAuthorize("hasAnyAuthority('system:notice:edit')")
     public ModelAndView edit(String id, ModelMap mmap)
     {
         SysNotice sysNotice = sysNoticeService.getById(id);
@@ -137,7 +137,7 @@ public class SysNoticeController extends BaseController
      */
     @ResponseBody
     @PutMapping("/update")
-    @PreAuthorize("hasPermission('/system/notice/edit','system:notice:edit')")
+    @PreAuthorize("hasAnyAuthority('system:notice:edit')")
     public Result update(@RequestBody SysNotice sysNotice)
     {
         return decide(sysNoticeService.updateById(sysNotice));
@@ -148,7 +148,7 @@ public class SysNoticeController extends BaseController
      */
     @ResponseBody
     @DeleteMapping( "/batchRemove")
-    @PreAuthorize("hasPermission('/system/notice/remove','system:notice:remove')")
+    @PreAuthorize("hasAnyAuthority('system:notice:remove')")
     public Result batchRemove(String ids)
     {
         return decide(sysNoticeService.removeByIds(Arrays.asList(Convert.toStrArray(ids))));
@@ -159,7 +159,7 @@ public class SysNoticeController extends BaseController
      */
     @ResponseBody
     @DeleteMapping("/remove/{id}")
-    @PreAuthorize("hasPermission('/system/notice/remove','system:notice:remove')")
+    @PreAuthorize("hasAnyAuthority('system:notice:remove')")
     public Result remove(@PathVariable("id") String id)
     {
         return decide(sysNoticeService.removeById(id));

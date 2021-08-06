@@ -25,8 +25,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">状态</label>
                     <div class="layui-input-block">
-                        <input type="radio" name="enable" value="0" title="开启">
-                        <input type="radio" name="enable" value="1" title="关闭" checked>
+                        <input type="radio" name="enable" value="1" title="开启">
+                        <input type="radio" name="enable" value="0" title="关闭" checked>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -47,11 +47,11 @@
     </div>
     <div class="bottom">
         <div class="button-container">
-            <button type="submit" class="pear-btn pear-btn-primary pear-btn-sm" lay-submit="" lay-filter="role-save">
+            <button type="submit" class="wayne-btn wayne-btn-primary wayne-btn-sm" lay-submit="" lay-filter="role-save">
                 <i class="layui-icon layui-icon-ok"></i>
                 提交
             </button>
-            <button type="reset" class="pear-btn pear-btn-sm">
+            <button type="reset" class="wayne-btn wayne-btn-sm">
                 <i class="layui-icon layui-icon-refresh"></i>
                 重置
             </button>
@@ -66,7 +66,7 @@
 
         form.on('submit(role-save)', function (data) {
             $.ajax({
-                url: '/system/role/save',
+                url: '/api/system/role/save',
                 data: JSON.stringify(data.field),
                 dataType: 'json',
                 contentType: 'application/json',

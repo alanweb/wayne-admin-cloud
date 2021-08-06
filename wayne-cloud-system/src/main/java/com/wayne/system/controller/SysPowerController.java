@@ -3,6 +3,7 @@ package com.wayne.system.controller;
 import com.wayne.common.constant.ControllerConstant;
 import com.wayne.common.tools.sequence.SequenceUtil;
 import com.wayne.common.web.base.BaseController;
+import com.wayne.common.web.constants.Enable;
 import com.wayne.common.web.domain.response.Result;
 import com.wayne.common.web.domain.response.module.ResultTable;
 import com.wayne.common.web.domain.response.module.ResultTree;
@@ -45,7 +46,7 @@ public class SysPowerController extends BaseController {
      * Return 权限列表视图
      * */
     @GetMapping("main")
-    @PreAuthorize("hasPermission('/system/power/main','sys:power:main')")
+    @PreAuthorize("hasAnyAuthority('sys:power:main')")
     public ModelAndView main(ModelAndView modelAndView){
         return jumpPage(MODULE_PATH + "main");
     }
@@ -56,7 +57,7 @@ public class SysPowerController extends BaseController {
      * Return 权限列表数据
      * */
     @GetMapping("data")
-    @PreAuthorize("hasPermission('/system/power/data','sys:power:data')")
+    @PreAuthorize("hasAnyAuthority('sys:power:data')")
     public ResultTable data(SysPower sysPower){
         return treeTable(sysPowerService.list(sysPower));
     }
@@ -67,7 +68,7 @@ public class SysPowerController extends BaseController {
      * Return 权限新增视图
      * */
     @GetMapping("add")
-    @PreAuthorize("hasPermission('/system/power/add','sys:power:add')")
+    @PreAuthorize("hasAnyAuthority('sys:power:add')")
     public ModelAndView add(){
         return jumpPage(MODULE_PATH + "add");
     }
@@ -78,7 +79,7 @@ public class SysPowerController extends BaseController {
      * Return 权限修改视图
      * */
     @GetMapping("edit")
-    @PreAuthorize("hasPermission('/system/power/edit','sys:power:edit')")
+    @PreAuthorize("hasAnyAuthority('sys:power:edit')")
     public ModelAndView edit(Model model, String powerId){
         model.addAttribute("sysPower",sysPowerService.getById(powerId));
         return jumpPage(MODULE_PATH + "edit");
@@ -90,7 +91,7 @@ public class SysPowerController extends BaseController {
      * Return: ResuBean
      * */
     @PostMapping("save")
-    @PreAuthorize("hasPermission('/system/power/add','sys:power:add')")
+    @PreAuthorize("hasAnyAuthority('sys:power:add')")
     public Result save(@RequestBody SysPower sysPower){
         if(Strings.isBlank(sysPower.getParentId())){
             return failure("请选择上级菜单");
@@ -106,7 +107,7 @@ public class SysPowerController extends BaseController {
      * Return 执行结果
      * */
     @PutMapping("update")
-    @PreAuthorize("hasPermission('/system/power/edit','sys:power:edit')")
+    @PreAuthorize("hasAnyAuthority('sys:power:edit')")
     public Result update(@RequestBody SysPower sysPower){
         if(Strings.isBlank(sysPower.getParentId())){
             return failure("请选择上级菜单");
@@ -121,7 +122,7 @@ public class SysPowerController extends BaseController {
      * Return ResuTree
      * */
     @DeleteMapping("remove/{id}")
-    @PreAuthorize("hasPermission('/system/power/remove','sys:power:remove')")
+    @PreAuthorize("hasAnyAuthority('sys:power:remove')")
     public Result remove(@PathVariable String id){
         boolean result = sysPowerService.removeById(id);
         return decide(result);
@@ -150,7 +151,7 @@ public class SysPowerController extends BaseController {
      * */
     @PutMapping("enable")
     public Result enable(@RequestBody SysPower sysPower){
-        sysPower.setEnable(true);
+        sysPower.setEnable(Enable.ENABLE);
         boolean result = sysPowerService.updateById(sysPower);
         return decide(result);
     }
@@ -162,7 +163,7 @@ public class SysPowerController extends BaseController {
      * */
     @PutMapping("disable")
     public Result disable(@RequestBody SysPower sysPower){
-        sysPower.setEnable(false);
+        sysPower.setEnable(Enable.DISABLE);
         boolean result = sysPowerService.updateById(sysPower);
         return decide(result);
     }

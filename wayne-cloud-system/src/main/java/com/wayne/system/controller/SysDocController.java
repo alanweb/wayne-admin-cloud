@@ -22,7 +22,7 @@ public class SysDocController extends BaseController {
     private String MODULE_PATH = "system/doc/" ;
 
     @GetMapping("main")
-    @PreAuthorize("hasPermission('/system/doc/main','sys:doc:main')")
+    @PreAuthorize("hasAnyAuthority('sys:doc:main')")
     public ModelAndView main(){
         return jumpPage(MODULE_PATH + "main");
     }

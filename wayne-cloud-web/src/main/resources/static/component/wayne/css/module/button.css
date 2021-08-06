@@ -1,0 +1,171 @@
+/** Buttom 默认*/
+.wayne-btn {
+    display: inline-block;
+    line-height: 38px;
+    white-space: nowrap;
+    cursor: pointer;
+    text-align: center;
+    box-sizing: border-box;
+    outline: none;
+    transition: 0.1s;
+    font-weight: 500;
+    padding: 0 18px;
+    height: 38px;
+    font-size: 14px;
+    background-color: white;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    margin-left: 1.5px;
+    margin-right: 1.5px;
+}
+
+.wayne-btn i {
+    font-size: 13px;
+}
+
+.wayne-btn-danger,
+.wayne-btn-warming,
+.wayne-btn-success,
+.wayne-btn-primary {
+    color: #fff !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+}
+
+/** Button 主题 */
+.wayne-btn-primary {
+    background-color: #2D8CF0 !important;
+    border: #2D8CF0;
+}
+
+.wayne-btn-danger {
+    background-color: #f56c6c !important;
+    border: #f56c6c;
+}
+
+.wayne-btn-warming {
+    background-color: #f6ad55 !important;
+    border: #f6ad55;
+}
+
+.wayne-btn-success {
+    background-color: #5FB878 !important;
+    border: #5FB878;
+}
+
+.wayne-btn[round] {
+    border-radius: 50px;
+}
+
+.wayne-btn-primary[plain] {
+    color: #409eff !important;
+    background: #ecf5ff 10% !important;
+    border-color: #b3d8ff !important;
+}
+
+.wayne-btn-primary[plain]:hover {
+    color: #fff !important;
+    background-color: #2d8cf0 !important
+}
+
+.wayne-btn-success[plain] {
+    color: #67c23a !important;
+    background: #f0f9eb !important;
+    border-color: #c2e7b0 !important;
+}
+
+.wayne-btn-success[plain]:hover {
+    color: white !important;
+    background-color: #67c23a !important
+}
+
+.wayne-btn-warming[plain] {
+    color: #e6a23c !important;
+    background: #fdf6ec !important;
+    border-color: #f5dab1 !important;
+}
+
+.wayne-btn-warming[plain]:hover {
+    color: white !important;
+    background-color: #e6a23c !important
+}
+
+.wayne-btn-danger[plain] {
+    color: #f56c6c !important;
+    background: #fef0f0 !important;
+    border-color: #fbc4c4 !important;
+}
+
+.wayne-btn-danger[plain]:hover {
+    color: white !important;
+    background-color: #f56c6c !important
+}
+
+/** Button Group */
+.wayne-btn-group {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.wayne-btn-group .wayne-btn {
+    float: left;
+    position: relative;
+    border-radius: 0px;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+
+.wayne-btn-md {
+    height: 34px;
+    line-height: 34px;
+    padding: 0 10px;
+    font-size: 12.5px;
+}
+
+.wayne-btn-group .wayne-btn:first-child {
+    border-top-left-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+}
+
+.wayne-btn-group .wayne-btn:last-child {
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+}
+
+.wayne-btn-group .wayne-btn[round]:first-child {
+    border-top-left-radius: 50px !important;
+    border-bottom-left-radius: 50px !important;
+}
+
+.wayne-btn-group .wayne-btn[round]:last-child {
+    border-top-right-radius: 50px !important;
+    border-bottom-right-radius: 50px !important;
+}
+
+/** Button Size*/
+.wayne-btn-sm {
+    height: 32px;
+    line-height: 32px;
+    padding: 0 10px;
+    font-size: 12px;
+}
+
+.wayne-btn-xs {
+    height: 28px;
+    line-height: 28px;
+    padding: 0 8px;
+    font-size: 12px;
+}
+
+.wayne-btn-md {
+    height: 34px;
+    line-height: 34px;
+    padding: 0 10px;
+    font-size: 12.5px;
+}
+
+.wayne-btn-lg {
+    height: 44px;
+    line-height: 44px;
+    padding: 0 25px;
+    font-size: 16px;
+}

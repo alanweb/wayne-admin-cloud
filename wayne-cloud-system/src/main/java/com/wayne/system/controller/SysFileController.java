@@ -68,7 +68,7 @@ public class SysFileController extends BaseController {
      * Return: ModelAndView
      */
     @GetMapping("main")
-    @PreAuthorize("hasPermission('/system/file/main','sys:file:main')")
+    @PreAuthorize("hasAnyAuthority('sys:file:main')")
     public ModelAndView main() {
         return jumpPage(MODULE_PATH + "main");
     }
@@ -79,7 +79,7 @@ public class SysFileController extends BaseController {
      * Return: 文件资源列表
      */
     @GetMapping("data")
-    @PreAuthorize("hasPermission('/system/file/data','sys:file:data')")
+    @PreAuthorize("hasAnyAuthority('sys:file:data')")
     public ResultTable data(PageDomain pageDomain) {
         PageHelper.startPage(pageDomain.getPage(), pageDomain.getLimit());
         PageInfo<SysFile> pageInfo = new PageInfo<>(getFileService().data());
@@ -92,7 +92,7 @@ public class SysFileController extends BaseController {
      * Return: 执行结果
      */
     @GetMapping("add")
-    @PreAuthorize("hasPermission('/system/file/add','sys:file:add')")
+    @PreAuthorize("hasAnyAuthority('sys:file:add')")
     public ModelAndView add() {
         return jumpPage(MODULE_PATH + "add");
     }
@@ -128,7 +128,7 @@ public class SysFileController extends BaseController {
      * Return: 文件流
      */
     @DeleteMapping("remove/{id}")
-    @PreAuthorize("hasPermission('/system/file/remove','sys:file:remove')")
+    @PreAuthorize("hasAnyAuthority('sys:file:remove')")
     public Result remove(@PathVariable("id") String id) {
         boolean result = getFileService().remove(id);
         return Result.decide(result, "删除成功", "删除失败");
@@ -141,7 +141,7 @@ public class SysFileController extends BaseController {
      */
     @Transactional
     @DeleteMapping("batchRemove/{ids}")
-    @PreAuthorize("hasPermission('/system/file/remove','sys:file:remove')")
+    @PreAuthorize("hasAnyAuthority('sys:file:remove')")
     public Result batchRemove(@PathVariable("ids") String ids) {
         for (String id : ids.split(",")) {
             getFileService().remove(id);

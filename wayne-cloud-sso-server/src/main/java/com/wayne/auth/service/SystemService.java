@@ -13,7 +13,7 @@ public interface SystemService {
     String saveLog(@RequestBody SysBaseLog log);
     @PutMapping("/api/system/user/update")
     String updateUser(@RequestBody SysBaseUser user);
-    @GetMapping("/api/system/user/queryByName")
+    @GetMapping("/api/system/user/queryByUserName")
     SysBaseUser queryByName(@RequestParam("username") String username);
     @GetMapping("/api/system/account/info")
     UserDetailsResponse getUserAccount(@RequestParam("username") String username);

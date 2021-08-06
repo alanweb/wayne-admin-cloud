@@ -2,9 +2,9 @@
 <configuration>
     <!-- 文件输出格式 -->
     <property name="PATTERN" value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />
-    <property name="LOG_NAME" value="pear" />
+    <property name="LOG_NAME" value="wayne" />
     <!--所在项目包 打印日志用-->
-    <property name="PACKAGE_NAME" value="com.pearadmin" />
+    <property name="PACKAGE_NAME" value="com.wayneadmin" />
     <!-- test文件路径 -->
     <property name="TEST_FILE_PATH" value="/var/log/${LOG_NAME}" />
     <!-- pro文件路径 -->

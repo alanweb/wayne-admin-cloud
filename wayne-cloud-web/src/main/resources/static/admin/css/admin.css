@@ -1,8 +1,8 @@
-.pear-admin .layui-header,
-.pear-admin .layui-body,
-.pear-admin .layui-logo,
-.pear-admin .layui-side,
-.pear-admin .layui-header .layui-layout-left {
+.wayne-admin .layui-header,
+.wayne-admin .layui-body,
+.wayne-admin .layui-logo,
+.wayne-admin .layui-side,
+.wayne-admin .layui-header .layui-layout-left {
     transition: all .3s;
 }
 
@@ -10,34 +10,34 @@ html, body, .layui-layout {
     height: 100%;
 }
 
-.pear-admin .layui-logo .title {
+.wayne-admin .layui-logo .title {
     font-size: 20px;
 }
 
-.pear-admin .layui-layout-right .layui-nav-child {
+.wayne-admin .layui-layout-right .layui-nav-child {
     border: 1px solid whitesmoke;
     border-radius: 6px;
     width: 150px;
 }
 
-.pear-admin .layui-header {
+.wayne-admin .layui-header {
     left: 230px;
     width: calc(100% - 230px);
     background-color: white;
     border-bottom: 1px solid whitesmoke;
 }
 
-.pear-admin .layui-header .layui-nav-img {
+.wayne-admin .layui-header .layui-nav-img {
     width: 30px;
     height: 30px;
 }
 
-.pear-admin .layui-layout-control {
+.wayne-admin .layui-layout-control {
     left: 120px;
     position: absolute;
 }
 
-.pear-admin .layui-logo {
+.wayne-admin .layui-logo {
     width: 230px;
     height: 60px;
     line-height: 60px;
@@ -46,12 +46,12 @@ html, body, .layui-layout {
 
 }
 
-.pear-admin .layui-logo img {
+.wayne-admin .layui-logo img {
     width: 34px;
     height: 34px;
 }
 
-.pear-admin .layui-logo .title {
+.wayne-admin .layui-logo .title {
     font-size: 21px;
     font-weight: 550;
     color: #5FB878;
@@ -60,97 +60,97 @@ html, body, .layui-layout {
     margin-left: 5px;
 }
 
-.pear-admin .layui-logo .logo {
+.wayne-admin .layui-logo .logo {
     display: none;
 }
 
-.pear-admin .layui-side {
+.wayne-admin .layui-side {
     top: 0px;
     width: 230px;
     box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
     z-index: 9999;
 }
 
-.pear-admin .layui-side-scroll::-webkit-scrollbar {
+.wayne-admin .layui-side-scroll::-webkit-scrollbar {
     width: 0px;
     height: 0px;
 }
 
-.pear-admin .layui-side-scroll {
+.wayne-admin .layui-side-scroll {
     height: calc(100% - 60px) !important;
     background-color: #28333E;
     width: 247px;
 
 }
 
-.pear-admin .layui-header .layui-nav .layui-nav-item > a {
+.wayne-admin .layui-header .layui-nav .layui-nav-item > a {
     color: black;
     font-size: 15px;
 }
 
-.pear-admin .layui-body {
+.wayne-admin .layui-body {
     left: 230px;
     bottom: 0px;
     padding-bottom: 0px;
 }
 
-.pear-admin .layui-layout-left {
+.wayne-admin .layui-layout-left {
     left: 0px;
 }
 
 /** 隐 藏 布 局 样 式 */
-.pear-mini .layui-logo .title {
+.wayne-mini .layui-logo .title {
     display: none;
 }
 
-.pear-mini .layui-logo .logo {
+.wayne-mini .layui-logo .logo {
     display: inline-block;
 }
 
-.pear-mini .layui-side {
+.wayne-mini .layui-side {
     width: 60px;
 }
 
-.pear-mini .layui-header {
+.wayne-mini .layui-header {
     left: 60px;
     width: calc(100% - 60px);
 }
 
-.pear-mini .layui-body {
+.wayne-mini .layui-body {
     left: 60px;
 }
 
-.pear-mini .layui-logo {
+.wayne-mini .layui-logo {
     width: 60px;
 }
 
-.pear-mini .layui-nav-tree .layui-nav-item span {
+.wayne-mini .layui-nav-tree .layui-nav-item span {
     display: none;
 }
 
-.pear-mini .bottom-nav li {
+.wayne-mini .bottom-nav li {
     width: 100% !important;
 }
 
-.pear-mini .layui-side-scroll {
+.wayne-mini .layui-side-scroll {
     height: calc(100% - 60px);
 }
 
-.pear-admin .layui-header .layui-nav .layui-nav-bar {
+.wayne-admin .layui-header .layui-nav .layui-nav-bar {
     top: 0px !important;
     height: 2px !important;
     background-color: #5FB878;
 }
 
-.pear-admin .layui-header .layui-nav .layui-this:after {
+.wayne-admin .layui-header .layui-nav .layui-this:after {
     display: none;
 }
 
-.pear-admin .layui-header .layui-nav-more {
+.wayne-admin .layui-header .layui-nav-more {
     display: none;
 }
 
-.pear-collasped-pe {
+.wayne-collasped-pe {
     display: none;
     width: 50px;
     position: absolute;
@@ -165,7 +165,7 @@ html, body, .layui-layout {
     box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
 }
 
-.pear-collasped-pe a {
+.wayne-collasped-pe a {
     color: white !important;
 }
 
@@ -187,7 +187,7 @@ html, body, .layui-layout {
         display: none !important;
     }
 
-    .pear-collasped-pe {
+    .wayne-collasped-pe {
         display: inline-block !important;
     }
 
@@ -200,42 +200,42 @@ html, body, .layui-layout {
         padding-right: 10px;
     }
 
-    .pear-mini .bottom-nav {
+    .wayne-mini .bottom-nav {
         display: none;
     }
 
-    .pear-mini .layui-side-scroll {
+    .wayne-mini .layui-side-scroll {
         height: calc(100% - 62px);
     }
 
     /** 隐 藏 布 局 样 式 */
-    .pear-mini .layui-side {
+    .wayne-mini .layui-side {
         width: 0px;
     }
 
-    .pear-mini .layui-header {
+    .wayne-mini .layui-header {
         left: 0px;
         width: 100%;
     }
 
-    .pear-mini .layui-body {
+    .wayne-mini .layui-body {
         left: 0px;
     }
 
-    .pear-mini .layui-logo {
+    .wayne-mini .layui-logo {
         width: 0px;
     }
 
-    .pear-admin .layui-body {
+    .wayne-admin .layui-body {
         left: 0px;
     }
 
-    .pear-admin .layui-header {
+    .wayne-admin .layui-header {
         left: 0px;
         width: 100%;
     }
 
-    .pear-admin .pear-cover {
+    .wayne-admin .wayne-cover {
         width: 100%;
         height: 100%;
         background-color: #1E1E1E;
@@ -246,7 +246,7 @@ html, body, .layui-layout {
         margin-top: -60px;
     }
 
-    .pear-mini .pear-cover {
+    .wayne-mini .wayne-cover {
         display: none;
     }
 }
@@ -303,21 +303,21 @@ html, body, .layui-layout {
 }
 
 /** 主 题 选 择 界 面 样 式 */
-.pearone-color .color-title {
+.wayneone-color .color-title {
     padding: 15px 0 0px 20px;
     margin-bottom: 4px;
 }
 
-.pearone-color .color-content {
+.wayneone-color .color-content {
     padding: 15px 10px 0 20px;
 }
 
-.pearone-color .color-content ul {
+.wayneone-color .color-content ul {
     list-style: none;
     padding: 0px;
 }
 
-.pearone-color .color-content ul li {
+.wayneone-color .color-content ul li {
     position: relative;
     display: inline-block;
     vertical-align: top;
@@ -331,8 +331,8 @@ html, body, .layui-layout {
     color: #666;
 }
 
-.pearone-color .color-content li.layui-this:after,
-.pearone-color .color-content li:hover:after {
+.wayneone-color .color-content li.layui-this:after,
+.wayneone-color .color-content li:hover:after {
     width: 100%;
     height: 100%;
     padding: 4px;
@@ -343,7 +343,7 @@ html, body, .layui-layout {
     border-radius: 4px;
 }
 
-.pearone-color .color-content li:after {
+.wayneone-color .color-content li:after {
     content: '';
     position: absolute;
     z-index: 20;

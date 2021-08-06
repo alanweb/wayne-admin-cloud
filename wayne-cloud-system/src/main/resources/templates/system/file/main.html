@@ -3,7 +3,7 @@
 <head>
     <th:block th:include="include :: header('文件列表')"/>
 </head>
-<body class="pear-container">
+<body class="wayne-container">
 <div class="layui-card">
     <div class="layui-card-body">
         <form class="layui-form" action="">
@@ -16,11 +16,11 @@
                 <div class="layui-input-inline">
                     <input type="text" name="username" placeholder="" class="layui-input">
                 </div>
-                <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="file-query">
+                <button class="wayne-btn wayne-btn-md wayne-btn-primary" lay-submit lay-filter="file-query">
                     <i class="layui-icon layui-icon-search"></i>
                     查询
                 </button>
-                <button type="reset" class="pear-btn pear-btn-md">
+                <button type="reset" class="wayne-btn wayne-btn-md">
                     <i class="layui-icon layui-icon-refresh"></i>
                     重置
                 </button>
@@ -38,26 +38,26 @@
 </body>
 
 <script type="text/html" id="role-toolbar">
-    <button class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
+    <button class="wayne-btn wayne-btn-primary wayne-btn-md" lay-event="add">
         <i class="layui-icon layui-icon-add-1"></i>
         上传
     </button>
-    <button class="pear-btn pear-btn-md" lay-event="batchRemove">
+    <button class="wayne-btn wayne-btn-md" lay-event="batchRemove">
         <i class="layui-icon layui-icon-delete"></i>
         删除
     </button>
 </script>
 
 <script type="text/html" id="role-bar">
-    <a class="pear-btn pear-btn-primary pear-btn-sm" href="/api/system/file/download/{{d.id}}" download="{{d.fileDesc}}">
-        <i class="pear-icon pear-icon-direction-down"></i>
+    <a class="wayne-btn wayne-btn-primary wayne-btn-sm" href="/api/system/file/download/{{d.id}}" download="{{d.fileDesc}}">
+        <i class="wayne-icon wayne-icon-direction-down"></i>
     </a>
-    <button class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove"><i class="layui-icon layui-icon-delete"></i>
+    <button class="wayne-btn wayne-btn-danger wayne-btn-sm" lay-event="remove"><i class="layui-icon layui-icon-delete"></i>
     </button>
 </script>
 
 <script type="text/html" id="file-image">
-    <a href="javascript:void(0);" class="pear-text">查看</a>
+    <a href="javascript:void(0);" class="wayne-text">查看</a>
 </script>
 
 <script type="text/html" id="file-createTime">

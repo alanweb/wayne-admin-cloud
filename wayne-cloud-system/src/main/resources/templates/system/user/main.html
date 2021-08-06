@@ -4,7 +4,7 @@
     <th:block th:include="include :: header('用户列表')"/>
     <link rel="stylesheet" th:href="@{/admin/css/other/user.css}" />
 </head>
-<body class="pear-container">
+<body class="wayne-container">
 <div class="layui-card">
     <div class="layui-card-body">
         <form class="layui-form" action="" lay-filter="user-query-form">
@@ -17,11 +17,11 @@
                 <div class="layui-input-inline">
                     <input type="text" name="username" placeholder="" class="layui-input">
                 </div>
-                <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="user-query">
+                <button class="wayne-btn wayne-btn-md wayne-btn-primary" lay-submit lay-filter="user-query">
                     <i class="layui-icon layui-icon-search"></i>
                     查询
                 </button>
-                <button type="reset" class="pear-btn pear-btn-md">
+                <button type="reset" class="wayne-btn wayne-btn-md">
                     <i class="layui-icon layui-icon-refresh"></i>
                     重置
                 </button>
@@ -50,24 +50,24 @@
 </body>
 
 <script type="text/html" id="user-toolbar">
-    <button sec:authorize="hasPermission('/system/user/add','sys:user:add')" class="pear-btn pear-btn-primary pear-btn-md" lay-event="add">
-        <i class="pear-icon pear-icon-add"></i>
+    <button sec:authorize="hasAnyAuthority('sys:user:add')" class="wayne-btn wayne-btn-primary wayne-btn-md" lay-event="add">
+        <i class="wayne-icon wayne-icon-add"></i>
         新增
     </button>
-    <button sec:authorize="hasPermission('/system/user/remove','sys:user:remove')" class="pear-btn pear-btn-md" lay-event="batchRemove">
-        <i class="pear-icon pear-icon-ashbin"></i>
+    <button sec:authorize="hasAnyAuthority('sys:user:remove')" class="wayne-btn wayne-btn-md" lay-event="batchRemove">
+        <i class="wayne-icon wayne-icon-ashbin"></i>
         删除
     </button>
-    <button class="pear-btn pear-btn-md" lay-event="collasped">
-        <i class="pear-icon pear-icon-modular"></i>
+    <button class="wayne-btn wayne-btn-md" lay-event="collasped">
+        <i class="wayne-icon wayne-icon-modular"></i>
         高级
     </button>
 </script>
 
 <script type="text/html" id="user-bar">
-    <button sec:authorize="hasPermission('/system/user/edit','sys:user:edit')" class="pear-btn pear-btn-primary pear-btn-sm" lay-event="edit"><i class="pear-icon pear-icon-edit"></i>
+    <button sec:authorize="hasAnyAuthority('sys:user:edit')" class="wayne-btn wayne-btn-primary wayne-btn-sm" lay-event="edit"><i class="wayne-icon wayne-icon-edit"></i>
     </button>
-    <button sec:authorize="hasPermission('/system/user/remove','sys:user:remove')" class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove"><i class="pear-icon pear-icon-ashbin"></i>
+    <button sec:authorize="hasAnyAuthority('sys:user:remove')" class="wayne-btn wayne-btn-danger wayne-btn-sm" lay-event="remove"><i class="wayne-icon wayne-icon-ashbin"></i>
     </button>
 </script>
 

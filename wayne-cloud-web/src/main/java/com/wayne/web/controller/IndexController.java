@@ -12,14 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping
 @Api(tags = {"项目入口"})
 public class IndexController extends BaseController {
-    @GetMapping({ "/", "/index"})
+    @GetMapping({"/", "/index"})
     @Logging(title = "主页", describe = "返回 Index 主页视图", type = BusinessType.ADD)
     public ModelAndView index() {
-        return jumpPage("index");
+        String avatar = getCurrentUser().getAvatar();
+        Map<String, String> params = new HashMap<>();
+        params.put("avatar", avatar);
+        return jumpPage("index", params);
     }
 
     /**

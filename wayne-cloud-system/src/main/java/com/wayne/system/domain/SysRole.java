@@ -1,5 +1,6 @@
 package com.wayne.system.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.wayne.common.plugin.system.domain.SysBaseRole;
@@ -24,4 +25,7 @@ public class SysRole extends SysBaseRole {
     private String roleId;
 
     private String remark;
+
+    @TableField(exist = false)
+    private boolean checked;
 }

@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
@@ -56,6 +57,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     private SecureAuthenticationFailureHandler secureAuthenticationFailureHandler;
     @Resource
     private SecureCaptchaSupport secureCaptchaSupport;
+
     /**
      * 安全拦截机制
      *
@@ -66,6 +68,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         // 设置共享变量，目的是想要在登陆成功之后，正确重定向
         http.setSharedObject(RequestCache.class, new HttpSessionRequestCache());
+        SimpleUrlLogoutSuccessHandler simpleUrlLogoutSuccessHandler =
+                new SimpleUrlLogoutSuccessHandler();
+        simpleUrlLogoutSuccessHandler.setUseReferer(true);
+        simpleUrlLogoutSuccessHandler.setTargetUrlParameter("service");
         http.addFilter(corsFilter)
                 .authorizeRequests()
                 .antMatchers(securityProperties.getWhites()).permitAll()
@@ -89,6 +95,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .and()
                 .logout()
                 .addLogoutHandler(new SecureLogoutHandler())
+                .logoutSuccessHandler(simpleUrlLogoutSuccessHandler)
                 .deleteCookies("refresh_token", "access_token", "JSESSIONID_YY")
                 .and()
                 .rememberMe()

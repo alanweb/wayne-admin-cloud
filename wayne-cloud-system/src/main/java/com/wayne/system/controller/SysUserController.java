@@ -5,12 +5,14 @@ import com.wayne.common.constant.ControllerConstant;
 import com.wayne.common.plugin.logging.aop.annotation.Logging;
 import com.wayne.common.plugin.logging.aop.enums.BusinessType;
 import com.wayne.common.plugin.submit.annotation.RepeatSubmit;
+import com.wayne.common.plugin.system.domain.SysBaseRole;
 import com.wayne.common.plugin.system.domain.SysBaseUser;
 import com.wayne.common.tools.secure.SecurityUtil;
 import com.wayne.common.tools.sequence.SequenceUtil;
 import com.wayne.common.tools.servlet.ServletUtil;
 import com.wayne.common.tools.string.Convert;
 import com.wayne.common.web.base.BaseController;
+import com.wayne.common.web.constants.Enable;
 import com.wayne.common.web.domain.request.PageDomain;
 import com.wayne.common.web.domain.response.Result;
 import com.wayne.common.web.domain.response.module.ResultTable;
@@ -36,6 +38,7 @@ import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Describe: 用户控制器
@@ -66,7 +69,6 @@ public class SysUserController extends BaseController {
     private ISysLogService sysLogService;
 
 
-
     /**
      * Describe: 获取用户列表数据
      * Param ModelAndView
@@ -84,7 +86,6 @@ public class SysUserController extends BaseController {
         PageInfo<SysUser> pageInfo = sysUserService.page(user, pageDomain);
         return pageTable(pageInfo.getList(), pageInfo.getTotal());
     }
-
 
 
     /**
@@ -216,7 +217,7 @@ public class SysUserController extends BaseController {
     @PutMapping("enable")
     @ApiOperation(value = "开启用户登录")
     public Result enable(@RequestBody SysUser sysUser) {
-        sysUser.setEnable("1");
+        sysUser.setEnable(Enable.ENABLE);
         boolean result = sysUserService.updateById(sysUser);
         return decide(result);
     }
@@ -229,7 +230,7 @@ public class SysUserController extends BaseController {
     @PutMapping("disable")
     @ApiOperation(value = "禁用用户登录")
     public Result disable(@RequestBody SysUser sysUser) {
-        sysUser.setEnable("0");
+        sysUser.setEnable(Enable.DISABLE);
         boolean result = sysUserService.updateById(sysUser);
         return decide(result);
     }
@@ -246,8 +247,23 @@ public class SysUserController extends BaseController {
         boolean result = sysUserService.updateById(sysUser);
         return decide(result);
     }
-    @GetMapping("queryByName")
-    public SysBaseUser queryByName(String username) {
+
+    @GetMapping("queryByUserId")
+    @ApiOperation(value = "根据用户主键查询用户信息", hidden = true)
+    public SysBaseUser queryByUserId(String userId) {
+        return sysUserService.getById(userId);
+    }
+
+    @GetMapping("queryByUserName")
+    @ApiOperation(value = "根据用户名查询用户信息", hidden = true)
+    public SysBaseUser queryByUserName(String username) {
         return sysUserService.selectByUsername(username);
     }
+
+    @GetMapping("queryUserRole")
+    @ApiOperation(value = "根据用户主键查询用户角色信息", hidden = true)
+    public List<SysBaseRole> queryUserRole(String userId) {
+        return sysUserService.getUserRole(userId).stream().collect(Collectors.toList());
+    }
+
 }

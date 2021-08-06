@@ -3,7 +3,7 @@
 <head>
     <th:block th:include="include :: header('在线列表')"/>
 </head>
-<body class="pear-container">
+<body class="wayne-container">
 <div class="layui-card">
     <div class="layui-card-body">
         <form class="layui-form" action="">
@@ -12,11 +12,11 @@
                 <div class="layui-input-inline">
                     <input type="text" name="username" placeholder="" class="layui-input">
                 </div>
-                <button class="pear-btn pear-btn-md pear-btn-primary" lay-submit lay-filter="online-query">
+                <button class="wayne-btn wayne-btn-md wayne-btn-primary" lay-submit lay-filter="online-query">
                     <i class="layui-icon layui-icon-search"></i>
                     查询
                 </button>
-                <button type="reset" class="pear-btn pear-btn-md">
+                <button type="reset" class="wayne-btn wayne-btn-md">
                     <i class="layui-icon layui-icon-refresh"></i>
                     重置
                 </button>
@@ -32,13 +32,13 @@
 </body>
 
 <script type="text/html" id="online-bar">
-    <button sec:authorize="hasPermission('/system/online/remove','sys:online:remove')" class="pear-btn pear-btn-danger pear-btn-sm" lay-event="remove">
-        <i class="pear-icon pear-icon-ashbin"></i>
+    <button sec:authorize="hasAnyAuthority('sys:online:remove')" class="wayne-btn wayne-btn-danger wayne-btn-sm" lay-event="remove">
+        <i class="wayne-icon wayne-icon-ashbin"></i>
     </button>
 </script>
 
 <script type="text/html" id="online-state">
-    <span class="pear-text">
+    <span class="wayne-text">
         在线
     </span>
 </script>

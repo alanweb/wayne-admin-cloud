@@ -1,6 +1,5 @@
 package com.wayne.web.controller.system;
 
-import com.wayne.common.constant.ControllerConstant;
 import com.wayne.common.web.base.BaseController;
 import com.wayne.web.service.SystemService;
 import io.swagger.annotations.Api;
@@ -59,8 +58,8 @@ public class UserController extends BaseController {
     @ApiOperation(value = "获取用户修改视图")
     @PreAuthorize("hasAnyAuthority('sys:user:edit')")
     public ModelAndView edit(Model model, String userId) {
-//        model.addAttribute("sysRoles", sysUserService.getUserRole(userId));
-        model.addAttribute("sysUser", getCurrentUser());
+        model.addAttribute("sysRoles", systemService.getUserRole(userId));
+        model.addAttribute("sysUser", systemService.queryByUserId(userId));
         return jumpPage(MODULE_PATH + "edit");
     }
 
