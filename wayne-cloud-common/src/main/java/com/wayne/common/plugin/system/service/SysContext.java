@@ -1,6 +1,6 @@
 package com.wayne.common.plugin.system.service;
 
-import com.wayne.common.plugin.system.domain.SysBaseDict;
+import com.wayne.common.plugin.system.domain.SysBaseDictData;
 import com.wayne.common.plugin.system.domain.SysBaseLog;
 import com.wayne.common.plugin.system.domain.SysBaseRole;
 import com.wayne.common.plugin.system.domain.SysBaseUser;
@@ -41,7 +41,7 @@ public interface SysContext {
 	 * @param typeCode
 	 * @return
 	 */
-	List<SysBaseDict> selectDictByCode(String typeCode);
+	List<SysBaseDictData> selectDictByCode(String typeCode);
 
 	/**
 	 * 查询表字典通过查询指定table的 text code key 获取字典值
@@ -50,7 +50,7 @@ public interface SysContext {
 	 * @param code value
 	 * @return
 	 */
-    List<SysBaseDict> queryTableDictItemsByCode(String table, String text, String code);
+    List<SysBaseDictData> queryTableDictItemsByCode(String table, String text, String code);
 
 
 	/**
@@ -60,7 +60,7 @@ public interface SysContext {
 	 * @param code value
 	 * @return
 	 */
-	List<SysBaseDict> queryTableDictItemsByCodeAndFilter(String table, String text, String code, String filterSql);
+	List<SysBaseDictData> queryTableDictItemsByCodeAndFilter(String table, String text, String code, String filterSql);
 
 
 	/**
@@ -71,7 +71,7 @@ public interface SysContext {
 	 * @param keyArray values
 	 * @return
 	 */
-	List<SysBaseDict>queryTableDictByKeys(String table, String text, String code, String[] keyArray);
+	List<SysBaseDictData>queryTableDictByKeys(String table, String text, String code, String[] keyArray);
 
 	/**
 	 * 查询系统配置

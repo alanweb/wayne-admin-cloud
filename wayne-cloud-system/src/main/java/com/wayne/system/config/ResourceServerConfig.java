@@ -90,10 +90,3 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 
 }
-
-
-/**
- * 设置每个请求都会被拦截，需要认证后才能通过。
- * 设置放行的路径不需要认证(使swagger页面能成功访问)
- * 若要进行接口测试，设置放行的路径为 /** ,即所有路径均放行，测试完后删除该路径即可。
- */

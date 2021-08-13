@@ -43,14 +43,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Resource
     private SecurityProperties securityProperties;
 
-    /**
-     * 用于统计用户在线
-     */
-    @Resource
-    private SessionRegistry sessionRegistry;
-
-    @Resource
-    private SecureSessionExpiredHandler secureSessionExpiredHandler;
     @Resource
     private SecureAuthenticationSuccessHandler secureAuthenticationSuccessHandler;
     @Resource
@@ -105,16 +97,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .authenticationSuccessHandler(rememberMeAuthenticationSuccessHandler)
                 .and()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .sessionFixation()
-                .migrateSession()
-                // 同时登陆多个只保留一个
-                .maximumSessions(securityProperties.getMaximum())
-                .maxSessionsPreventsLogin(false)
-                // 踢出用户操作
-                .expiredSessionStrategy(secureSessionExpiredHandler)
-                // 用于统计在线
-                .sessionRegistry(sessionRegistry);
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
     }
 
     @Override

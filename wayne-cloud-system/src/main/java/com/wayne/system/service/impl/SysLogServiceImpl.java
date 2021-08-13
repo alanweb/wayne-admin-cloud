@@ -18,9 +18,9 @@ import java.util.List;
  * Describe: 日 志 服 务 接 口 实 现
  * Author: 就 眠 仪 式
  * CreateTime: 2019/10/23
- * */
+ */
 @Service
-public class SysLogServiceImpl extends ServiceImpl<SysLogMapper,SysLog> implements ISysLogService {
+public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> implements ISysLogService {
 
 
     @Override
@@ -39,10 +39,11 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogMapper,SysLog> implemen
     }
 
     @Override
-    public List<SysLog> data(LoggingType loggingType,LocalDateTime startTime,LocalDateTime endTime) {
+    public List<SysLog> data(LoggingType loggingType, LocalDateTime startTime, LocalDateTime endTime) {
         QueryWrapper<SysLog> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("logging_Type",loggingType);
-        queryWrapper.between("create_time",startTime,endTime);
+        queryWrapper.eq("logging_Type", loggingType);
+        if (null != startTime && null != endTime)
+            queryWrapper.between("create_time", startTime, endTime);
         return baseMapper.selectList(queryWrapper);
     }
 

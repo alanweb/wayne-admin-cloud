@@ -76,8 +76,8 @@
         let treetable = layui.treetable;
         let popup = layui.popup;
 
-        let MODULE_PATH = "/system/power/";
-
+        let API_PATH = "/system/power/";
+        let MODULE_PATH = "/web/power/";
         window.render = function () {
             treetable.render({
                 treeColIndex: 1,
@@ -89,7 +89,7 @@
                 treeDefaultClose: true,
                 toolbar: '#power-toolbar',
                 elem: '#power-table',
-                url: '/system/power/data',
+                url: API_PATH+'data',
                 page: false,
                 cols: [
                     [
@@ -162,7 +162,7 @@
             }
             let loading = layer.load();
             $.ajax({
-                url: '/system/power/' + operate,
+                url: API_PATH + operate,
                 data: JSON.stringify({powerId: this.value}),
                 dataType: 'json',
                 contentType: 'application/json',
@@ -204,7 +204,7 @@
                 layer.close(index);
                 let loading = layer.load();
                 $.ajax({
-                    url: MODULE_PATH + "remove/" + obj.data['powerId'],
+                    url: API_PATH + "remove/" + obj.data['powerId'],
                     dataType: 'json',
                     type: 'delete',
                     success: function (result) {

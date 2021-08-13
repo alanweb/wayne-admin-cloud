@@ -52,7 +52,8 @@
     <a class="wayne-btn wayne-btn-primary wayne-btn-sm" href="/system/file/download/{{d.id}}" download="{{d.fileDesc}}">
         <i class="wayne-icon wayne-icon-direction-down"></i>
     </a>
-    <button class="wayne-btn wayne-btn-danger wayne-btn-sm" lay-event="remove"><i class="layui-icon layui-icon-delete"></i>
+    <button class="wayne-btn wayne-btn-danger wayne-btn-sm" lay-event="remove"><i
+            class="layui-icon layui-icon-delete"></i>
     </button>
 </script>
 
@@ -66,14 +67,14 @@
 
 <th:block th:include="include :: footer"/>
 <script>
-    layui.use(['table', 'form', 'jquery','popup','common'], function () {
+    layui.use(['table', 'form', 'jquery', 'popup', 'common'], function () {
         let table = layui.table;
         let form = layui.form;
         let $ = layui.jquery;
         let popup = layui.popup;
         let common = layui.common;
-
-        let MODULE_PATH = "/system/file/";
+        let API_PATH = "/system/file/";
+        let MODULE_PATH = "/web/file/";
 
         let cols = [
             [
@@ -82,7 +83,7 @@
                 {title: '原名称', field: 'fileDesc', align: 'center', width: 260},
                 {title: '类型', field: 'fileType', align: 'center', width: 80},
                 {title: '文件大小', field: 'fileSize', align: 'center'},
-                {title: '预览', field: 'fileType', align: 'center', templet: "#file-image",event:"file-image"},
+                {title: '预览', field: 'fileType', align: 'center', templet: "#file-image", event: "file-image"},
                 {title: '创建日期', field: 'createTime', align: 'center', templet: "#file-createTime"},
                 {title: '操作', toolbar: '#role-bar', align: 'center', width: 150}
             ]
@@ -90,11 +91,10 @@
 
         table.render({
             elem: '#file-table',
-            url: MODULE_PATH + 'data',
+            url: API_PATH + 'data',
             page: true,
             cols: cols,
             skin: 'line',
-            height: 'full-148',
             toolbar: '#role-toolbar',
             defaultToolbar: [{
                 layEvent: 'refresh',
@@ -105,7 +105,7 @@
         table.on('tool(file-table)', function (obj) {
             if (obj.event === 'remove') {
                 window.remove(obj);
-            }else if(obj.event === 'file-image'){
+            } else if (obj.event === 'file-image') {
                 window.show(obj);
             }
         });
@@ -135,17 +135,17 @@
             });
         }
 
-        window.show = function(obj){
-                layer.photos({
-                    photos: {
-                        "title": "预览图片",
-                        "start": 0,
-                        "data": [
-                            {"src": "/system/file/download/"+obj.data.id}
-                        ]
-                    }
-                    ,anim: 5
-                });
+        window.show = function (obj) {
+            layer.photos({
+                photos: {
+                    "title": "预览图片",
+                    "start": 0,
+                    "data": [
+                        {"src": API_PATH + "download/" + obj.data.id}
+                    ]
+                }
+                , anim: 5
+            });
         }
 
         window.remove = function (obj) {
@@ -153,13 +153,13 @@
                 layer.close(index);
                 let loading = layer.load();
                 $.ajax({
-                    url: MODULE_PATH + "remove/" + obj.data['id'],
+                    url: API_PATH + "remove/" + obj.data['id'],
                     dataType: 'json',
                     type: 'delete',
                     success: function (result) {
                         layer.close(loading);
                         if (result.success) {
-                            popup.success(result.msg,function(){
+                            popup.success(result.msg, function () {
                                 obj.del();
                             });
                         } else {
@@ -171,7 +171,7 @@
         }
 
         window.batchRemove = function (obj) {
-            let ids = common.checkField(obj,'id');
+            let ids = common.checkField(obj, 'id');
             if (common.isEmpty(ids)) {
                 popup.warning("未选中数据");
                 return false;
@@ -180,13 +180,13 @@
                 layer.close(index);
                 let loading = layer.load();
                 $.ajax({
-                    url: MODULE_PATH + "batchRemove/" + ids,
+                    url: API_PATH + "batchRemove/" + ids,
                     dataType: 'json',
                     type: 'delete',
                     success: function (result) {
                         layer.close(loading);
                         if (result.success) {
-                            popup.success(result.msg,function(){
+                            popup.success(result.msg, function () {
                                 table.reload('file-table');
                             });
                         } else {

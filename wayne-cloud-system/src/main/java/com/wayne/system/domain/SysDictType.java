@@ -1,6 +1,8 @@
 package com.wayne.system.domain;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.wayne.common.plugin.system.domain.SysBaseDictType;
 import com.wayne.common.web.base.BaseDomain;
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
@@ -14,31 +16,11 @@ import org.apache.ibatis.type.Alias;
 @Data
 @Alias("SysDictType")
 @TableName(value = "Sys_Dict_Type")
-public class SysDictType extends BaseDomain {
+public class SysDictType extends SysBaseDictType {
 
     /**
      * 标识
      * */
+    @TableId
     private String id;
-
-    /**
-     * 字典名称
-     * */
-    private String typeName;
-
-    /**
-     * 字典类型
-     * */
-    private String typeCode;
-
-    /**
-     * 字典描述
-     * */
-    private String description;
-
-    /**
-     * 字典可用状态
-     * */
-    private String enable;
-
 }

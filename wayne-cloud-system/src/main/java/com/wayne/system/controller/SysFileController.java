@@ -32,11 +32,6 @@ import java.util.Map;
 public class SysFileController extends BaseController {
 
     /**
-     * 系 统 文 件
-     */
-    private String MODULE_PATH = "system/file/" ;
-
-    /**
      * 配置文件
      */
     @Resource
@@ -63,17 +58,6 @@ public class SysFileController extends BaseController {
     }
 
     /**
-     * Describe: 文件管理页面
-     * Param: null
-     * Return: ModelAndView
-     */
-    @GetMapping("main")
-    @PreAuthorize("hasAnyAuthority('sys:file:main')")
-    public ModelAndView main() {
-        return jumpPage(MODULE_PATH + "main");
-    }
-
-    /**
      * Describe: 文件资源数据
      * Param: PageDomain
      * Return: 文件资源列表
@@ -84,17 +68,6 @@ public class SysFileController extends BaseController {
         PageHelper.startPage(pageDomain.getPage(), pageDomain.getLimit());
         PageInfo<SysFile> pageInfo = new PageInfo<>(getFileService().data());
         return pageTable(pageInfo.getList(), pageInfo.getTotal());
-    }
-
-    /**
-     * Describe: 文件上传视图
-     * Param: null
-     * Return: 执行结果
-     */
-    @GetMapping("add")
-    @PreAuthorize("hasAnyAuthority('sys:file:add')")
-    public ModelAndView add() {
-        return jumpPage(MODULE_PATH + "add");
     }
 
     /**

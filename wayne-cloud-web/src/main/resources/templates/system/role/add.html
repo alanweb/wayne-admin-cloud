@@ -66,7 +66,7 @@
 
         form.on('submit(role-save)', function (data) {
             $.ajax({
-                url: '/api/system/role/save',
+                url: '/system/role/save',
                 data: JSON.stringify(data.field),
                 dataType: 'json',
                 contentType: 'application/json',

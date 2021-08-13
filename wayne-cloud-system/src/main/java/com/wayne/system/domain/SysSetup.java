@@ -1,22 +1,9 @@
 package com.wayne.system.domain;
 
+import com.wayne.common.plugin.system.domain.SysBaseSetup;
 import lombok.Data;
 
 @Data
-public class SysSetup {
-
-    private String mailHost;
-
-    private String mailPort;
-
-    private String mailFrom;
-
-    private String mailUser;
-
-    private String mailPass;
-
-    private String uploadKind;
-
-    private String uploadPath;
+public class SysSetup extends SysBaseSetup {
 
 }

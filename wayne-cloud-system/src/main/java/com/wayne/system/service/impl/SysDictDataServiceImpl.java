@@ -9,7 +9,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.wayne.common.tools.spring.SpringUtil;
 import com.wayne.common.web.domain.request.PageDomain;
-import com.wayne.system.domain.SysDictData;
+import com.wayne.system.domain.SysDictDataData;
 import com.wayne.system.mapper.SysDictDataMapper;
 import com.wayne.system.service.ISysDictDataService;
 import org.springframework.stereotype.Service;
@@ -25,23 +25,23 @@ import java.util.concurrent.TimeUnit;
  * CreateTime: 2019/10/23
  */
 @Service
-public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDictData> implements ISysDictDataService {
+public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDictDataData> implements ISysDictDataService {
 
-    public static LoadingCache<String, List<SysDictData>> loadingCacheSysDictData = CacheBuilder.newBuilder().maximumSize(100).expireAfterWrite(600, TimeUnit.SECONDS).build(new CacheLoader<String, List<SysDictData>>() {
+    public static LoadingCache<String, List<SysDictDataData>> loadingCacheSysDictData = CacheBuilder.newBuilder().maximumSize(100).expireAfterWrite(600, TimeUnit.SECONDS).build(new CacheLoader<String, List<SysDictDataData>>() {
         @Override
-        public List<SysDictData> load(String typeCode) {
+        public List<SysDictDataData> load(String typeCode) {
             SysDictDataMapper tempSysDictDataMapper = SpringUtil.getBean("sysDictDataMapper", SysDictDataMapper.class);
             return tempSysDictDataMapper.selectByCode(typeCode);
         }
     });
 
     @Override
-    public List<SysDictData> list(SysDictData sysDictData) {
+    public List<SysDictDataData> list(SysDictDataData sysDictData) {
         return baseMapper.selectList(new QueryWrapper<>(sysDictData));
     }
 
     @Override
-    public List<SysDictData> selectByCode(String typeCode) {
+    public List<SysDictDataData> selectByCode(String typeCode) {
         try {
             return loadingCacheSysDictData.get(typeCode);
         } catch (ExecutionException e) {
@@ -61,15 +61,15 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
     }
 
     @Override
-    public PageInfo<SysDictData> page(SysDictData sysDictData, PageDomain pageDomain) {
+    public PageInfo<SysDictDataData> page(SysDictDataData sysDictData, PageDomain pageDomain) {
         PageHelper.startPage(pageDomain.getPage(), pageDomain.getLimit());
-        List<SysDictData> list = list(sysDictData);
+        List<SysDictDataData> list = list(sysDictData);
         return new PageInfo<>(list);
     }
 
     @Override
     public Boolean remove(String id) {
-        SysDictData sysDictData = baseMapper.selectById(id);
+        SysDictDataData sysDictData = baseMapper.selectById(id);
         if (sysDictData != null) {
             baseMapper.deleteById(id);
         }

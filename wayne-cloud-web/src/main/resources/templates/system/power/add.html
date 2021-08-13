@@ -24,7 +24,8 @@
                 <div class="layui-form-item" id="powerCodeItem">
                     <label class="layui-form-label">标识</label>
                     <div class="layui-input-block">
-                        <input type="text" id="powerCode" name="powerCode" autocomplete="off" placeholder="权限标识" class="layui-input">
+                        <input type="text" id="powerCode" name="powerCode" autocomplete="off" placeholder="权限标识"
+                               class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -38,7 +39,8 @@
                 <div class="layui-form-item" id="powerUrlItem">
                     <label class="layui-form-label">路径</label>
                     <div class="layui-input-block">
-                        <input type="text" id="powerUrl" name="powerUrl" autocomplete="off" placeholder="菜单路径" class="layui-input">
+                        <input type="text" id="powerUrl" name="powerUrl" autocomplete="off" placeholder="菜单路径"
+                               class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item" id="openTypeItem">
@@ -60,7 +62,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">排序</label>
                     <div class="layui-input-block">
-                        <input type="text" name="sort" lay-verify="title" autocomplete="off" placeholder="排序" class="layui-input">
+                        <input type="text" name="sort" lay-verify="title" autocomplete="off" placeholder="排序"
+                               class="layui-input">
                     </div>
                 </div>
             </div>
@@ -68,7 +71,8 @@
     </div>
     <div class="bottom">
         <div class="button-container">
-            <button type="submit" class="wayne-btn wayne-btn-primary wayne-btn-sm" lay-submit="" lay-filter="power-save">
+            <button type="submit" class="wayne-btn wayne-btn-primary wayne-btn-sm" lay-submit=""
+                    lay-filter="power-save">
                 <i class="layui-icon layui-icon-ok"></i>
                 提交
             </button>
@@ -81,15 +85,15 @@
 </form>
 <th:block th:include="include :: footer"/>
 <script>
-    layui.use(['form', 'jquery', 'iconPicker', 'dtree','dictionary'], function () {
+    layui.use(['form', 'jquery', 'iconPicker', 'dtree', 'dictionary'], function () {
         let form = layui.form;
         let $ = layui.jquery;
         let iconPicker = layui.iconPicker;
         let dtree = layui.dtree;
-
+        let API_PATH = "/system/power/"
         dtree.renderSelect({
             elem: "#selectParent",
-            url: "/system/power/selectParent",
+            url: API_PATH + "selectParent",
             method: 'get',
             selectInputName: {nodeId: "parentId", context: "powerName"},
             skin: "layui",
@@ -122,7 +126,7 @@
         form.on('submit(power-save)', function (data) {
             data.field.icon = "layui-icon " + data.field.icon;
             $.ajax({
-                url: '/system/power/save',
+                url: API_PATH + 'save',
                 data: JSON.stringify(data.field),
                 dataType: 'json',
                 contentType: 'application/json',
@@ -157,6 +161,7 @@
                 console.log(data);
             }
         });
+        iconPicker.checkIcon('icon', 'layui-icon-auz');
     })
 </script>
 <script>

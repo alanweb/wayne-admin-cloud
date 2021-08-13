@@ -34,7 +34,7 @@ public class SysMailServiceImpl extends ServiceImpl<SysMailMapper, SysMail> impl
     public boolean save(SysMail sysMail) {
         if (sendMail(sysMail)) {
             sysMail.setMailId(SequenceUtil.makeStringId());
-            sysMail.setCreateBy(((SysUser) SecurityUtil.currentUserObj()).getUsername());
+            sysMail.setCreateBy(SecurityUtil.currentUserObj().toString());
             return baseMapper.insert(sysMail) > 0 ? true : false;
         } else {
             return false;

@@ -29,24 +29,8 @@ import java.util.ArrayList;
 @RequestMapping(ControllerConstant.API_SYSTEM_PREFIX + "mail")
 public class SysMailController extends BaseController {
 
-    /**
-     * 基 础 路 径
-     */
-    private String MODULE_PATH = "system/mail/" ;
-
     @Resource
     private ISysMailService sysMailService;
-
-    /**
-     * Describe: 邮件管理页面
-     * Return: ModelAndView
-     */
-    @GetMapping("/main")
-    @ApiOperation(value = "邮件管理页面")
-    @PreAuthorize("hasAnyAuthority('sys:mail:main')")
-    public ModelAndView main() {
-        return jumpPage(MODULE_PATH + "main");
-    }
 
     /**
      * Describe: 邮件列表数据
@@ -59,17 +43,6 @@ public class SysMailController extends BaseController {
     public ResultTable data(SysMail sysMail, PageDomain pageDomain) {
         PageInfo<SysMail> page = sysMailService.page(sysMail, pageDomain);
         return pageTable(page.getList(), page.getTotal());
-    }
-
-    /**
-     * Describe: 邮件发送页面
-     * Return: ModelAndView
-     */
-    @GetMapping("/add")
-    @ApiOperation(value = "邮件发送页面")
-    @PreAuthorize("hasAnyAuthority('sys:mail:add')")
-    public ModelAndView add() {
-        return jumpPage(MODULE_PATH + "add");
     }
 
     /**

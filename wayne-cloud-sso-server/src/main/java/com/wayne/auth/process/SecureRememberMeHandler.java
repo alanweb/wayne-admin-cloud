@@ -1,16 +1,14 @@
 package com.wayne.auth.process;
 
-import com.wayne.auth.session.SecureSessionService;
+import com.wayne.auth.service.SystemService;
 import com.wayne.common.plugin.logging.aop.enums.BusinessType;
 import com.wayne.common.plugin.logging.aop.enums.LoggingType;
 import com.wayne.common.plugin.system.domain.SysBaseLog;
 import com.wayne.common.plugin.system.domain.SysBaseUser;
 import com.wayne.common.tools.secure.SecurityUtil;
 import com.wayne.common.tools.sequence.SequenceUtil;
-import com.wayne.auth.service.SystemService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -27,8 +25,6 @@ public class SecureRememberMeHandler implements AuthenticationSuccessHandler {
 
     @Resource
     private SystemService systemService;
-    @Resource
-    private SessionRegistry sessionRegistry;
 
     @Override
     public void onAuthenticationSuccess(
@@ -55,9 +51,6 @@ public class SecureRememberMeHandler implements AuthenticationSuccessHandler {
         SysBaseUser currentUser = (SysBaseUser) authentication.getPrincipal();
         currentUser.setLastTime(now);
         request.getSession().setAttribute("currentUser", currentUser);
-        SecureSessionService.expiredSession(request, sessionRegistry);
-        // 注册新的SessionInformation
-        sessionRegistry.registerNewSession(request.getSession().getId(), authentication.getPrincipal());
         response.sendRedirect(redirectUrl);
     }
 }

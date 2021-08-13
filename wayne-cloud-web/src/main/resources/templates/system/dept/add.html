@@ -45,8 +45,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">状态</label>
                     <div class="layui-input-block">
-                        <input type="radio" name="status" value="0" title="开启">
-                        <input type="radio" name="status" value="1" title="关闭" checked>
+                        <input type="radio" name="status" value="1" title="开启" checked>
+                        <input type="radio" name="status" value="0" title="关闭" >
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -80,14 +80,14 @@
 </form>
 <th:block th:include="include :: footer"/>
 <script>
-    layui.use(['form', 'jquery','dtree'], function () {
+    layui.use(['form', 'jquery', 'dtree'], function () {
         let form = layui.form;
         let $ = layui.jquery;
         let dtree = layui.dtree;
-
+        let API_PATH = "/system/dept/"
         dtree.renderSelect({
             elem: "#selectParent",
-            url: "/system/dept/tree",
+            url: API_PATH + "tree",
             method: 'get',
             selectInputName: {nodeId: "parentId", context: "parentName"},
             skin: "layui",
@@ -98,7 +98,7 @@
 
         form.on('submit(dept-save)', function (data) {
             $.ajax({
-                url: '/system/dept/save',
+                url: API_PATH+'save',
                 data: JSON.stringify(data.field),
                 dataType: 'json',
                 contentType: 'application/json',

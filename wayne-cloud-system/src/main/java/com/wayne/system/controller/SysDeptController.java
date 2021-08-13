@@ -1,8 +1,11 @@
 package com.wayne.system.controller;
 
 import com.wayne.common.constant.ControllerConstant;
+import com.wayne.common.plugin.system.domain.SysBaseDept;
+import com.wayne.common.plugin.system.domain.SysBasePower;
 import com.wayne.common.tools.sequence.SequenceUtil;
 import com.wayne.common.web.base.BaseController;
+import com.wayne.common.web.constants.Enable;
 import com.wayne.common.web.domain.response.Result;
 import com.wayne.common.web.domain.response.module.ResultTable;
 import com.wayne.common.web.domain.response.module.ResultTree;
@@ -11,7 +14,6 @@ import com.wayne.system.service.ISysDeptService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -27,25 +29,10 @@ import java.util.List;
 public class SysDeptController extends BaseController {
 
     /**
-     * Describe: 基础路径
-     */
-    private static String MODULE_PATH = "system/dept/" ;
-
-    /**
      * Describe: 部门模块服务
      */
     @Resource
     private ISysDeptService sysDeptService;
-
-    /**
-     * Describe: 获取部门列表视图
-     * Param ModelAndView
-     * Return 用户列表视图
-     */
-    @GetMapping("main")
-    public ModelAndView main() {
-        return jumpPage(MODULE_PATH + "main");
-    }
 
     /**
      * Describe: 获取部门列表数据
@@ -70,16 +57,6 @@ public class SysDeptController extends BaseController {
     }
 
     /**
-     * Describe: 获取部门新增视图
-     * Param ModelAndView
-     * Return 部门新增视图
-     */
-    @GetMapping("add")
-    public ModelAndView add() {
-        return jumpPage(MODULE_PATH + "add");
-    }
-
-    /**
      * Describe: 保存部门信息
      * Param SysDept
      * Return 执行结果
@@ -90,18 +67,6 @@ public class SysDeptController extends BaseController {
         SysDept.setDeptId(SequenceUtil.makeStringId());
         boolean result = sysDeptService.save(SysDept);
         return decide(result);
-    }
-
-    /**
-     * Describe: 获取部门修改视图
-     * Param ModelAndView
-     * Return 部门修改视图
-     */
-    @GetMapping("edit")
-    public ModelAndView edit(ModelAndView modelAndView, String deptId) {
-        modelAndView.addObject("sysDept", sysDeptService.getById(deptId));
-        modelAndView.setViewName(MODULE_PATH + "edit");
-        return modelAndView;
     }
 
     /**
@@ -144,7 +109,7 @@ public class SysDeptController extends BaseController {
      */
     @PutMapping("enable")
     public Result enable(@RequestBody SysDept SysDept) {
-        SysDept.setStatus("0");
+        SysDept.setStatus(Enable.ENABLE);
         boolean result = sysDeptService.updateById(SysDept);
         return decide(result);
     }
@@ -156,8 +121,19 @@ public class SysDeptController extends BaseController {
      */
     @PutMapping("disable")
     public Result disable(@RequestBody SysDept SysDept) {
-        SysDept.setStatus("1");
+        SysDept.setStatus(Enable.DISABLE);
         boolean result = sysDeptService.updateById(SysDept);
         return decide(result);
     }
+    /**
+     * Describe: 查询部门信息
+     * Param: deptId
+     * Return: SysBaseDept
+     */
+    @GetMapping("/{deptId}")
+    @ApiOperation(value = "获取部门信息", hidden = true)
+    public SysBaseDept queryByDeptId(@PathVariable String deptId) {
+        return sysDeptService.getById(deptId);
+    }
+
 }

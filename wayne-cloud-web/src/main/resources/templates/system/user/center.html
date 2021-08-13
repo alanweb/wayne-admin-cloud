@@ -190,7 +190,7 @@
             });
             return false;
         })
-        $("#avatar").attr("src", "/api/system/file/download/"+[[${userInfo.avatar}]]);
+        $("#avatar").attr("src", "/system/file/download/"+[[${userInfo.avatar}]]);
 
         $("#avatar").click(function () {
             layer.open({
@@ -208,7 +208,7 @@
 
         form.on('submit(user-update)', function (data) {
             $.ajax({
-                url: '/api/system/user/updateInfo',
+                url: '/system/user/updateInfo',
                 data: JSON.stringify(data.field),
                 dataType: 'json',
                 contentType: 'application/json',

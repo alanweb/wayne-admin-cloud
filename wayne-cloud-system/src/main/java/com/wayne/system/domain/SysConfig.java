@@ -2,6 +2,7 @@ package com.wayne.system.domain;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.wayne.common.plugin.system.domain.SysBaseConfig;
 import com.wayne.common.web.base.BaseDomain;
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
@@ -15,32 +16,11 @@ import org.apache.ibatis.type.Alias;
 @Data
 @Alias("SysConfig")
 @TableName("sys_config")
-public class SysConfig extends BaseDomain {
+public class SysConfig extends SysBaseConfig {
 
     /**
      * 配置标识
      * */
     @TableId
     private String configId;
-
-    /**
-     * 配置名称
-     * */
-    private String configName;
-
-    /**
-     * 配置类型
-     * */
-    private String configType;
-
-    /**
-     * 配置标识
-     * */
-    private String configCode;
-
-    /**
-     * 配置值
-     * */
-    private String configValue;
-
 }

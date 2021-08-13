@@ -159,9 +159,9 @@ public class SysRoleController extends BaseController {
     }
 
     /**
-     * Describe: 查询全部角色
+     * Describe: 查询角色信息
      * Param: roleId
-     * Return: List<SysBaseRole>
+     * Return: SysBaseRole
      */
     @GetMapping("/{roleId}")
     @ApiOperation(value = "获取角色信息", hidden = true)

@@ -71,7 +71,7 @@
         let popup = layui.popup;
         let common = layui.common;
 
-        let MODULE_PATH = "/system/mail/";
+        let API_PATH = "/system/mail/";
 
         let cols = [
             [
@@ -87,11 +87,10 @@
 
         table.render({
             elem: '#mail-table',
-            url: MODULE_PATH + 'data',
+            url: API_PATH + 'data',
             page: true,
             cols: cols,
             skin: 'line',
-            height: 'full-148',
             toolbar: '#mail-toolbar',
             defaultToolbar: [{
                 title: '刷新',
@@ -124,7 +123,7 @@
                 title: '发邮件',
                 shade: 0.1,
                 area: ['600px', '600px'],
-                content: MODULE_PATH + 'add'
+                content: '/web/mail/add'
             });
         }
 
@@ -133,7 +132,7 @@
                 layer.close(index);
                 let loading = layer.load();
                 $.ajax({
-                    url: MODULE_PATH + "remove/" + obj.data['mailId'],
+                    url: API_PATH + "remove/" + obj.data['mailId'],
                     dataType: 'json',
                     type: 'delete',
                     success: function (result) {
@@ -160,7 +159,7 @@
                 layer.close(index);
                 let loading = layer.load();
                 $.ajax({
-                    url: MODULE_PATH + "batchRemove/" + ids,
+                    url: API_PATH + "batchRemove/" + ids,
                     dataType: 'json',
                     type: 'delete',
                     success: function (result) {

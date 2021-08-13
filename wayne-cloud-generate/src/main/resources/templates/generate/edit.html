@@ -193,7 +193,7 @@
 
         dtree.renderSelect({
             elem: "#selectParent",
-            url: "/api/system/power/selectParent",
+            url: "/system/power/selectParent",
             method: 'get',
             skin: 'layui',
             selectInputName: {nodeId: "parentMenuId", context: "parentMenuName"},
@@ -385,7 +385,7 @@
                         row.dictType, row.columnId);
                     $.ajax({
                         type: 'get',
-                        url: '/api/system/dictType/list',
+                        url: '/system/dictType/list',
                         async: false,
                         dataType: 'json',
                         success: function (res) {

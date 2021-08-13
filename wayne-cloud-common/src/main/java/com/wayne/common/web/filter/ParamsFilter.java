@@ -16,8 +16,8 @@ public class ParamsFilter implements Filter {
     @Override
     public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
             throws IOException, ServletException {
-        ParameterRequestWrapper parmsRequest = new ParameterRequestWrapper((HttpServletRequest) arg0);
-        arg2.doFilter(parmsRequest, arg1);
+        ParameterRequestWrapper paramsRequest = new ParameterRequestWrapper((HttpServletRequest) arg0);
+        arg2.doFilter(paramsRequest, arg1);
     }
 
     @Override

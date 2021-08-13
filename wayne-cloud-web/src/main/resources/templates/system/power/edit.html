@@ -82,7 +82,8 @@
     </div>
     <div class="bottom">
         <div class="button-container">
-            <button type="submit" class="wayne-btn wayne-btn-primary wayne-btn-sm" lay-submit="" lay-filter="power-save">
+            <button type="submit" class="wayne-btn wayne-btn-primary wayne-btn-sm" lay-submit=""
+                    lay-filter="power-save">
                 <i class="layui-icon layui-icon-ok"></i>
                 提交
             </button>
@@ -100,10 +101,10 @@
         let $ = layui.jquery;
         let iconPicker = layui.iconPicker;
         let dtree = layui.dtree;
-
+        let API_PATH = "/system/power/"
         dtree.renderSelect({
             elem: "#selectParent",
-            url: "/system/power/selectParent",
+            url: API_PATH + "selectParent",
             method: 'get',
             selectInputName: {nodeId: "parentId", context: "powerName"},
             skin: "layui",
@@ -136,7 +137,7 @@
         form.on('submit(power-save)', function (data) {
             data.field.icon = "layui-icon " + data.field.icon;
             $.ajax({
-                url: '/system/power/update',
+                url: API_PATH + 'update',
                 data: JSON.stringify(data.field),
                 dataType: 'json',
                 contentType: 'application/json',

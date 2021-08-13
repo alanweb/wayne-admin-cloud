@@ -25,36 +25,40 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">负责人</label>
                     <div class="layui-input-block">
-                        <input type="text" th:value="${sysDept.leader}" name="leader" lay-verify="title" autocomplete="off" placeholder="请输入标题"
+                        <input type="text" th:value="${sysDept.leader}" name="leader" lay-verify="title"
+                               autocomplete="off" placeholder="请输入标题"
                                class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">邮箱</label>
                     <div class="layui-input-block">
-                        <input type="text" th:value="${sysDept.email}" name="email" lay-verify="title" autocomplete="off" placeholder="请输入标题"
+                        <input type="text" th:value="${sysDept.email}" name="email" lay-verify="title"
+                               autocomplete="off" placeholder="请输入标题"
                                class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">联系方式</label>
                     <div class="layui-input-block">
-                        <input type="text" th:value="${sysDept.phone}" name="phone" lay-verify="title" autocomplete="off" placeholder="请输入标题"
+                        <input type="text" th:value="${sysDept.phone}" name="phone" lay-verify="title"
+                               autocomplete="off" placeholder="请输入标题"
                                class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">状态</label>
                     <div class="layui-input-block">
-                        <input type="radio" name="status" th:checked="${sysDept.status eq '0'}" value="0" title="开启">
-                        <input type="radio" name="status" th:checked="${sysDept.status eq '1'}" value="1" title="关闭"
+                        <input type="radio" name="status" th:checked="${sysDept.status eq '1'}" value="1" title="开启">
+                        <input type="radio" name="status" th:checked="${sysDept.status eq '0'}" value="0" title="关闭"
                                checked>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">排序</label>
                     <div class="layui-input-block">
-                        <input type="text" name="sort" th:value="${sysDept.sort}" lay-verify="title" autocomplete="off" placeholder="请输入标题"
+                        <input type="text" name="sort" th:value="${sysDept.sort}" lay-verify="title" autocomplete="off"
+                               placeholder="请输入标题"
                                class="layui-input">
                     </div>
                 </div>
@@ -87,10 +91,10 @@
     layui.use(['form', 'jquery'], function () {
         let form = layui.form;
         let $ = layui.jquery;
-
+        let API_PATH = "/system/dept/";
         form.on('submit(dept-update)', function (data) {
             $.ajax({
-                url: '/system/dept/update',
+                url: API_PATH + 'update',
                 data: JSON.stringify(data.field),
                 dataType: 'json',
                 contentType: 'application/json',

@@ -74,28 +74,28 @@ public class SysContextService implements SysContext {
     }
 
     @Override
-    public List<SysBaseDict> selectDictByCode(String typeCode) {
-        List<SysDictData> sysDictDataList = iSysDictDataService.selectByCode(typeCode);
+    public List<SysBaseDictData> selectDictByCode(String typeCode) {
+        List<SysDictDataData> sysDictDataList = iSysDictDataService.selectByCode(typeCode);
         return buildSysDictDataModel(sysDictDataList);
     }
 
     @Override
-    public List<SysBaseDict> queryTableDictItemsByCode(String table, String text, String code) {
+    public List<SysBaseDictData> queryTableDictItemsByCode(String table, String text, String code) {
         return buildSysDictDataModel(sysDictDataMapper.queryTableDictItemsByCode(table, text, code));
     }
 
     @Override
-    public List<SysBaseDict> queryTableDictItemsByCodeAndFilter(String table, String text, String code, String filterSql) {
+    public List<SysBaseDictData> queryTableDictItemsByCodeAndFilter(String table, String text, String code, String filterSql) {
         return buildSysDictDataModel(sysDictDataMapper.queryTableDictItemsByCodeAndFilter(table, text, code, filterSql));
     }
 
     @Override
-    public List<SysBaseDict> queryTableDictByKeys(String table, String text, String code, String[] keyArray) {
+    public List<SysBaseDictData> queryTableDictByKeys(String table, String text, String code, String[] keyArray) {
         return buildSysDictDataModel(sysDictDataMapper.queryTableDictByKeys(table, text, code, keyArray));
     }
 
-    private List<SysBaseDict> buildSysDictDataModel(List<SysDictData> sysDictDataList) {
-        List<SysBaseDict> sysDictDataModelList = new ArrayList<>();
+    private List<SysBaseDictData> buildSysDictDataModel(List<SysDictDataData> sysDictDataList) {
+        List<SysBaseDictData> sysDictDataModelList = new ArrayList<>();
         if (sysDictDataList != null && sysDictDataList.size() > 0) {
             sysDictDataModelList = sysDictDataList.stream().collect(Collectors.toList());
         }

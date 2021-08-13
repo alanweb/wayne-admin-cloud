@@ -49,7 +49,7 @@
         let table = layui.table;
         let form = layui.form;
 
-        let MODULE_PATH = "/system/log/";
+        let API_PATH = "/system/log/";
 
         let cols = [
             [
@@ -68,7 +68,7 @@
 
         table.render({
             elem: '#log-operate-table',
-            url: MODULE_PATH + 'operateLog',
+            url: API_PATH + 'operateLog',
             page: true,
             cols: cols,
             skin: 'line',
@@ -77,7 +77,7 @@
 
         table.render({
             elem: '#log-login-table',
-            url: MODULE_PATH + 'loginLog',
+            url: API_PATH + 'loginLog',
             page: true,
             cols: cols,
             skin: 'line',
@@ -107,7 +107,7 @@
                 title: '详细信息',
                 shade: 0,
                 area: ['400px', '400px'],
-                content: MODULE_PATH + "info",
+                content: "/system/log/info",
                 success: function (layero) {
                     let iframeWin = window[layero.find('iframe')[0]['name']];
                     iframeWin.show(obj.data);

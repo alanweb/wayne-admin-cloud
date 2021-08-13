@@ -1,7 +1,7 @@
 package com.wayne.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.wayne.system.domain.SysDictData;
+import com.wayne.system.domain.SysDictDataData;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -13,14 +13,14 @@ import java.util.List;
  * CreateTime: 2019/10/23
  */
 @Repository
-public interface SysDictDataMapper extends BaseMapper<SysDictData> {
+public interface SysDictDataMapper extends BaseMapper<SysDictDataData> {
     /**
      * 通过字典code获取字典数据
      *
      * @param typeCode
      * @return
      */
-    List<SysDictData> selectByCode(@Param("typeCode") String typeCode);
+    List<SysDictDataData> selectByCode(@Param("typeCode") String typeCode);
 
     /**
      * Describe: 根据 code 删除字典数据
@@ -37,7 +37,7 @@ public interface SysDictDataMapper extends BaseMapper<SysDictData> {
      * @param code  value
      * @return
      */
-    List<SysDictData> queryTableDictItemsByCode(@Param("table") String table, @Param("text") String text, @Param("code") String code);
+    List<SysDictDataData> queryTableDictItemsByCode(@Param("table") String table, @Param("text") String text, @Param("code") String code);
 
     /**
      * 通过查询指定table的 text code 获取字典（指定查询条件）
@@ -47,7 +47,7 @@ public interface SysDictDataMapper extends BaseMapper<SysDictData> {
      * @param code  value
      * @return
      */
-    List<SysDictData> queryTableDictItemsByCodeAndFilter(@Param("table") String table, @Param("text") String text, @Param("code") String code, @Param("filterSql") String filterSql);
+    List<SysDictDataData> queryTableDictItemsByCodeAndFilter(@Param("table") String table, @Param("text") String text, @Param("code") String code, @Param("filterSql") String filterSql);
 
     /**
      * 通过查询指定table的 text code key 获取字典值，包含value
@@ -58,5 +58,5 @@ public interface SysDictDataMapper extends BaseMapper<SysDictData> {
      * @param keyArray values
      * @return
      */
-    List<SysDictData> queryTableDictByKeys(@Param("table") String table, @Param("text") String text, @Param("code") String code, @Param("keyArray") String[] keyArray);
+    List<SysDictDataData> queryTableDictByKeys(@Param("table") String table, @Param("text") String text, @Param("code") String code, @Param("keyArray") String[] keyArray);
 }

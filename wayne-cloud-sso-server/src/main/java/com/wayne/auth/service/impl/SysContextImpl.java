@@ -1,6 +1,6 @@
 package com.wayne.auth.service.impl;
 
-import com.wayne.common.plugin.system.domain.SysBaseDict;
+import com.wayne.common.plugin.system.domain.SysBaseDictData;
 import com.wayne.common.plugin.system.domain.SysBaseLog;
 import com.wayne.common.plugin.system.domain.SysBaseRole;
 import com.wayne.common.plugin.system.domain.SysBaseUser;
@@ -37,22 +37,22 @@ public class SysContextImpl implements SysContext {
     }
 
     @Override
-    public List<SysBaseDict> selectDictByCode(String typeCode) {
+    public List<SysBaseDictData> selectDictByCode(String typeCode) {
         return null;
     }
 
     @Override
-    public List<SysBaseDict> queryTableDictItemsByCode(String table, String text, String code) {
+    public List<SysBaseDictData> queryTableDictItemsByCode(String table, String text, String code) {
         return null;
     }
 
     @Override
-    public List<SysBaseDict> queryTableDictItemsByCodeAndFilter(String table, String text, String code, String filterSql) {
+    public List<SysBaseDictData> queryTableDictItemsByCodeAndFilter(String table, String text, String code, String filterSql) {
         return null;
     }
 
     @Override
-    public List<SysBaseDict> queryTableDictByKeys(String table, String text, String code, String[] keyArray) {
+    public List<SysBaseDictData> queryTableDictByKeys(String table, String text, String code, String[] keyArray) {
         return null;
     }
 

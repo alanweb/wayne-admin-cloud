@@ -33,21 +33,6 @@ public class SysLogController extends BaseController {
 
     @Resource
     private ISysLogService sysLogService;
-    /**
-     * 系 统 日 志
-     */
-    private String MODULE_PATH = "system/log";
-
-    /**
-     * Describe: 行为日志视图
-     * Param: null
-     * Return: ModelAndView
-     */
-    @GetMapping("main")
-    @PreAuthorize("hasAnyAuthority('sys:log:main')")
-    public ModelAndView main() {
-        return jumpPage(MODULE_PATH + "/main");
-    }
 
     /**
      * Describe: 操作日志数据
@@ -73,17 +58,6 @@ public class SysLogController extends BaseController {
         PageHelper.startPage(pageDomain.getPage(), pageDomain.getLimit());
         PageInfo<SysLog> pageInfo = new PageInfo<>(sysLogService.data(LoggingType.LOGIN, startTime, endTime));
         return pageTable(pageInfo.getList(), pageInfo.getTotal());
-    }
-
-    /**
-     * Describe: 日志详情
-     * Param: null
-     * Return: ModelAndView
-     */
-    @GetMapping("/info")
-    @PreAuthorize("hasAnyAuthority('sys:log:info')")
-    public ModelAndView details() {
-        return jumpPage(MODULE_PATH + "/info");
     }
 
     /**

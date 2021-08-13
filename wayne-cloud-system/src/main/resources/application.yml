@@ -8,7 +8,6 @@ server:
     session:
       # 超 时 时 间
       timeout: 120m
-    context-path: /api
   max-http-header-size: 102400
 spring:
   session:
@@ -60,6 +59,7 @@ wayne:
       - /system/client/**
       - /system/account/info
       - /system/user/update
+      - /system/user/queryByUserName
       - /system/log/save
   # 上传配置
   upload:
@@ -80,11 +80,10 @@ wayne:
 
 # Page Helper 分页配置
 pagehelper:
-  # 方 言
-  helper-dialect: mysql
+  supportMethodsArguments: true
+  reasonable: false
+  helperDialect: mysql
   params: count=countSql
-  reasonable: true
-  support-methods-arguments: true
 
 logging:
   config: classpath:logback-spring.xml

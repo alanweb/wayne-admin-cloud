@@ -38,7 +38,8 @@
 </body>
 
 <script type="text/html" id="config-toolbar">
-    <button sec:authorize="hasAnyAuthority('sys:config:add')" class="wayne-btn wayne-btn-primary wayne-btn-md" lay-event="add">
+    <button sec:authorize="hasAnyAuthority('sys:config:add')" class="wayne-btn wayne-btn-primary wayne-btn-md"
+            lay-event="add">
         <i class="layui-icon layui-icon-add-1"></i>
         新增
     </button>
@@ -49,9 +50,11 @@
 </script>
 
 <script type="text/html" id="user-bar">
-    <button sec:authorize="hasAnyAuthority('sys:dept:edit')" class="wayne-btn wayne-btn-primary wayne-btn-sm" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>
+    <button sec:authorize="hasAnyAuthority('sys:dept:edit')" class="wayne-btn wayne-btn-primary wayne-btn-sm"
+            lay-event="edit"><i class="layui-icon layui-icon-edit"></i>
     </button>
-    <button sec:authorize="hasAnyAuthority('sys:dept:remove')" class="wayne-btn wayne-btn-danger wayne-btn-sm" lay-event="remove"><i class="layui-icon layui-icon-delete"></i>
+    <button sec:authorize="hasAnyAuthority('sys:dept:remove')" class="wayne-btn wayne-btn-danger wayne-btn-sm"
+            lay-event="remove"><i class="layui-icon layui-icon-delete"></i>
     </button>
 </script>
 
@@ -61,14 +64,14 @@
 
 <th:block th:include="include :: footer"/>
 <script>
-    layui.use(['table', 'form', 'jquery','common','popup'], function () {
+    layui.use(['table', 'form', 'jquery', 'common', 'popup'], function () {
         let table = layui.table;
         let form = layui.form;
         let $ = layui.jquery;
         let common = layui.common;
         let popup = layui.popup;
-
-        let MODULE_PATH = "/system/config/";
+        let API_PATH = "/system/config/";
+        let MODULE_PATH = "/web/config/";
 
         let cols = [
             [
@@ -84,7 +87,7 @@
 
         table.render({
             elem: '#config-table',
-            url: MODULE_PATH + 'data',
+            url: API_PATH + 'data',
             page: true,
             cols: cols,
             skin: 'line',
@@ -143,13 +146,13 @@
                 layer.close(index);
                 let loading = layer.load();
                 $.ajax({
-                    url: MODULE_PATH + "remove/" + obj.data['configId'],
+                    url: API_PATH + "remove/" + obj.data['configId'],
                     dataType: 'json',
                     type: 'delete',
                     success: function (result) {
                         layer.close(loading);
                         if (result.success) {
-                            popup.success(result.msg,function(){
+                            popup.success(result.msg, function () {
                                 table.reload('config-table');
                             });
                         } else {
@@ -161,7 +164,7 @@
         }
 
         window.batchRemove = function (obj) {
-            let ids = common.checkField(obj,'configId');
+            let ids = common.checkField(obj, 'configId');
             if (common.isEmpty(ids)) {
                 popup.warning("未选中数据");
                 return false;
@@ -170,13 +173,13 @@
                 layer.close(index);
                 let loading = layer.load();
                 $.ajax({
-                    url: MODULE_PATH + "batchRemove/" + ids,
+                    url: API_PATH + "batchRemove/" + ids,
                     dataType: 'json',
                     type: 'delete',
                     success: function (result) {
                         layer.close(loading);
                         if (result.success) {
-                            popup.success(result.msg,function(){
+                            popup.success(result.msg, function () {
                                 table.reload('config-table');
                             });
                         } else {

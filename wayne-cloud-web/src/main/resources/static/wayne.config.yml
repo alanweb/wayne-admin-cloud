@@ -7,7 +7,7 @@ logo:
 ## 菜单配置
 menu: 
   ## 菜单数据来源
-  data: /api/system/user/menu
+  data: /system/user/menu
   ## 是否同时只打开一个菜单目录
   accordion: true
   ## 是否开启多系统菜单模式
@@ -73,4 +73,4 @@ other:
   autoHead: false
 header:
   ## 站内消息，数据来源，通过 false 设置关闭
-  message: "/api/system/notice/notice"
+  message: "/system/notice/notice"

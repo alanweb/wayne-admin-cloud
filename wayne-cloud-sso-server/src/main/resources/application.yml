@@ -5,6 +5,7 @@ server:
     session:
       # 超 时 时 间
       timeout: 120m
+  max-http-header-size: 102400
 spring:
   application:
     name: wayne-auth
@@ -86,6 +87,7 @@ wayne:
       - /component/** # 开放静态资源
       - /favicon.ico # 开放FAVICON
       - /api/userInfo
+      - /oauth/authorize
       - /.well-known/jwks.json #开放公钥
     ## 安全配置
     key-store:

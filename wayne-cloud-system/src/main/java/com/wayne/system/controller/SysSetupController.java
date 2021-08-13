@@ -31,38 +31,12 @@ import java.util.HashMap;
 @RequestMapping(ControllerConstant.API_SYSTEM_PREFIX + "setup")
 public class SysSetupController extends BaseController implements ApplicationEventPublisherAware {
 
-    private static String MODULE_PATH = "system/setup/" ;
+
 
     private ApplicationEventPublisher applicationEventPublisher;
 
     @Resource
     private ISysConfigService sysConfigService;
-
-    @GetMapping("main")
-    @PreAuthorize("hasAnyAuthority('sys:setup:main')")
-    public ModelAndView main(Model model) {
-
-        SysSetup sysSetup = new SysSetup();
-
-        SysConfig mailFromConfig = sysConfigService.getByCode(ConfigurationConstant.MAIN_FROM);
-        SysConfig mailUserConfig = sysConfigService.getByCode(ConfigurationConstant.MAIN_USER);
-        SysConfig mailPassConfig = sysConfigService.getByCode(ConfigurationConstant.MAIN_PASS);
-        SysConfig mailHostConfig = sysConfigService.getByCode(ConfigurationConstant.MAIN_HOST);
-        SysConfig mailPortConfig = sysConfigService.getByCode(ConfigurationConstant.MAIN_PORT);
-        sysSetup.setMailFrom(mailFromConfig == null ? "" : mailFromConfig.getConfigValue());
-        sysSetup.setMailUser(mailUserConfig == null ? "" : mailUserConfig.getConfigValue());
-        sysSetup.setMailPass(mailPassConfig == null ? "" : mailPassConfig.getConfigValue());
-        sysSetup.setMailHost(mailHostConfig == null ? "" : mailHostConfig.getConfigValue());
-        sysSetup.setMailPort(mailPortConfig == null ? "" : mailPortConfig.getConfigValue());
-
-        SysConfig uploadKindConfig = sysConfigService.getByCode(ConfigurationConstant.UPLOAD_KIND);
-        SysConfig uploadPathConfig = sysConfigService.getByCode(ConfigurationConstant.UPLOAD_PATH);
-        sysSetup.setUploadKind(uploadKindConfig == null ? "" : uploadKindConfig.getConfigValue());
-        sysSetup.setUploadPath(uploadPathConfig == null ? "" : uploadPathConfig.getConfigValue());
-
-        model.addAttribute("setup", sysSetup);
-        return jumpPage(MODULE_PATH + "main");
-    }
 
     @Transactional
     @PutMapping("save")

@@ -25,6 +25,7 @@ import com.wayne.system.service.ISysRoleService;
 import com.wayne.system.service.ISysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -147,7 +148,9 @@ public class SysUserController extends BaseController {
     @ApiOperation(value = "修改用户数据")
     @Logging(title = "修改用户", describe = "修改用户", type = BusinessType.EDIT)
     public Result update(@RequestBody SysUser sysUser) {
-        sysUserService.saveUserRole(sysUser.getUserId(), Arrays.asList(sysUser.getRoleIds().split(",")));
+        if (StringUtils.isNotBlank(sysUser.getRoleIds())) {
+            sysUserService.saveUserRole(sysUser.getUserId(), Arrays.asList(sysUser.getRoleIds().split(",")));
+        }
         boolean result = sysUserService.updateById(sysUser);
         return decide(result);
     }

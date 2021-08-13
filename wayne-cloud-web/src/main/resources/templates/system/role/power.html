@@ -35,7 +35,7 @@
         dtree.render({
             elem: "#role-power",
             method: "get",
-            url: "/api/system/role/getRolePower?roleId=" + [[${roleId}]],
+            url: "/system/role/getRolePower?roleId=" + [[${roleId}]],
             dataFormat: "list",
             checkbar: true,
             skin: "layui",
@@ -56,7 +56,7 @@
             data.field.powerIds = ids;
 
             $.ajax({
-                url: '/api/system/role/saveRolePower',
+                url: '/system/role/saveRolePower',
                 data: data.field,
                 dataType: 'json',
                 type: 'put',

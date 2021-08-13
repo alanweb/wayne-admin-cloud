@@ -102,7 +102,7 @@
         let common = layui.common;
 
         let MODULE_PATH = "/web/user/";
-        let API_PATH = "/api/system/user/";
+        let API_PATH = "/system/user/";
         let cols = [
             [
                 {type: 'checkbox'},
@@ -122,7 +122,6 @@
             page: true,
             cols: cols,
             skin: 'line',
-            height: 'full-148',
             toolbar: '#user-toolbar',
             text: {none: '暂无人员信息'},
             defaultToolbar: [{layEvent: 'refresh', icon: 'layui-icon-refresh'}, 'filter', 'print', 'exports']
@@ -131,7 +130,7 @@
         dtree.render({
             elem: "#dept-tree",
             method: "get",
-            url: "/api/system/dept/tree",
+            url: "/system/dept/tree",
             dataFormat: "list",
             line: true,
             skin: "laySimple",
@@ -200,7 +199,7 @@
             }
             let loading = layer.load();
             $.ajax({
-                url: '/api/system/user/' + operate,
+                url: '/system/user/' + operate,
                 data: JSON.stringify({userId: this.value}),
                 dataType: 'json',
                 contentType: 'application/json',
